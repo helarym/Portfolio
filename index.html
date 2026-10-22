@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mark Helary Diaz — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============ CORE ============ */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --red:#e03226; --red-deep:#b3241a;
+  --ink:#0c0c0e; --ink-2:#141418;
+  --cream:#f4f1ec; --white:#ffffff;
+  --line:rgba(12,12,14,.12); --line-d:rgba(244,241,236,.14);
+  --muted:#6d6d72;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+::selection{background:var(--red);color:#fff}
+::-webkit-scrollbar{width:9px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:9px}
+img{max-width:100%}
+a{color:inherit;text-decoration:none}
+.anton{font-family:'Anton',sans-serif}
+.script{font-family:'Caveat',cursive}
+
+/* scroll progress bar */
+#progress{position:fixed;top:0;left:0;height:3px;background:var(--red);width:0;z-index:100}
+
+/* ============ NAV ============ */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem clamp(1.2rem,5vw,4rem);transition:.35s}
+nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-family:'Anton';font-size:1.5rem;letter-spacing:.03em}
+.logo b{color:var(--red)}
+.nav-links{display:flex;gap:2rem;font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em}
+.nav-links a{position:relative;opacity:.75;transition:.25s}
+.nav-links a:hover{opacity:1;color:var(--red)}
+.badge{display:flex;align-items:center;gap:.55rem;font-size:.72rem;font-weight:700;letter-spacing:.14em;
+  border:1px solid var(--line);border-radius:999px;padding:.55rem 1rem;background:rgba(255,255,255,.6)}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}50%{box-shadow:0 0 0 7px rgba(34,197,94,0)}}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;
+  padding:clamp(6rem,12vh,8rem) clamp(1.2rem,6vw,6rem) 2rem}
+.hero-giant{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);z-index:1;white-space:nowrap;
+  font-family:'Anton';font-size:clamp(4.5rem,17.5vw,17rem);line-height:.9;user-select:none;pointer-events:none;
+  background:linear-gradient(180deg,#cf2a1f 0%,#df5148 42%,#eec0b9 72%,var(--cream) 96%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:2rem}
+.hero-hey{font-family:'Caveat';font-size:clamp(1.6rem,3vw,2.4rem);color:var(--red);transform:rotate(-3deg);display:inline-block}
+.hero h1{font-family:'Anton';font-size:clamp(2.6rem,5.6vw,4.8rem);line-height:1;text-transform:uppercase;margin:.3rem 0 .9rem}
+.hero-roles{font-weight:700;font-size:clamp(.8rem,1.4vw,1rem);letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.hero-roles span{color:var(--red)}
+.hero-sub{margin-top:1rem;max-width:44ch;color:var(--muted);font-size:clamp(.95rem,1.3vw,1.05rem);line-height:1.65}
+.hero-cta{display:flex;gap:1rem;margin-top:1.8rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.95rem 1.7rem;border-radius:999px;transition:.3s;cursor:pointer;border:2px solid var(--ink)}
+.btn-red{background:var(--red);border-color:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-deep);border-color:var(--red-deep);transform:translateY(-3px);box-shadow:0 14px 30px -10px rgba(224,50,38,.5)}
+.btn-ghost:hover{background:var(--ink);color:var(--cream);transform:translateY(-3px)}
+.hero-photo-wrap{display:flex;justify-content:flex-end}
+.photo{position:relative;border-radius:22px;overflow:hidden;background:linear-gradient(135deg,#232327,#0e0e10);
+  box-shadow:0 30px 70px -25px rgba(12,12,14,.45)}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo--empty{display:flex;align-items:center;justify-content:center;min-height:100%}
+.photo--empty::after{content:'📷  drop your photo here';color:rgba(244,241,236,.55);font-weight:600;font-size:.9rem;letter-spacing:.05em;padding:3rem 1rem;text-align:center}
+.hero-photo{width:min(400px,80vw);aspect-ratio:4/5;transform:rotate(3deg);border:6px solid #fff}
+.hero-photo::before{content:'MARK DIAZ — 2025';position:absolute;bottom:.8rem;left:1rem;z-index:2;color:#fff;
+  font-size:.68rem;font-weight:700;letter-spacing:.18em;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.hero-foot{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;margin-top:3rem;
+  font-size:.7rem;font-weight:700;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+.scroll-cue{animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ============ BLACK STRIP MARQUEE ============ */
+.strip{background:var(--ink);padding:1.1rem 0;overflow:hidden;transform:rotate(-1.2deg) scale(1.03);border-block:1px solid var(--ink)}
+.loop{display:flex;width:max-content;gap:3rem;animation:loop var(--speed,30s) linear infinite;will-change:transform}
+.loop.reverse{animation-direction:reverse}
+@keyframes loop{to{transform:translateX(-50%)}}
+.strip .loop span{font-family:'Anton';font-size:clamp(1rem,2.2vw,1.5rem);letter-spacing:.06em;color:var(--cream);white-space:nowrap}
+.strip .loop span i{color:var(--red);font-style:normal;margin-right:3rem}
+
+/* ============ SECTIONS ============ */
+.section{padding:clamp(4.5rem,9vw,8rem) clamp(1.2rem,6vw,6rem)}
+.dark{background:radial-gradient(70% 55% at 50% 0%,rgba(224,50,38,.13),transparent 70%),var(--ink);color:var(--cream)}
+.sec-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:1.2rem}
+.sec-tag::before{content:'';width:26px;height:2px;background:var(--red)}
+.reveal{opacity:0;transform:translateY(30px);transition:.8s cubic-bezier(.2,.65,.25,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}.d4{transition-delay:.46s}
+
+/* ============ STATS (count-up) ============ */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--line)}
+.stat{padding:clamp(2rem,4vw,3.5rem) clamp(1rem,3vw,2.5rem);border-left:1px solid var(--line)}
+.stat:first-child{border-left:none}
+.stat-num{font-family:'Anton';font-size:clamp(2.8rem,5.5vw,4.6rem);line-height:1}
+.stat-num small{color:var(--red);font-size:.6em}
+.stat-label{margin-top:.6rem;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* ============ ABOUT ============ */
+.about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,6vw,5rem);align-items:center}
+.about-h{font-family:'Anton';font-size:clamp(2rem,4.6vw,3.9rem);line-height:1.05;text-transform:uppercase}
+.about-h em{font-style:normal;color:var(--red)}
+.about-txt{margin-top:1.6rem;color:#3d3d42;line-height:1.8;font-size:clamp(.95rem,1.25vw,1.05rem)}
+.about-txt p{margin-bottom:1rem}
+.about-txt .punch{font-weight:700;color:var(--ink)}
+.about-photo{width:100%;aspect-ratio:4/5;transform:rotate(-2deg)}
+.photo-chip{position:absolute;z-index:2;background:var(--ink);color:var(--cream);font-size:.68rem;font-weight:700;
+  letter-spacing:.14em;padding:.6rem 1rem;border-radius:999px;box-shadow:0 10px 25px -8px rgba(0,0,0,.4)}
+.chip-a{top:8%;left:-1.2rem}
+.chip-b{bottom:22%;right:-1.2rem}
+.chip-c{bottom:-1rem;left:8%;background:var(--red);color:#fff}
+.about-photo-wrap{position:relative}
+
+/* ============ EXPERIENCE ============ */
+.big-h{font-family:'Anton';font-size:clamp(2.4rem,6vw,5.2rem);line-height:.98;text-transform:uppercase}
+.big-h em{font-style:normal;color:var(--red)}
+.exp-list{margin-top:3.5rem;border-top:1px solid var(--line-d)}
+.exp-row{display:grid;grid-template-columns:80px 1.2fr 1.6fr auto;gap:1.5rem;align-items:center;
+  padding:1.8rem .5rem;border-bottom:1px solid var(--line-d);transition:.35s}
+.exp-row:hover{background:rgba(224,50,38,.07);padding-left:1.4rem}
+.exp-num{font-family:'Anton';font-size:1.6rem;color:rgba(244,241,236,.28);transition:.35s}
+.exp-row:hover .exp-num{color:var(--red)}
+.exp-co{font-family:'Anton';font-size:clamp(1.1rem,2vw,1.5rem);text-transform:uppercase;letter-spacing:.02em}
+.exp-co small{display:block;font-family:'Inter';font-size:.72rem;font-weight:600;letter-spacing:.12em;color:var(--red);margin-top:.35rem;text-transform:uppercase}
+.exp-desc{color:rgba(244,241,236,.6);font-size:.9rem;line-height:1.6}
+.exp-year{font-weight:800;font-size:.8rem;letter-spacing:.14em;white-space:nowrap;border:1px solid var(--line-d);
+  padding:.5rem 1rem;border-radius:999px}
+
+/* ============ TOOLS (marquee rows) ============ */
+.tools-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem}
+.tools-note{max-width:36ch;color:var(--muted);font-size:.9rem;line-height:1.7}
+.tool-rows{display:flex;flex-direction:column;gap:1.1rem;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.pill{display:flex;align-items:center;gap:.6rem;background:var(--white);border:1px solid var(--line);border-radius:999px;
+  padding:.75rem 1.4rem;font-weight:700;font-size:.9rem;white-space:nowrap;transition:.3s}
+.pill:hover{border-color:var(--red);color:var(--red);transform:translateY(-3px)}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0}
+.pill:nth-child(3n) i{background:var(--ink)}
+.pill:nth-child(4n) i{background:#9a9aa0}
+.pill img{width:20px;height:20px;object-fit:contain;flex-shrink:0}
+
+/* ============ PROJECTS (moving cards) ============ */
+.proj-frame{margin-top:3rem;border:1px solid var(--line-d);border-radius:26px;padding:clamp(1.2rem,3vw,2.5rem);
+  background:rgba(255,255,255,.02);overflow:hidden;position:relative}
+.proj-frame::before{content:'● PROJECT ARCHIVE — DRAG YOUR CURSOR OVER A CARD TO PAUSE';position:absolute;top:.7rem;left:1.4rem;
+  font-size:.6rem;letter-spacing:.2em;color:rgba(244,241,236,.35);font-weight:700}
+.proj-track{display:flex;gap:1.5rem;width:max-content;animation:loop 45s linear infinite;padding-top:1.6rem}
+.proj-frame:hover .proj-track{animation-play-state:paused}
+.pcard{position:relative;width:min(420px,84vw);flex-shrink:0;background:var(--ink-2);border:1px solid var(--line-d);
+  border-radius:18px;padding:1.6rem;overflow:hidden;transition:.35s}
+.pcard:hover{border-color:var(--red);transform:translateY(-6px)}
+.pcard-num{position:absolute;top:-1.4rem;right:.4rem;font-family:'Anton';font-size:7rem;color:rgba(224,50,38,.16);line-height:1;pointer-events:none}
+.pcard-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.1rem}
+.pcard-tags span{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--line-d);padding:.35rem .7rem;border-radius:999px;color:rgba(244,241,236,.65)}
+.pcard-preview{aspect-ratio:16/10;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font-family:'Anton';font-size:3rem;color:rgba(244,241,236,.85);margin-bottom:1.2rem;
+  background:linear-gradient(135deg,#3a1414,#1a0d0d);border:1px solid var(--line-d);position:relative}
+.pcard-preview::after{content:'project preview — drop image here';position:absolute;bottom:.7rem;font-family:'Inter';
+  font-size:.6rem;letter-spacing:.15em;color:rgba(244,241,236,.35);text-transform:uppercase;font-weight:600}
+.pcard:nth-child(4n+2) .pcard-preview{background:linear-gradient(135deg,#26262e,#101014)}
+.pcard:nth-child(4n+3) .pcard-preview{background:linear-gradient(135deg,#2e1a2e,#120d14)}
+.pcard:nth-child(4n+4) .pcard-preview{background:linear-gradient(135deg,#14262e,#0d1214)}
+.pcard h3{font-family:'Anton';font-size:1.6rem;text-transform:uppercase;letter-spacing:.02em}
+.pcard p{margin-top:.5rem;color:rgba(244,241,236,.6);font-size:.88rem;line-height:1.6}
+.pcard-foot{margin-top:1.2rem;padding-top:1rem;border-top:1px dashed var(--line-d);font-size:.7rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+
+/* ============ PROCESS ============ */
+.proc-intro{max-width:70ch;color:var(--muted);line-height:1.75;margin-top:1.2rem}
+.steps{margin-top:3.5rem}
+.step{display:grid;grid-template-columns:auto 1fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;padding:2.2rem 0;border-bottom:1px solid var(--line)}
+.step-num{font-family:'Anton';font-size:clamp(4rem,9vw,7.5rem);line-height:1;color:rgba(224,50,38,.18);transition:.4s}
+.step:hover .step-num{color:var(--red);transform:scale(1.05)}
+.step h3{font-family:'Anton';font-size:clamp(1.4rem,3vw,2.2rem);text-transform:uppercase}
+.step p{margin-top:.5rem;color:var(--muted);max-width:60ch;line-height:1.7;font-size:.95rem}
+
+/* ============ CONTACT ============ */
+.contact-h{font-family:'Anton';font-size:clamp(2.6rem,7vw,6rem);line-height:1;text-transform:uppercase}
+.contact-h em{font-style:normal;color:var(--red)}
+.socials{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2.2rem}
+.soc{border:1px solid var(--line-d);border-radius:999px;padding:.8rem 1.5rem;font-weight:700;font-size:.82rem;
+  letter-spacing:.1em;text-transform:uppercase;transition:.3s}
+.soc:hover{background:var(--red);border-color:var(--red);transform:translateY(-3px)}
+.comm-label{margin-top:3rem;font-size:.7rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,241,236,.45)}
+.comm{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+.comm span{display:inline-flex;align-items:center;gap:.55rem;border:1px solid var(--line-d);border-radius:999px;padding:.5rem 1.1rem;font-size:.78rem;color:rgba(244,241,236,.7)}
+.comm span img{width:18px;height:18px;border-radius:4px;object-fit:contain;flex-shrink:0}
+.comm span i{width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0}
+
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:2rem clamp(1.2rem,6vw,6rem);
+  border-top:1px solid var(--line-d);background:var(--ink);color:rgba(244,241,236,.5);
+  font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+footer a:hover{color:var(--red)}
+
+/* ============ VIDEO-STYLE PHOTOS ============ */
+/* HERO: cut-out portrait stands IN FRONT of the giant PORTFOLIO word */
+.hero{justify-content:flex-end;padding-bottom:0}
+.hero-giant{top:34%}
+.hero-inner{z-index:3;grid-template-columns:minmax(0,27vw) 1fr;align-items:end;margin-bottom:2vh}
+.hero-inner h1{font-size:clamp(2rem,3.9vw,3.5rem)}
+.hero-inner .hero-hey{font-size:clamp(1.4rem,2.2vw,2rem)}
+.hero-inner .hero-roles{font-size:.7rem;line-height:1.8}
+.hero-inner .hero-sub{font-size:.88rem;max-width:34ch}
+.hero-foot{z-index:3}
+.hero-tagwrap{display:flex;justify-content:flex-end;align-self:end}
+.role-tag{background:rgba(255,255,255,.72);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;
+  padding:.95rem 1.3rem;font-weight:700;font-size:.95rem;line-height:1.4;box-shadow:0 16px 34px -14px rgba(12,12,14,.4)}
+.hero-person{position:absolute;left:50%;bottom:0;transform:translateX(-50%);z-index:2;height:min(86vh,880px);
+  display:flex;align-items:flex-end;pointer-events:none}
+.hero-person img{height:100%;width:auto;max-width:92vw;object-fit:contain;object-position:bottom;
+  filter:drop-shadow(0 28px 40px rgba(12,12,14,.3))}
+.hero-person.is-empty{width:min(380px,80vw);height:min(66vh,560px);align-items:center;justify-content:center;
+  border:2px dashed rgba(12,12,14,.25);border-radius:22px}
+.hero-person.is-empty::after{content:'📷 add mark-hero.png (cut-out, no background)';color:rgba(12,12,14,.45);
+  font-weight:600;font-size:.85rem;text-align:center;padding:1rem}
+
+/* ABOUT: cut-out portrait with callout lines + dark stats card */
+.about-cut{position:relative;max-width:480px;margin-inline:auto;display:flex;justify-content:center;align-items:flex-end}
+.about-cut .cut-img{position:relative;z-index:2;width:100%;height:auto;display:block;
+  filter:drop-shadow(0 24px 36px rgba(12,12,14,.3))}
+.about-cut.is-empty{min-height:420px;align-items:center;border:2px dashed rgba(12,12,14,.25);border-radius:22px}
+.about-cut.is-empty::after{content:'📷 add mark-about.png (cut-out, no background)';color:rgba(12,12,14,.45);
+  font-weight:600;font-size:.85rem;text-align:center;padding:1rem}
+.callout{position:absolute;z-index:3;display:flex;align-items:center;gap:.6rem;font-size:.62rem;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.callout::after{content:'';display:block;width:56px;height:1px;background:var(--ink)}
+.callout-a{top:24%;left:-4.5rem}
+.callout-b{top:46%;right:-4.5rem;flex-direction:row-reverse}
+.about-card{margin-top:2rem;max-width:360px;background:var(--ink);color:var(--cream);border-radius:14px;
+  padding:.35rem 1.15rem;box-shadow:0 20px 40px -18px rgba(12,12,14,.5)}
+.about-card .row{display:flex;gap:.9rem;align-items:center;padding:.85rem 0;border-bottom:1px solid var(--line-d)}
+.about-card .row:last-child{border-bottom:none}
+.about-card .ic{width:30px;height:30px;border-radius:8px;background:rgba(224,50,38,.2);color:var(--red);
+  display:grid;place-items:center;font-size:.9rem;flex-shrink:0}
+.about-card b{display:block;font-family:'Anton';font-weight:400;letter-spacing:.05em;font-size:1rem;text-transform:uppercase}
+.about-card small{display:block;color:rgba(244,241,236,.6);font-size:.68rem;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;margin-top:2px}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:980px){
+  .hero-inner{grid-template-columns:1fr;text-align:left}
+  .hero-photo-wrap{justify-content:flex-start;margin-top:1.5rem}
+  .hero-giant{top:38%;font-size:22vw}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(3){border-left:none}
+  .stat{border-top:1px solid var(--line)}
+  .stat:nth-child(-n+2){border-top:none}
+  .about-grid{grid-template-columns:1fr}
+  .exp-row{grid-template-columns:50px 1fr;grid-template-rows:auto auto}
+  .exp-desc{grid-column:2}
+  .exp-year{grid-column:2;justify-self:start}
+  .nav-links{display:none}
+}
+@media(max-width:560px){
+  .stats{grid-template-columns:1fr 1fr}
+  .step{grid-template-columns:1fr;gap:.5rem}
+}
+@media(max-width:980px){
+  .hero{justify-content:center;padding-bottom:2rem}
+  .hero-giant{top:68%;font-size:22vw}
+  .hero-inner{grid-template-columns:1fr;margin-bottom:0}
+  .hero-tagwrap{display:none}
+  .hero-person{position:relative;left:auto;bottom:auto;transform:none;height:auto;width:min(420px,88vw);margin:1.5rem auto 0}
+  .hero-person img{width:100%;height:auto}
+  .hero-person.is-empty{height:380px}
+  .callout-a{left:0}
+  .callout-b{right:0}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- ============ NAV ============ -->
+<nav id="nav">
+  <a href="#top" class="logo">MD<b>.</b></a>
+  <div class="nav-links">
+    <a href="#about">About</a><a href="#experience">Experience</a>
+    <a href="#tools">Tools</a><a href="#work">Work</a><a href="#contact">Contact</a>
+  </div>
+  <div class="badge"><span class="dot"></span>AVAILABLE FOR PROJECTS</div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero-giant">PORTFOLIO</div>
+  <div class="hero-inner">
+    <div>
+      <span class="hero-hey">Hey, I'm</span>
+      <h1>Mark Helary<br>Diaz</h1>
+      <div class="hero-roles">Digital Marketing <span>×</span> Creatives <span>×</span> Automation <span>×</span> Video</div>
+      <p class="hero-sub">I design, automate, and edit things that cut through the noise — and get people moving. Pretty is the baseline. Purpose is the product.</p>
+      <div class="hero-cta">
+        <a href="#work" class="btn btn-red">See my work ↓</a>
+        <a href="#contact" class="btn btn-ghost">Say hi 👋</a>
+      </div>
+    </div>
+    <div class="hero-tagwrap">
+      <div class="role-tag">Digital Marketer<br>Creative Digital Builder</div>
+    </div>
+  </div>
+
+  <!-- 🔁 PHOTO 1 (top): a cut-out photo with NO background (transparent PNG).
+       Save it next to this file as mark-hero.png. It stands in front of the giant PORTFOLIO word. -->
+  <div class="hero-person">
+    <img src="images/2x2 pic.png" alt="Mark Helary Diaz"
+         onerror="if(!this.dataset.t){this.dataset.t=1;this.src='mark-hero.jpg';}else{this.parentElement.classList.add('is-empty');this.remove();}">
+  </div>
+
+  <div class="hero-foot">
+    <span>Based in the Philippines 🇵🇭</span>
+    <span class="scroll-cue">Scroll ↓</span>
+  </div>
+</header>
+
+<!-- ============ STRIP ============ -->
+<div class="strip">
+  <div class="loop" style="--speed:26s">
+    <span>Digital Marketing <i>✦</i></span><span>UI / UX Design <i>✦</i></span>
+    <span>Automation <i>✦</i></span><span>Video Editing <i>✦</i></span>
+    <span>AI-Hybrid Workflows <i>✦</i></span><span>Social Media Creatives <i>✦</i></span>
+  </div>
+</div>
+
+<!-- ============ STATS (count-up animation) ============ -->
+<section class="section" style="padding-top:0;padding-bottom:0">
+  <div class="stats">
+    <div class="stat reveal"><div class="stat-num"><span data-count="3">0</span><small>+</small></div><div class="stat-label">Years of Experience</div></div>
+    <div class="stat reveal d1"><div class="stat-num"><span data-count="25">0</span><small>+</small></div><div class="stat-label">Tools in My Stack</div></div>
+    <div class="stat reveal d2"><div class="stat-num"><span data-count="4">0</span></div><div class="stat-label">Service Pillars</div></div>
+    <div class="stat reveal d3"><div class="stat-num"><span data-count="100">0</span><small>%</small></div><div class="stat-label">Commitment, Always</div></div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="sec-tag">01 / Behind the work</div>
+      <h2 class="about-h">I don't just make it<br>look good. <em>I make it<br>make sense.</em></h2>
+      <div class="about-txt">
+        <p>I'm <span class="punch">Mark Helary Diaz</span> — a digital marketer, creative designer, and automation builder from Caloocan, PH. BSBA student at STI Caloocan, ex-CSR for US healthcare, telco & retail accounts — so I know how real customers think, talk, and decide.</p>
+        <p>I work where <span class="punch">strategy, design, and systems</span> meet. That means I'm not here to throw pretty sections on a page and call it "marketing."</p>
+        <p>I think about the offer. The audience. The journey. The friction. The follow-through. Then I design — and automate — around what actually needs to happen.</p>
+        <p class="punch">If it doesn't help the business move forward, it doesn't belong.</p>
+      </div>
+
+      <div class="about-card">
+        <div class="row"><span class="ic">✦</span><div><b>3+ Years</b><small>Customer-facing experience</small></div></div>
+        <div class="row"><span class="ic">⚙</span><div><b>Design · Automation · Marketing</b><small>Core services</small></div></div>
+        <div class="row"><span class="ic">◉</span><div><b>Caloocan, PH</b><small>Remote-friendly</small></div></div>
+      </div>
+    </div>
+    <div class="about-photo-wrap reveal d2">
+      <!-- 🔁 PHOTO 2 (below): another cut-out photo with NO background (transparent PNG).
+           Save it next to this file as mark-about.png. -->
+      <div class="about-cut">
+        <img class="cut-img" src="images/image1 (1).jpeg" alt="Mark Helary Diaz" loading="lazy"
+             onerror="if(!this.dataset.t){this.dataset.t=1;this.src='mark-about.jpg';}else{this.parentElement.classList.add('is-empty');this.remove();}">
+        <span class="callout callout-a">Automation mind</span>
+        <span class="callout callout-b">Creative eye</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="section dark" id="experience">
+  <div class="sec-tag">02 / The reps</div>
+  <h2 class="big-h reveal">Experience that<br><em>built me.</em></h2>
+  <div class="exp-list">
+    <div class="exp-row reveal">
+      <div class="exp-num">01</div>
+      <div class="exp-co">Concentrix · UP Ayala Hub<small>CSR — Healthcare (Solutran, US)</small></div>
+      <div class="exp-desc">Work-from-home mid-pandemic. Benefits & claims support on a seasonal US healthcare account — precision under pressure, learned fast.</div>
+      <div class="exp-year">2020–21</div>
+    </div>
+    <div class="exp-row reveal d1">
+      <div class="exp-num">02</div>
+      <div class="exp-co">VXI · Muñoz<small>CSR — Telco (AT&T, US)</small></div>
+      <div class="exp-desc">Billing, troubleshooting, and retention for US telco customers. Where I learned to stay calm when the customer isn't.</div>
+      <div class="exp-year">2022</div>
+    </div>
+    <div class="exp-row reveal d2">
+      <div class="exp-num">03</div>
+      <div class="exp-co">Foundever<small>CSR — Retail (Staples, US)</small></div>
+      <div class="exp-desc">Order support, escalations, and product guidance for a US retail giant. Speed + accuracy, every single shift.</div>
+      <div class="exp-year">2023</div>
+    </div>
+    <div class="exp-row reveal d3">
+      <div class="exp-num">04</div>
+      <div class="exp-co">Church of Jesus Christ of Latter-day Saints<small>Ward Clerk — Membership → Finance (Voluntary)</small></div>
+      <div class="exp-desc">Records, reporting, and now handling finance. Trust, accuracy, and systems — with purpose.</div>
+      <div class="exp-year">2025–Now</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOOLS (animated marquees with logos) ============ -->
+<section class="section" id="tools">
+  <div class="tools-head reveal">
+    <div>
+      <div class="sec-tag">03 / The stack</div>
+      <h2 class="big-h" style="color:var(--ink)">Tools I<br><em>actually use.</em></h2>
+    </div>
+    <p class="tools-note">Not a logo dump — this is the daily driver stack. Hover any row to pause and inspect. 👀</p>
+  </div>
+
+  <div class="tool-rows">
+    <div class="loop" id="toolRow1" style="--speed:30s"></div>
+    <div class="loop reverse" id="toolRow2" style="--speed:36s"></div>
+    <div class="loop" id="toolRow3" style="--speed:33s"></div>
+  </div>
+
+  <script>
+    // Logo helpers
+    // logo("name")        -> Simple Icons library (short brand name)
+    // iconify("set/name") -> Iconify library
+    // favicon("site.com") -> the website's own small icon (works for almost any tool)
+    const logo = s => (s.startsWith("http") || s.includes("/")) ? s : "https://cdn.simpleicons.org/" + s;
+    const iconify = n => "https://api.iconify.design/" + n + ".svg";
+    const favicon = d => "https://www.google.com/s2/favicons?domain=" + d + "&sz=64";
+
+    // Each tool is ["Name shown", logo source]. To add a tool, add one line.
+    const toolRows = {
+      toolRow1: [
+        ["Notion", "notion"], ["Trello", "trello"], ["ClickUp", "clickup"],
+        ["Baserow", "baserow"], ["Supabase", "supabase"], ["Cloudflare", "cloudflare"],
+        ["GitHub", "github"], ["VS Code", iconify("logos/visual-studio-code")]
+      ],
+      toolRow2: [
+        ["Google Workspace", favicon("workspace.google.com")], ["Apps Script", "googleappsscript"],
+        ["Sheets", "googlesheets"], ["Forms", "googleforms"], ["Gemini", "googlegemini"],
+        ["Analytics", "googleanalytics"], ["Excel", iconify("vscode-icons/file-type-excel")],
+        ["PowerPoint", iconify("vscode-icons/file-type-powerpoint")],
+        ["MS Teams", iconify("logos/microsoft-teams")]
+      ],
+      toolRow3: [
+        ["Claude", "claude"], ["GPT", iconify("logos/openai-icon")],
+        ["Google Flow", iconify("logos/google-icon")],
+        ["Canva", favicon("canva.com")], ["Figma", "figma"], ["Loom", "loom"], ["Meta", "meta"]
+      ]
+    };
+
+    // Website of each tool: used as a backup logo if the main one fails to load
+    const domains = {
+      "Notion":"notion.so", "Trello":"trello.com", "ClickUp":"clickup.com", "Baserow":"baserow.io",
+      "Supabase":"supabase.com", "Cloudflare":"cloudflare.com", "GitHub":"github.com",
+      "VS Code":"code.visualstudio.com", "Google Workspace":"workspace.google.com",
+      "Apps Script":"script.google.com", "Sheets":"sheets.google.com", "Forms":"forms.google.com",
+      "Gemini":"gemini.google.com", "Analytics":"analytics.google.com", "Excel":"microsoft.com",
+      "PowerPoint":"microsoft.com", "MS Teams":"teams.microsoft.com", "Claude":"claude.ai",
+      "GPT":"chatgpt.com", "Google Flow":"labs.google", "Canva":"canva.com", "Figma":"figma.com",
+      "Loom":"loom.com", "Meta":"meta.com",
+      "Gmail":"mail.google.com", "Zoom":"zoom.us", "Google Meet":"meet.google.com",
+      "Slack":"slack.com", "Discord":"discord.com", "Telegram":"telegram.org",
+      "Viber":"viber.com", "Messenger":"messenger.com"
+    };
+
+    // If a logo fails to load, try the next backup. If all fail, show a red dot.
+    function logoFail(img) {
+      const next = (img.dataset.fb || "").split("|").filter(Boolean);
+      if (next.length) {
+        img.dataset.fb = next.slice(1).join("|");
+        img.src = next[0];
+      } else {
+        img.replaceWith(document.createElement("i"));
+      }
+    }
+
+    function logoHtml(name, src) {
+      const chain = [];
+      if (src) chain.push(logo(src));
+      if (domains[name]) chain.push(favicon(domains[name]));
+      if (!chain.length) return "<i></i>";
+      return `<img src="${chain[0]}" data-fb="${chain.slice(1).join("|")}" alt="" onerror="logoFail(this)">`;
+    }
+
+    Object.entries(toolRows).forEach(([id, list]) => {
+      document.getElementById(id).innerHTML = list.map(([name, src]) =>
+        `<span class="pill">${logoHtml(name, src)}${name}</span>`
+      ).join("");
+    });
+  </script>
+</section>
+
+<!-- ============ PROJECTS (moving cards) ============ -->
+<section class="section dark" id="work">
+  <div class="sec-tag">04 / Selected work</div>
+  <h2 class="big-h reveal">Work that does<br><em>its d*mn job.</em></h2>
+  <div class="proj-frame reveal d1">
+    <div class="proj-track" id="projTrack">
+      <div class="pcard">
+        <div class="pcard-num">01</div>
+        <div class="pcard-tags"><span>UI/UX</span><span>Social Media</span><span>Branding</span></div>
+        <div class="pcard-preview">✦</div>
+        <h3>Design & Creatives</h3>
+        <p>UI/UX layouts, brand visuals, and scroll-stopping social content. Designed to look sharp — and to make sense.</p>
+        <div class="pcard-foot">Case study — slot ready ↗</div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-num">02</div>
+        <div class="pcard-tags"><span>Apps Script</span><span>Notion</span><span>Supabase</span></div>
+        <div class="pcard-preview">⚙</div>
+        <h3>Automation</h3>
+        <p>Workflows and no-code systems that delete busywork. If it's repetitive, I'll make it run itself.</p>
+        <div class="pcard-foot">Case study — slot ready ↗</div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-num">03</div>
+        <div class="pcard-tags"><span>Cinematic</span><span>Montage</span><span>Reels</span></div>
+        <div class="pcard-preview">▶</div>
+        <h3>Video Editing</h3>
+        <p>Cinematic cuts, montages, and reels with rhythm. Pacing that keeps thumbs from scrolling.</p>
+        <div class="pcard-foot">Case study — slot ready ↗</div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-num">04</div>
+        <div class="pcard-tags"><span>Meta Ads</span><span>Gen-AI</span><span>Analytics</span></div>
+        <div class="pcard-preview">↗</div>
+        <h3>Digital Marketing</h3>
+        <p>AI-hybrid campaigns and ads built around one thing: conversion. Strategy first, boosting second.</p>
+        <div class="pcard-foot">Case study — slot ready ↗</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="section">
+  <div class="reveal">
+    <div class="sec-tag">05 / The process</div>
+    <h2 class="big-h" style="color:var(--ink)">I don't wing it<br>and hope it <em>converts.</em></h2>
+    <p class="proc-intro">I start with the offer, map the journey, design around the decisions people need to make — then build the d*mn thing properly.</p>
+  </div>
+  <div class="steps">
+    <div class="step reveal"><div class="step-num">01</div><div><h3>Diagnose</h3><p>Find what's actually broken. Offer, audience, message, friction — audited before a single pixel gets pushed.</p></div></div>
+    <div class="step reveal d1"><div class="step-num">02</div><div><h3>Map</h3><p>Build the path before building the page. Pages, sections, messaging hierarchy, CTAs — from interested to ready-to-buy.</p></div></div>
+    <div class="step reveal d2"><div class="step-num">03</div><div><h3>Design</h3><p>Make it look sharp and make sense. UI/UX, creatives, and content aligned to one goal: move people.</p></div></div>
+    <div class="step reveal d3"><div class="step-num">04</div><div><h3>Deploy & Automate</h3><p>Ship it, then wire it. Automations, tracking, and clean handoff — so the thing runs without babysitting.</p></div></div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section dark" id="contact">
+  <div class="sec-tag">06 / Say less</div>
+  <h2 class="contact-h reveal">Let's build something<br><em>that makes sense.</em></h2>
+  <!-- 🔁 Update hrefs with your real profile links -->
+  <div class="socials reveal d1">
+    <a class="soc" href="#" target="_blank">Facebook ↗</a>
+    <a class="soc" href="#" target="_blank">Instagram ↗</a>
+    <a class="soc" href="#" target="_blank">LinkedIn ↗</a>
+    <a class="soc" href="mailto:your@email.com">Email me ↗</a>
+  </div>
+  <div class="comm-label reveal d2">Where else to reach me</div>
+  <div class="comm reveal d3" id="commList"></div>
+  <script>
+    // Communication apps with logos (uses the helpers from the Tools section above)
+    const commApps = ["Gmail", "Zoom", "Google Meet", "MS Teams", "Slack", "Discord", "Telegram", "Viber", "Messenger"];
+    document.getElementById("commList").innerHTML = commApps.map(name =>
+      `<span>${logoHtml(name, name === "MS Teams" ? iconify("logos/microsoft-teams") : "")}${name}</span>`
+    ).join("");
+  </script>
+</section>
+
+<footer>
+  <span>© 2025 Mark Helary Diaz</span>
+  <span>Caloocan, PH 🇵🇭</span>
+  <a href="#top">Back to top ↑</a>
+</footer>
+
+<script>
+/* ===== scroll progress + nav blur ===== */
+const nav = document.getElementById('nav'), prog = document.getElementById('progress');
+addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', scrollY > 10);
+  const h = document.documentElement;
+  prog.style.width = (scrollY / (h.scrollHeight - h.clientHeight) * 100) + '%';
+});
+
+/* ===== reveal on scroll ===== */
+const rev = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); rev.unobserve(e.target); }
+}), { threshold: .15 });
+document.querySelectorAll('.reveal').forEach(el => rev.observe(el));
+
+/* ===== count-up numbers ===== */
+const counters = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  const el = e.target, target = +el.dataset.count, dur = 1700, t0 = performance.now();
+  (function tick(now) {
+    const p = Math.min((now - t0) / dur, 1), eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(target * eased);
+    if (p < 1) requestAnimationFrame(tick);
+  })(t0);
+  counters.unobserve(el);
+}), { threshold: .5 });
+document.querySelectorAll('[data-count]').forEach(el => counters.observe(el));
+
+/* ===== duplicate marquee tracks for seamless infinite loop ===== */
+document.querySelectorAll('.loop, #projTrack').forEach(t => t.innerHTML += t.innerHTML);
+</script>
+</body>
+</html>
