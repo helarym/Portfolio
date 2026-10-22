@@ -47,7 +47,7 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;
   padding:clamp(6rem,12vh,8rem) clamp(1.2rem,6vw,6rem) 2rem}
 .hero-giant{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);z-index:1;white-space:nowrap;
-  font-family:'Anton';font-size:clamp(4.5rem,17.5vw,17rem);line-height:.9;user-select:none;pointer-events:none;
+  font-family:'Anton';font-size:clamp(5rem,21vw,21rem);line-height:.9;user-select:none;pointer-events:none;
   background:linear-gradient(180deg,#cf2a1f 0%,#df5148 42%,#eec0b9 72%,var(--cream) 96%);
   -webkit-background-clip:text;background-clip:text;color:transparent}
 .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:2rem}
@@ -71,9 +71,12 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .hero-photo{width:min(400px,80vw);aspect-ratio:4/5;transform:rotate(3deg);border:6px solid #fff}
 .hero-photo::before{content:'MARK DIAZ — 2025';position:absolute;bottom:.8rem;left:1rem;z-index:2;color:#fff;
   font-size:.68rem;font-weight:700;letter-spacing:.18em;text-shadow:0 2px 10px rgba(0,0,0,.6)}
-.hero-foot{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;margin-top:3rem;
-  font-size:.7rem;font-weight:700;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
-.scroll-cue{animation:bob 1.8s ease-in-out infinite}
+.hero-foot{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;margin-top:3rem;
+  font-size:.72rem;font-weight:700;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+.scroll-cue{display:inline-flex;align-items:center;gap:.55rem;background:var(--ink);color:var(--cream);
+  border-radius:999px;padding:.85rem 1.6rem;font-size:.78rem;letter-spacing:.18em;cursor:pointer;
+  box-shadow:0 16px 32px -12px rgba(12,12,14,.55);animation:bob 1.8s ease-in-out infinite}
+.scroll-cue:hover{background:var(--red);color:#fff}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 
 /* ============ BLACK STRIP MARQUEE ============ */
@@ -102,7 +105,17 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .stat-label{margin-top:.6rem;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 
 /* ============ ABOUT ============ */
-.about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,6vw,5rem);align-items:center}
+#about{position:relative;overflow:hidden;isolation:isolate;
+  background:radial-gradient(130% 100% at 72% 0%,rgba(255,255,255,.5),rgba(255,255,255,0) 55%),
+    linear-gradient(180deg,#e9e9ee 0%,#dcdce4 100%);
+  filter:grayscale(calc(var(--bp,0) * .55)) contrast(calc(1 + var(--bp,0) * .04))}
+.about-giant{position:absolute;left:66%;top:2%;transform:translateX(-50%);z-index:1;white-space:nowrap;
+  font-family:'Anton';font-size:clamp(7rem,24vw,22rem);line-height:.9;user-select:none;pointer-events:none;
+  background:linear-gradient(180deg,#ffffff 0%,#eceef3 40%,#c4c8d3 68%,rgba(196,200,211,0) 90%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  opacity:var(--word-o,0);will-change:opacity}
+
+.about-grid{display:grid;grid-template-columns:1fr minmax(0,1.12fr);gap:clamp(2rem,5vw,4rem);align-items:end}
 .about-h{font-family:'Anton';font-size:clamp(2rem,4.6vw,3.9rem);line-height:1.05;text-transform:uppercase}
 .about-h em{font-style:normal;color:var(--red)}
 .about-txt{margin-top:1.6rem;color:#3d3d42;line-height:1.8;font-size:clamp(.95rem,1.25vw,1.05rem)}
@@ -202,19 +215,20 @@ footer a:hover{color:var(--red)}
 /* ============ VIDEO-STYLE PHOTOS ============ */
 /* HERO: cut-out portrait stands IN FRONT of the giant PORTFOLIO word */
 .hero{justify-content:flex-end;padding-bottom:0}
-.hero-giant{top:34%}
+.hero-giant{top:26%}
 .hero-inner{z-index:3;grid-template-columns:minmax(0,27vw) 1fr;align-items:end;margin-bottom:2vh}
-.hero-inner h1{font-size:clamp(2rem,3.9vw,3.5rem)}
+.hero-inner h1{font-size:clamp(2.2rem,4.3vw,3.9rem)}
 .hero-inner .hero-hey{font-size:clamp(1.4rem,2.2vw,2rem)}
 .hero-inner .hero-roles{font-size:.7rem;line-height:1.8}
 .hero-inner .hero-sub{font-size:.88rem;max-width:34ch}
 .hero-foot{z-index:3}
-.hero-tagwrap{display:flex;justify-content:flex-end;align-self:end}
-.role-tag{background:rgba(255,255,255,.72);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;
-  padding:.95rem 1.3rem;font-weight:700;font-size:.95rem;line-height:1.4;box-shadow:0 16px 34px -14px rgba(12,12,14,.4)}
-.hero-person{position:absolute;left:50%;bottom:0;transform:translateX(-50%);z-index:2;height:min(86vh,880px);
+.hero-tagwrap{position:absolute;right:clamp(1.5rem,7vw,7.5rem);bottom:10vh;z-index:3;max-width:min(30vw,430px)}
+.role-tag{background:rgba(255,255,255,.72);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:18px;
+  padding:1.35rem 1.9rem;font-weight:700;font-size:clamp(1.15rem,1.8vw,1.55rem);line-height:1.45;
+  box-shadow:0 22px 44px -16px rgba(12,12,14,.42)}
+.hero-person{position:absolute;left:50%;bottom:-11vh;transform:translateX(-50%);z-index:2;width:min(46vw,68vh,720px);
   display:flex;align-items:flex-end;pointer-events:none}
-.hero-person img{height:100%;width:auto;max-width:92vw;object-fit:contain;object-position:bottom;
+.hero-person img{width:100%;height:auto;max-width:100%;object-fit:contain;object-position:bottom;
   filter:drop-shadow(0 28px 40px rgba(12,12,14,.3))}
 .hero-person.is-empty{width:min(380px,80vw);height:min(66vh,560px);align-items:center;justify-content:center;
   border:2px dashed rgba(12,12,14,.25);border-radius:22px}
@@ -222,9 +236,14 @@ footer a:hover{color:var(--red)}
   font-weight:600;font-size:.85rem;text-align:center;padding:1rem}
 
 /* ABOUT: cut-out portrait with callout lines + dark stats card */
-.about-cut{position:relative;max-width:480px;margin-inline:auto;display:flex;justify-content:center;align-items:flex-end}
+.about-cut{position:relative;max-width:680px;margin-inline:auto;display:flex;justify-content:center;align-items:flex-end}
+.about-photo-wrap{position:relative;
+  margin-bottom:calc(-1 * clamp(4.5rem,9vw,8rem) - 4vh)} /* photo sits at the bottom edge of the section */
 .about-cut .cut-img{position:relative;z-index:2;width:100%;height:auto;display:block;
   filter:drop-shadow(0 24px 36px rgba(12,12,14,.3))}
+
+/* ---- 2nd photo scroll effect: slight monochrome filter over the whole section (driven by --bp on #about) ---- */
+.cut-stack{position:relative;display:block;width:100%}
 .about-cut.is-empty{min-height:420px;align-items:center;border:2px dashed rgba(12,12,14,.25);border-radius:22px}
 .about-cut.is-empty::after{content:'📷 add mark-about.png (cut-out, no background)';color:rgba(12,12,14,.45);
   font-weight:600;font-size:.85rem;text-align:center;padding:1rem}
@@ -270,12 +289,15 @@ footer a:hover{color:var(--red)}
   .hero-person{position:relative;left:auto;bottom:auto;transform:none;height:auto;width:min(420px,88vw);margin:1.5rem auto 0}
   .hero-person img{width:100%;height:auto}
   .hero-person.is-empty{height:380px}
+  .about-photo-wrap{margin-bottom:0}
+  .about-giant{left:50%;top:1%;font-size:30vw}
   .callout-a{left:0}
   .callout-b{right:0}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}
+  .about-giant{opacity:.85}
 }
 </style>
 </head>
@@ -307,16 +329,18 @@ footer a:hover{color:var(--red)}
         <a href="#contact" class="btn btn-ghost">Say hi 👋</a>
       </div>
     </div>
-    <div class="hero-tagwrap">
-      <div class="role-tag">Digital Marketer<br>Creative Digital Builder</div>
-    </div>
   </div>
 
-  <!-- 🔁 PHOTO 1 (top): a cut-out photo with NO background (transparent PNG).
-       Save it next to this file as mark-hero.png. It stands in front of the giant PORTFOLIO word. -->
+  <!-- 🔁 PHOTO 1 (top): cut-out photo with NO background (transparent PNG) — images/Herohelary.png.
+       It stands in front of the giant PORTFOLIO word. -->
   <div class="hero-person">
     <img src="images/Herohelary.png" alt="Mark Helary Diaz"
-         onerror="if(!this.dataset.t){this.dataset.t=1;this.src='mark-hero.jpg';}else{this.parentElement.classList.add('is-empty');this.remove();}">
+         onerror="this.parentElement.classList.add('is-empty');this.remove();">
+  </div>
+
+  <!-- role card — sits near the hero portrait, big like the reference -->
+  <div class="hero-tagwrap">
+    <div class="role-tag">Digital Marketer<br>Creative Digital Builder</div>
   </div>
 
   <div class="hero-foot">
@@ -346,6 +370,7 @@ footer a:hover{color:var(--red)}
 
 <!-- ============ ABOUT ============ -->
 <section class="section" id="about">
+  <div class="about-giant" aria-hidden="true">LEAD</div>
   <div class="about-grid">
     <div class="reveal">
       <div class="sec-tag">01 / Behind the work</div>
@@ -364,11 +389,13 @@ footer a:hover{color:var(--red)}
       </div>
     </div>
     <div class="about-photo-wrap reveal d2">
-      <!-- 🔁 PHOTO 2 (below): another cut-out photo with NO background (transparent PNG).
-           Save it next to this file as mark-about.png. -->
+      <!-- 🔁 PHOTO 2: cut-out photo with NO background (transparent PNG) — images/abouthelary.png.
+           While scrolling past, the whole section gets a slight monochrome filter, then returns to normal. -->
       <div class="about-cut">
-        <img class="cut-img" src="images/2ndimage helary.jpeg" alt="Mark Helary Diaz" loading="lazy"
-             onerror="if(!this.dataset.t){this.dataset.t=1;this.src='mark-about.jpg';}else{this.parentElement.classList.add('is-empty');this.remove();}">
+        <div class="cut-stack">
+          <img class="cut-img" src="images/abouthelary.png" alt="Mark Helary Diaz" loading="lazy"
+               onerror="if(!this.dataset.t){this.dataset.t=1;this.src='images/2ndimage helary.jpeg';}else{this.closest('.about-cut').classList.add('is-empty');this.remove();}">
+        </div>
         <span class="callout callout-a">Automation mind</span>
         <span class="callout callout-b">Creative eye</span>
       </div>
@@ -608,6 +635,36 @@ const counters = new IntersectionObserver(es => es.forEach(e => {
   counters.unobserve(el);
 }), { threshold: .5 });
 document.querySelectorAll('[data-count]').forEach(el => counters.observe(el));
+
+/* ===== 2nd photo: scroll-driven slight monochrome moment (peaks when centered, returns to normal) ===== */
+const aboutSec = document.getElementById('about');
+const aboutCut = document.querySelector('.about-cut');
+const aboutGiant = document.querySelector('.about-giant');
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function monoMoment() {
+  if (!aboutSec || !aboutCut || reduceMotion) return;
+  const r = aboutCut.getBoundingClientRect();
+  const vh = innerHeight;
+  // travel: -1 when the photo is just entering at the bottom, +1 when it's leaving at the top
+  const travel = (vh / 2 - (r.top + r.height / 2)) / ((vh + r.height) / 2);
+  const bell = Math.max(0, 1 - Math.abs(travel));   // 0 at the edges, 1 when centered
+  const p = bell * bell * (3 - 2 * bell);           // smoothstep
+  aboutSec.style.setProperty('--bp', p.toFixed(3)); // drives the grayscale filter on #about
+}
+/* ===== silver LEAD word: shows on scroll, then fades as it rises past ===== */
+function leadWord() {
+  if (!aboutGiant || reduceMotion) return;
+  const r = aboutGiant.getBoundingClientRect();
+  const vh = innerHeight;
+  const c = (r.top + r.height / 2) / vh;          // 1 = bottom of viewport, 0 = top
+  const t = Math.max(0, 1 - Math.abs(c - 0.32) / 0.55); // peaks in the upper-third
+  const p = t * t * (3 - 2 * t);                  // smoothstep
+  aboutGiant.style.setProperty('--word-o', p.toFixed(3));
+}
+function onScrollFx() { requestAnimationFrame(() => { monoMoment(); leadWord(); }); }
+addEventListener('scroll', onScrollFx, { passive: true });
+addEventListener('resize', onScrollFx);
+onScrollFx();
 
 /* ===== duplicate marquee tracks for seamless infinite loop ===== */
 document.querySelectorAll('.loop, #projTrack').forEach(t => t.innerHTML += t.innerHTML);
