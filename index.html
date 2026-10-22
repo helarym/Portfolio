@@ -104,14 +104,14 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 /* ============ ABOUT ============ */
 #about{position:relative;overflow:hidden;isolation:isolate;
   background:radial-gradient(130% 100% at 72% 0%,rgba(255,255,255,.5),rgba(255,255,255,0) 55%),
-    linear-gradient(180deg,#e9e9ee 0%,#dcdce4 100%)}
+    linear-gradient(180deg,#e9e9ee 0%,#dcdce4 100%);
+  filter:grayscale(calc(var(--bp,0) * .55)) contrast(calc(1 + var(--bp,0) * .04))}
 .about-giant{position:absolute;left:66%;top:2%;transform:translateX(-50%);z-index:1;white-space:nowrap;
   font-family:'Anton';font-size:clamp(7rem,24vw,22rem);line-height:.9;user-select:none;pointer-events:none;
   background:linear-gradient(180deg,#ffffff 0%,#eceef3 40%,#c4c8d3 68%,rgba(196,200,211,0) 90%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
   opacity:var(--word-o,0);will-change:opacity}
-.about-wash{position:absolute;inset:0;z-index:5;pointer-events:none;
-  background:#2b5fd9;mix-blend-mode:color;opacity:calc(var(--bp,0) * .4)}
+
 .about-grid{display:grid;grid-template-columns:1fr minmax(0,1.12fr);gap:clamp(2rem,5vw,4rem);align-items:end}
 .about-h{font-family:'Anton';font-size:clamp(2rem,4.6vw,3.9rem);line-height:1.05;text-transform:uppercase}
 .about-h em{font-style:normal;color:var(--red)}
@@ -238,17 +238,8 @@ footer a:hover{color:var(--red)}
 .about-cut .cut-img{position:relative;z-index:2;width:100%;height:auto;display:block;
   filter:drop-shadow(0 24px 36px rgba(12,12,14,.3))}
 
-/* ---- 2nd photo: scroll-driven "blue vibe" (peaks mid-scroll, back to normal) ---- */
+/* ---- 2nd photo scroll effect: slight monochrome filter over the whole section (driven by --bp on #about) ---- */
 .cut-stack{position:relative;display:block;width:100%}
-.cut-stack::before{content:'';position:absolute;inset:-8% -12%;z-index:0;border-radius:50%;pointer-events:none;
-  background:radial-gradient(closest-side,rgba(47,125,255,.55),rgba(47,125,255,0) 72%);
-  filter:blur(10px);opacity:calc(var(--bp,0) * .85)}
-.blue-gel{position:absolute;inset:0;z-index:3;pointer-events:none;
-  background:linear-gradient(180deg,#1d5dff 0%,#2f7dff 45%,#8fc0ff 100%);
-  -webkit-mask-image:url('images/abouthelary.png');mask-image:url('images/abouthelary.png');
-  -webkit-mask-size:100% 100%;mask-size:100% 100%;
-  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
-  mix-blend-mode:color;opacity:calc(var(--bp,0) * .92)}
 .about-cut.is-empty{min-height:420px;align-items:center;border:2px dashed rgba(12,12,14,.25);border-radius:22px}
 .about-cut.is-empty::after{content:'📷 add mark-about.png (cut-out, no background)';color:rgba(12,12,14,.45);
   font-weight:600;font-size:.85rem;text-align:center;padding:1rem}
@@ -393,19 +384,17 @@ footer a:hover{color:var(--red)}
     </div>
     <div class="about-photo-wrap reveal d2">
       <!-- 🔁 PHOTO 2: cut-out photo with NO background (transparent PNG) — images/abouthelary.png.
-           The blue-gel layer turns the photo blue while it scrolls past, then it returns to normal. -->
+           While scrolling past, the whole section gets a slight monochrome filter, then returns to normal. -->
       <div class="about-cut">
         <div class="cut-stack">
           <img class="cut-img" src="images/abouthelary.png" alt="Mark Helary Diaz" loading="lazy"
                onerror="if(!this.dataset.t){this.dataset.t=1;this.src='images/2ndimage helary.jpeg';}else{this.closest('.about-cut').classList.add('is-empty');this.remove();}">
-          <div class="blue-gel" aria-hidden="true"></div>
         </div>
         <span class="callout callout-a">Automation mind</span>
         <span class="callout callout-b">Creative eye</span>
       </div>
     </div>
   </div>
-  <div class="about-wash" aria-hidden="true"></div>
 </section>
 
 <!-- ============ EXPERIENCE ============ -->
@@ -641,19 +630,20 @@ const counters = new IntersectionObserver(es => es.forEach(e => {
 }), { threshold: .5 });
 document.querySelectorAll('[data-count]').forEach(el => counters.observe(el));
 
-/* ===== 2nd photo: scroll-driven blue vibe (peaks when centered, returns to normal) ===== */
+/* ===== 2nd photo: scroll-driven slight monochrome moment (peaks when centered, returns to normal) ===== */
+const aboutSec = document.getElementById('about');
 const aboutCut = document.querySelector('.about-cut');
 const aboutGiant = document.querySelector('.about-giant');
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-function blueVibe() {
-  if (!aboutCut || reduceMotion) return;
+function monoMoment() {
+  if (!aboutSec || !aboutCut || reduceMotion) return;
   const r = aboutCut.getBoundingClientRect();
   const vh = innerHeight;
   // travel: -1 when the photo is just entering at the bottom, +1 when it's leaving at the top
   const travel = (vh / 2 - (r.top + r.height / 2)) / ((vh + r.height) / 2);
   const bell = Math.max(0, 1 - Math.abs(travel));   // 0 at the edges, 1 when centered
   const p = bell * bell * (3 - 2 * bell);           // smoothstep
-  aboutCut.style.setProperty('--bp', p.toFixed(3));
+  aboutSec.style.setProperty('--bp', p.toFixed(3)); // drives the grayscale filter on #about
 }
 /* ===== silver LEAD word: shows on scroll, then fades as it rises past ===== */
 function leadWord() {
@@ -665,7 +655,7 @@ function leadWord() {
   const p = t * t * (3 - 2 * t);                  // smoothstep
   aboutGiant.style.setProperty('--word-o', p.toFixed(3));
 }
-function onScrollFx() { requestAnimationFrame(() => { blueVibe(); leadWord(); }); }
+function onScrollFx() { requestAnimationFrame(() => { monoMoment(); leadWord(); }); }
 addEventListener('scroll', onScrollFx, { passive: true });
 addEventListener('resize', onScrollFx);
 onScrollFx();
