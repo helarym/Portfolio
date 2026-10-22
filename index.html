@@ -102,7 +102,17 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .stat-label{margin-top:.6rem;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 
 /* ============ ABOUT ============ */
-.about-grid{display:grid;grid-template-columns:1fr minmax(0,1.12fr);gap:clamp(2rem,5vw,4rem);align-items:center}
+#about{position:relative;overflow:hidden;isolation:isolate;
+  background:radial-gradient(130% 100% at 72% 0%,rgba(255,255,255,.5),rgba(255,255,255,0) 55%),
+    linear-gradient(180deg,#e9e9ee 0%,#dcdce4 100%)}
+.about-giant{position:absolute;left:66%;top:2%;transform:translateX(-50%);z-index:1;white-space:nowrap;
+  font-family:'Anton';font-size:clamp(7rem,24vw,22rem);line-height:.9;user-select:none;pointer-events:none;
+  background:linear-gradient(180deg,#ffffff 0%,#eceef3 40%,#c4c8d3 68%,rgba(196,200,211,0) 90%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  opacity:var(--word-o,0);will-change:opacity}
+.about-wash{position:absolute;inset:0;z-index:5;pointer-events:none;
+  background:#2b5fd9;mix-blend-mode:color;opacity:calc(var(--bp,0) * .4)}
+.about-grid{display:grid;grid-template-columns:1fr minmax(0,1.12fr);gap:clamp(2rem,5vw,4rem);align-items:end}
 .about-h{font-family:'Anton';font-size:clamp(2rem,4.6vw,3.9rem);line-height:1.05;text-transform:uppercase}
 .about-h em{font-style:normal;color:var(--red)}
 .about-txt{margin-top:1.6rem;color:#3d3d42;line-height:1.8;font-size:clamp(.95rem,1.25vw,1.05rem)}
@@ -222,7 +232,9 @@ footer a:hover{color:var(--red)}
   font-weight:600;font-size:.85rem;text-align:center;padding:1rem}
 
 /* ABOUT: cut-out portrait with callout lines + dark stats card */
-.about-cut{position:relative;max-width:min(680px,58vw);margin-inline:auto;display:flex;justify-content:center;align-items:flex-end}
+.about-cut{position:relative;max-width:680px;margin-inline:auto;display:flex;justify-content:center;align-items:flex-end}
+.about-photo-wrap{position:relative;
+  margin-bottom:calc(-1 * clamp(4.5rem,9vw,8rem) - 4vh)} /* photo sits at the bottom edge of the section */
 .about-cut .cut-img{position:relative;z-index:2;width:100%;height:auto;display:block;
   filter:drop-shadow(0 24px 36px rgba(12,12,14,.3))}
 
@@ -282,12 +294,15 @@ footer a:hover{color:var(--red)}
   .hero-person{position:relative;left:auto;bottom:auto;transform:none;height:auto;width:min(420px,88vw);margin:1.5rem auto 0}
   .hero-person img{width:100%;height:auto}
   .hero-person.is-empty{height:380px}
+  .about-photo-wrap{margin-bottom:0}
+  .about-giant{left:50%;top:1%;font-size:30vw}
   .callout-a{left:0}
   .callout-b{right:0}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}
+  .about-giant{opacity:.85}
 }
 </style>
 </head>
@@ -358,6 +373,7 @@ footer a:hover{color:var(--red)}
 
 <!-- ============ ABOUT ============ -->
 <section class="section" id="about">
+  <div class="about-giant" aria-hidden="true">LEAD</div>
   <div class="about-grid">
     <div class="reveal">
       <div class="sec-tag">01 / Behind the work</div>
@@ -389,6 +405,7 @@ footer a:hover{color:var(--red)}
       </div>
     </div>
   </div>
+  <div class="about-wash" aria-hidden="true"></div>
 </section>
 
 <!-- ============ EXPERIENCE ============ -->
@@ -626,6 +643,7 @@ document.querySelectorAll('[data-count]').forEach(el => counters.observe(el));
 
 /* ===== 2nd photo: scroll-driven blue vibe (peaks when centered, returns to normal) ===== */
 const aboutCut = document.querySelector('.about-cut');
+const aboutGiant = document.querySelector('.about-giant');
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 function blueVibe() {
   if (!aboutCut || reduceMotion) return;
@@ -637,9 +655,20 @@ function blueVibe() {
   const p = bell * bell * (3 - 2 * bell);           // smoothstep
   aboutCut.style.setProperty('--bp', p.toFixed(3));
 }
-addEventListener('scroll', () => requestAnimationFrame(blueVibe), { passive: true });
-addEventListener('resize', blueVibe);
-blueVibe();
+/* ===== silver LEAD word: shows on scroll, then fades as it rises past ===== */
+function leadWord() {
+  if (!aboutGiant || reduceMotion) return;
+  const r = aboutGiant.getBoundingClientRect();
+  const vh = innerHeight;
+  const c = (r.top + r.height / 2) / vh;          // 1 = bottom of viewport, 0 = top
+  const t = Math.max(0, 1 - Math.abs(c - 0.32) / 0.55); // peaks in the upper-third
+  const p = t * t * (3 - 2 * t);                  // smoothstep
+  aboutGiant.style.setProperty('--word-o', p.toFixed(3));
+}
+function onScrollFx() { requestAnimationFrame(() => { blueVibe(); leadWord(); }); }
+addEventListener('scroll', onScrollFx, { passive: true });
+addEventListener('resize', onScrollFx);
+onScrollFx();
 
 /* ===== duplicate marquee tracks for seamless infinite loop ===== */
 document.querySelectorAll('.loop, #projTrack').forEach(t => t.innerHTML += t.innerHTML);
