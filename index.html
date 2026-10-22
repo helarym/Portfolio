@@ -102,7 +102,7 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .stat-label{margin-top:.6rem;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 
 /* ============ ABOUT ============ */
-.about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,6vw,5rem);align-items:center}
+.about-grid{display:grid;grid-template-columns:1fr minmax(0,1.12fr);gap:clamp(2rem,5vw,4rem);align-items:center}
 .about-h{font-family:'Anton';font-size:clamp(2rem,4.6vw,3.9rem);line-height:1.05;text-transform:uppercase}
 .about-h em{font-style:normal;color:var(--red)}
 .about-txt{margin-top:1.6rem;color:#3d3d42;line-height:1.8;font-size:clamp(.95rem,1.25vw,1.05rem)}
@@ -222,9 +222,21 @@ footer a:hover{color:var(--red)}
   font-weight:600;font-size:.85rem;text-align:center;padding:1rem}
 
 /* ABOUT: cut-out portrait with callout lines + dark stats card */
-.about-cut{position:relative;max-width:480px;margin-inline:auto;display:flex;justify-content:center;align-items:flex-end}
+.about-cut{position:relative;max-width:min(680px,58vw);margin-inline:auto;display:flex;justify-content:center;align-items:flex-end}
 .about-cut .cut-img{position:relative;z-index:2;width:100%;height:auto;display:block;
   filter:drop-shadow(0 24px 36px rgba(12,12,14,.3))}
+
+/* ---- 2nd photo: scroll-driven "blue vibe" (peaks mid-scroll, back to normal) ---- */
+.cut-stack{position:relative;display:block;width:100%}
+.cut-stack::before{content:'';position:absolute;inset:-8% -12%;z-index:0;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(47,125,255,.55),rgba(47,125,255,0) 72%);
+  filter:blur(10px);opacity:calc(var(--bp,0) * .85)}
+.blue-gel{position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(180deg,#1d5dff 0%,#2f7dff 45%,#8fc0ff 100%);
+  -webkit-mask-image:url('images/abouthelary.png');mask-image:url('images/abouthelary.png');
+  -webkit-mask-size:100% 100%;mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  mix-blend-mode:color;opacity:calc(var(--bp,0) * .92)}
 .about-cut.is-empty{min-height:420px;align-items:center;border:2px dashed rgba(12,12,14,.25);border-radius:22px}
 .about-cut.is-empty::after{content:'📷 add mark-about.png (cut-out, no background)';color:rgba(12,12,14,.45);
   font-weight:600;font-size:.85rem;text-align:center;padding:1rem}
@@ -312,11 +324,11 @@ footer a:hover{color:var(--red)}
     </div>
   </div>
 
-  <!-- 🔁 PHOTO 1 (top): a cut-out photo with NO background (transparent PNG).
-       Save it next to this file as mark-hero.png. It stands in front of the giant PORTFOLIO word. -->
+  <!-- 🔁 PHOTO 1 (top): cut-out photo with NO background (transparent PNG) — images/Herohelary.png.
+       It stands in front of the giant PORTFOLIO word. -->
   <div class="hero-person">
     <img src="images/Herohelary.png" alt="Mark Helary Diaz"
-         onerror="if(!this.dataset.t){this.dataset.t=1;this.src='mark-hero.jpg';}else{this.parentElement.classList.add('is-empty');this.remove();}">
+         onerror="this.parentElement.classList.add('is-empty');this.remove();">
   </div>
 
   <div class="hero-foot">
@@ -364,11 +376,14 @@ footer a:hover{color:var(--red)}
       </div>
     </div>
     <div class="about-photo-wrap reveal d2">
-      <!-- 🔁 PHOTO 2 (below): another cut-out photo with NO background (transparent PNG).
-           Save it next to this file as mark-about.png. -->
+      <!-- 🔁 PHOTO 2: cut-out photo with NO background (transparent PNG) — images/abouthelary.png.
+           The blue-gel layer turns the photo blue while it scrolls past, then it returns to normal. -->
       <div class="about-cut">
-        <img class="cut-img" src="images/2ndimage helary.jpeg" alt="Mark Helary Diaz" loading="lazy"
-             onerror="if(!this.dataset.t){this.dataset.t=1;this.src='mark-about.jpg';}else{this.parentElement.classList.add('is-empty');this.remove();}">
+        <div class="cut-stack">
+          <img class="cut-img" src="images/abouthelary.png" alt="Mark Helary Diaz" loading="lazy"
+               onerror="if(!this.dataset.t){this.dataset.t=1;this.src='images/2ndimage helary.jpeg';}else{this.closest('.about-cut').classList.add('is-empty');this.remove();}">
+          <div class="blue-gel" aria-hidden="true"></div>
+        </div>
         <span class="callout callout-a">Automation mind</span>
         <span class="callout callout-b">Creative eye</span>
       </div>
@@ -608,6 +623,23 @@ const counters = new IntersectionObserver(es => es.forEach(e => {
   counters.unobserve(el);
 }), { threshold: .5 });
 document.querySelectorAll('[data-count]').forEach(el => counters.observe(el));
+
+/* ===== 2nd photo: scroll-driven blue vibe (peaks when centered, returns to normal) ===== */
+const aboutCut = document.querySelector('.about-cut');
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function blueVibe() {
+  if (!aboutCut || reduceMotion) return;
+  const r = aboutCut.getBoundingClientRect();
+  const vh = innerHeight;
+  // travel: -1 when the photo is just entering at the bottom, +1 when it's leaving at the top
+  const travel = (vh / 2 - (r.top + r.height / 2)) / ((vh + r.height) / 2);
+  const bell = Math.max(0, 1 - Math.abs(travel));   // 0 at the edges, 1 when centered
+  const p = bell * bell * (3 - 2 * bell);           // smoothstep
+  aboutCut.style.setProperty('--bp', p.toFixed(3));
+}
+addEventListener('scroll', () => requestAnimationFrame(blueVibe), { passive: true });
+addEventListener('resize', blueVibe);
+blueVibe();
 
 /* ===== duplicate marquee tracks for seamless infinite loop ===== */
 document.querySelectorAll('.loop, #projTrack').forEach(t => t.innerHTML += t.innerHTML);
