@@ -43,8 +43,8 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;
   padding:clamp(6rem,12vh,8rem) clamp(1.2rem,6vw,6rem) 2rem}
 .hero-giant{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);z-index:1;white-space:nowrap;
-  font-family:'Archivo Black','Anton',sans-serif;font-size:clamp(3.5rem,17vw,30rem);line-height:.9;user-select:none;pointer-events:none;
-  background:linear-gradient(180deg,#cf2a1f 0%,#df5148 42%,#eec0b9 72%,var(--cream) 96%);
+  font-family:'Archivo Black','Anton',sans-serif;font-size:min(45vw,69rem);line-height:.9;user-select:none;pointer-events:none;
+  background:linear-gradient(180deg,#cf2a1f 0%,#df5148 52%,#eab8b0 80%,var(--cream) 97%);
   -webkit-background-clip:text;background-clip:text;color:transparent}
 .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:2rem}
 .hero-hey{font-family:'Caveat';font-size:clamp(1.6rem,3vw,2.4rem);color:var(--red);transform:rotate(-3deg);display:inline-block}
@@ -201,7 +201,7 @@ footer a:hover{color:var(--red)}
 /* HERO: cut-out portrait stands IN FRONT of the giant PORTFOLIO word */
 .hero{justify-content:flex-end;min-height:clamp(470px,47vw,1150px);
   padding:clamp(4.75rem,9vh,6.5rem) clamp(1.2rem,6vw,6rem) 0}
-.hero-giant{top:28%;font-size:clamp(3.5rem,17vw,30rem)}
+.hero-giant{top:50%}
 .hero-inner{z-index:3;grid-template-columns:minmax(0,27vw) 1fr;align-items:end;margin-bottom:0}
 .hero-inner h1{font-size:clamp(2.2rem,4.3vw,3.9rem)}
 .hero-inner .hero-hey{font-size:clamp(1.4rem,2.2vw,2rem)}
@@ -267,7 +267,7 @@ footer a:hover{color:var(--red)}
 }
 @media(max-width:980px){
   .hero{justify-content:flex-end;min-height:0;padding:5.25rem 1.15rem 1.25rem}
-  .hero-giant{top:auto;bottom:18%;font-size:17vw}
+  .hero-giant{top:auto;bottom:14%;font-size:50vw}
   .hero-inner{grid-template-columns:1fr;margin-bottom:0}
   .hero-tagwrap{display:none}
   .hero-person{position:relative;left:auto;top:auto;bottom:auto;transform:none;height:auto;width:60vw;margin:1.25rem auto 0}
@@ -640,4 +640,6 @@ onScrollFx();
 document.querySelectorAll('.loop, #projTrack').forEach(t => t.innerHTML += t.innerHTML);
 </script>
 </body>
+</html>
+
 </html>
