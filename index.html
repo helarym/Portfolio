@@ -15,7 +15,7 @@
   --line:rgba(12,12,14,.12); --line-d:rgba(244,241,236,.14);
   --muted:#6d6d72;
 }
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
 ::selection{background:var(--red);color:#fff}
 ::-webkit-scrollbar{width:9px}
@@ -147,7 +147,7 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 /* ============ TOOLS (marquee rows) ============ */
 .tools-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem}
 .tools-note{max-width:36ch;color:var(--muted);font-size:.9rem;line-height:1.7}
-.tool-rows{display:flex;flex-direction:column;gap:1.1rem;
+.tool-rows{display:flex;flex-direction:column;gap:1.1rem;overflow:hidden;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
 .pill{display:flex;align-items:center;gap:.6rem;background:var(--white);border:1px solid var(--line);border-radius:999px;
@@ -214,21 +214,21 @@ footer a:hover{color:var(--red)}
 
 /* ============ VIDEO-STYLE PHOTOS ============ */
 /* HERO: cut-out portrait stands IN FRONT of the giant PORTFOLIO word */
-.hero{justify-content:flex-end;padding-bottom:0}
-.hero-giant{top:26%}
-.hero-inner{z-index:3;grid-template-columns:minmax(0,27vw) 1fr;align-items:end;margin-bottom:2vh}
+.hero{justify-content:flex-end;min-height:clamp(480px,62vh,660px);
+  padding:clamp(4.75rem,9vh,6.5rem) clamp(1.2rem,6vw,6rem) 0}
+.hero-giant{top:24%;font-size:clamp(4.5rem,18vw,18rem)}
+.hero-inner{z-index:3;grid-template-columns:minmax(0,27vw) 1fr;align-items:end;margin-bottom:0}
 .hero-inner h1{font-size:clamp(2.2rem,4.3vw,3.9rem)}
 .hero-inner .hero-hey{font-size:clamp(1.4rem,2.2vw,2rem)}
 .hero-inner .hero-roles{font-size:.7rem;line-height:1.8}
 .hero-inner .hero-sub{font-size:.88rem;max-width:34ch}
-.hero-foot{z-index:3}
-.hero-tagwrap{position:absolute;right:clamp(1.5rem,7vw,7.5rem);bottom:10vh;z-index:3;max-width:min(30vw,430px)}
+.hero-foot{z-index:3;margin-top:1.5rem}
+.hero-tagwrap{position:absolute;right:clamp(1.5rem,6vw,6rem);bottom:13%;z-index:3;max-width:min(30vw,430px)}
 .role-tag{background:rgba(255,255,255,.72);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:18px;
   padding:1.35rem 1.9rem;font-weight:700;font-size:clamp(1.15rem,1.8vw,1.55rem);line-height:1.45;
   box-shadow:0 22px 44px -16px rgba(12,12,14,.42)}
-.hero-person{position:absolute;left:50%;bottom:-11vh;transform:translateX(-50%);z-index:2;width:min(46vw,68vh,720px);
-  display:flex;align-items:flex-end;pointer-events:none}
-.hero-person img{width:100%;height:auto;max-width:100%;object-fit:contain;object-position:bottom;
+.hero-person{position:absolute;left:57%;bottom:0;transform:translateX(-50%);z-index:2;height:96%;pointer-events:none}
+.hero-person img{height:100%;width:auto;display:block;
   filter:drop-shadow(0 28px 40px rgba(12,12,14,.3))}
 .hero-person.is-empty{width:min(380px,80vw);height:min(66vh,560px);align-items:center;justify-content:center;
   border:2px dashed rgba(12,12,14,.25);border-radius:22px}
@@ -282,17 +282,19 @@ footer a:hover{color:var(--red)}
   .step{grid-template-columns:1fr;gap:.5rem}
 }
 @media(max-width:980px){
-  .hero{justify-content:center;padding-bottom:2rem}
-  .hero-giant{top:68%;font-size:22vw}
+  .hero{justify-content:flex-end;min-height:0;padding:5.25rem 1.15rem 1.25rem}
+  .hero-giant{top:auto;bottom:18%;font-size:22vw}
   .hero-inner{grid-template-columns:1fr;margin-bottom:0}
   .hero-tagwrap{display:none}
-  .hero-person{position:relative;left:auto;bottom:auto;transform:none;height:auto;width:min(420px,88vw);margin:1.5rem auto 0}
+  .hero-person{position:relative;left:auto;bottom:auto;transform:none;height:auto;width:min(52vw,260px);margin:.75rem 0 0 auto}
   .hero-person img{width:100%;height:auto}
   .hero-person.is-empty{height:380px}
   .about-photo-wrap{margin-bottom:0}
-  .about-giant{left:50%;top:1%;font-size:30vw}
-  .callout-a{left:0}
-  .callout-b{right:0}
+  .about-giant{left:50%;top:auto;bottom:7%;font-size:30vw}
+  .callout{gap:.45rem}
+  .callout::after{width:30px}
+  .callout-a{left:auto;right:57%;top:10%}
+  .callout-b{right:auto;left:63%;top:14%}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
