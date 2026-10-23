@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mark Helary Diaz — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Anton&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ============ CORE ============ */
 *{margin:0;padding:0;box-sizing:border-box}
@@ -33,15 +33,11 @@ a{color:inherit;text-decoration:none}
 nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
   padding:1.1rem clamp(1.2rem,5vw,4rem);transition:.35s}
 nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.logo{font-family:'Anton';font-size:1.5rem;letter-spacing:.03em}
+.logo{font-family:'Archivo Black','Inter',sans-serif;font-size:1.65rem;letter-spacing:.01em}
 .logo b{color:var(--red)}
 .nav-links{display:flex;gap:2rem;font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em}
 .nav-links a{position:relative;opacity:.75;transition:.25s}
 .nav-links a:hover{opacity:1;color:var(--red)}
-.badge{display:flex;align-items:center;gap:.55rem;font-size:.72rem;font-weight:700;letter-spacing:.14em;
-  border:1px solid var(--line);border-radius:999px;padding:.55rem 1rem;background:rgba(255,255,255,.6)}
-.badge .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse 1.6s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}50%{box-shadow:0 0 0 7px rgba(34,197,94,0)}}
 
 /* ============ HERO ============ */
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;
@@ -53,10 +49,7 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:2rem}
 .hero-hey{font-family:'Caveat';font-size:clamp(1.6rem,3vw,2.4rem);color:var(--red);transform:rotate(-3deg);display:inline-block}
 .hero h1{font-family:'Anton';font-size:clamp(2.6rem,5.6vw,4.8rem);line-height:1;text-transform:uppercase;margin:.3rem 0 .9rem}
-.hero-roles{font-weight:700;font-size:clamp(.8rem,1.4vw,1rem);letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
-.hero-roles span{color:var(--red)}
-.hero-sub{margin-top:1rem;max-width:44ch;color:var(--muted);font-size:clamp(.95rem,1.3vw,1.05rem);line-height:1.65}
-.hero-cta{display:flex;gap:1rem;margin-top:1.8rem;flex-wrap:wrap}
+.hero-sub{margin-top:1rem;max-width:34ch;color:var(--muted);font-size:clamp(.95rem,1.3vw,1.05rem);line-height:1.65}
 .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;
   padding:.95rem 1.7rem;border-radius:999px;transition:.3s;cursor:pointer;border:2px solid var(--ink)}
 .btn-red{background:var(--red);border-color:var(--red);color:#fff}
@@ -73,19 +66,11 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
   font-size:.68rem;font-weight:700;letter-spacing:.18em;text-shadow:0 2px 10px rgba(0,0,0,.6)}
 .hero-foot{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;margin-top:3rem;
   font-size:.72rem;font-weight:700;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
-.scroll-cue{display:inline-flex;align-items:center;gap:.55rem;background:var(--ink);color:var(--cream);
-  border-radius:999px;padding:.85rem 1.6rem;font-size:.78rem;letter-spacing:.18em;cursor:pointer;
-  box-shadow:0 16px 32px -12px rgba(12,12,14,.55);animation:bob 1.8s ease-in-out infinite}
-.scroll-cue:hover{background:var(--red);color:#fff}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 
-/* ============ BLACK STRIP MARQUEE ============ */
-.strip{background:var(--ink);padding:1.1rem 0;overflow:hidden;transform:rotate(-1.2deg) scale(1.03);border-block:1px solid var(--ink)}
+/* ============ MARQUEE (tools rows + project track) ============ */
 .loop{display:flex;width:max-content;gap:3rem;animation:loop var(--speed,30s) linear infinite;will-change:transform}
 .loop.reverse{animation-direction:reverse}
 @keyframes loop{to{transform:translateX(-50%)}}
-.strip .loop span{font-family:'Anton';font-size:clamp(1rem,2.2vw,1.5rem);letter-spacing:.06em;color:var(--cream);white-space:nowrap}
-.strip .loop span i{color:var(--red);font-style:normal;margin-right:3rem}
 
 /* ============ SECTIONS ============ */
 .section{padding:clamp(4.5rem,9vw,8rem) clamp(1.2rem,6vw,6rem)}
@@ -214,21 +199,20 @@ footer a:hover{color:var(--red)}
 
 /* ============ VIDEO-STYLE PHOTOS ============ */
 /* HERO: cut-out portrait stands IN FRONT of the giant PORTFOLIO word */
-.hero{justify-content:flex-end;min-height:clamp(480px,62vh,660px);
+.hero{justify-content:flex-end;min-height:clamp(470px,47vw,1150px);
   padding:clamp(4.75rem,9vh,6.5rem) clamp(1.2rem,6vw,6rem) 0}
-.hero-giant{top:24%;font-size:clamp(4.5rem,18vw,18rem)}
+.hero-giant{top:22%;font-size:clamp(5rem,17vw,17rem)}
 .hero-inner{z-index:3;grid-template-columns:minmax(0,27vw) 1fr;align-items:end;margin-bottom:0}
 .hero-inner h1{font-size:clamp(2.2rem,4.3vw,3.9rem)}
 .hero-inner .hero-hey{font-size:clamp(1.4rem,2.2vw,2rem)}
-.hero-inner .hero-roles{font-size:.7rem;line-height:1.8}
 .hero-inner .hero-sub{font-size:.88rem;max-width:34ch}
 .hero-foot{z-index:3;margin-top:1.5rem}
 .hero-tagwrap{position:absolute;right:clamp(1.5rem,6vw,6rem);bottom:13%;z-index:3;max-width:min(30vw,430px)}
 .role-tag{background:rgba(255,255,255,.72);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:18px;
   padding:1.35rem 1.9rem;font-weight:700;font-size:clamp(1.15rem,1.8vw,1.55rem);line-height:1.45;
   box-shadow:0 22px 44px -16px rgba(12,12,14,.42)}
-.hero-person{position:absolute;left:57%;bottom:0;transform:translateX(-50%);z-index:2;height:96%;pointer-events:none}
-.hero-person img{height:100%;width:auto;display:block;
+.hero-person{position:absolute;left:50%;top:1.5%;transform:translateX(-50%);z-index:2;width:60%;pointer-events:none}
+.hero-person img{width:100%;height:auto;display:block;
   filter:drop-shadow(0 28px 40px rgba(12,12,14,.3))}
 .hero-person.is-empty{width:min(380px,80vw);height:min(66vh,560px);align-items:center;justify-content:center;
   border:2px dashed rgba(12,12,14,.25);border-radius:22px}
@@ -286,7 +270,7 @@ footer a:hover{color:var(--red)}
   .hero-giant{top:auto;bottom:18%;font-size:22vw}
   .hero-inner{grid-template-columns:1fr;margin-bottom:0}
   .hero-tagwrap{display:none}
-  .hero-person{position:relative;left:auto;bottom:auto;transform:none;height:auto;width:min(52vw,260px);margin:.75rem 0 0 auto}
+  .hero-person{position:relative;left:auto;top:auto;bottom:auto;transform:none;height:auto;width:60vw;margin:1.25rem auto 0}
   .hero-person img{width:100%;height:auto}
   .hero-person.is-empty{height:380px}
   .about-photo-wrap{margin-bottom:0}
@@ -314,7 +298,6 @@ footer a:hover{color:var(--red)}
     <a href="#about">About</a><a href="#experience">Experience</a>
     <a href="#tools">Tools</a><a href="#work">Work</a><a href="#contact">Contact</a>
   </div>
-  <div class="badge"><span class="dot"></span>AVAILABLE FOR PROJECTS</div>
 </nav>
 
 <!-- ============ HERO ============ -->
@@ -324,12 +307,7 @@ footer a:hover{color:var(--red)}
     <div>
       <span class="hero-hey">Hey, I'm</span>
       <h1>Mark Helary<br>Diaz</h1>
-      <div class="hero-roles">Digital Marketing <span>×</span> Creatives <span>×</span> Automation <span>×</span> Video</div>
-      <p class="hero-sub">I design, automate, and edit things that cut through the noise — and get people moving. Pretty is the baseline. Purpose is the product.</p>
-      <div class="hero-cta">
-        <a href="#work" class="btn btn-red">See my work ↓</a>
-        <a href="#contact" class="btn btn-ghost">Say hi 👋</a>
-      </div>
+      <p class="hero-sub">I design, automate, and edit things that get the job done.</p>
     </div>
   </div>
 
@@ -347,18 +325,8 @@ footer a:hover{color:var(--red)}
 
   <div class="hero-foot">
     <span>Based in the Philippines 🇵🇭</span>
-    <span class="scroll-cue">Scroll ↓</span>
   </div>
 </header>
-
-<!-- ============ STRIP ============ -->
-<div class="strip">
-  <div class="loop" style="--speed:26s">
-    <span>Digital Marketing <i>✦</i></span><span>UI / UX Design <i>✦</i></span>
-    <span>Automation <i>✦</i></span><span>Video Editing <i>✦</i></span>
-    <span>AI-Hybrid Workflows <i>✦</i></span><span>Social Media Creatives <i>✦</i></span>
-  </div>
-</div>
 
 <!-- ============ STATS (count-up animation) ============ -->
 <section class="section" style="padding-top:0;padding-bottom:0">
