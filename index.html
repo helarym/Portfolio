@@ -42,8 +42,8 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 /* ============ HERO ============ */
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;
   padding:clamp(6rem,12vh,8rem) clamp(1.2rem,6vw,6rem) 2rem}
-.hero-giant{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%) scaleY(3.325);z-index:1;white-space:nowrap;
-  font-family:'Archivo Black','Anton',sans-serif;font-size:15.45vw;line-height:.9;user-select:none;pointer-events:none;
+.hero-giant{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%) scaleY(2.89);z-index:1;white-space:nowrap;
+  font-family:'Archivo Black','Anton',sans-serif;font-size:17.75vw;letter-spacing:-.105em;line-height:.9;user-select:none;pointer-events:none;
   background:linear-gradient(180deg,#cf2a1f 0%,#df5148 50%,rgba(223,81,72,.72) 62%,rgba(223,81,72,.38) 71%,rgba(223,81,72,.13) 79%,rgba(223,81,72,0) 86%,rgba(223,81,72,0) 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent}
 .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:2rem}
@@ -250,7 +250,7 @@ footer a:hover{color:var(--red)}
 @media(max-width:980px){
   .hero-inner{grid-template-columns:1fr;text-align:left}
   .hero-photo-wrap{justify-content:flex-start;margin-top:1.5rem}
-  .hero-giant{top:38%;font-size:22vw}
+  .hero-giant{top:38%;font-size:17.75vw}
   .stats{grid-template-columns:repeat(2,1fr)}
   .stat:nth-child(3){border-left:none}
   .stat{border-top:1px solid var(--line)}
@@ -267,7 +267,7 @@ footer a:hover{color:var(--red)}
 }
 @media(max-width:980px){
   .hero{justify-content:flex-end;min-height:0;padding:5.25rem 1.15rem 1.25rem}
-  .hero-giant{top:auto;bottom:22%;font-size:15.45vw}
+  .hero-giant{top:auto;bottom:22%;font-size:17.75vw}
   .hero-inner{grid-template-columns:1fr;margin-bottom:0}
   .hero-tagwrap{display:none}
   .hero-person{position:relative;left:auto;top:auto;bottom:auto;transform:none;height:auto;width:60vw;margin:1.25rem auto 0}
