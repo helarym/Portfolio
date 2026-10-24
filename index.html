@@ -42,9 +42,8 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 /* ============ HERO ============ */
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;
   padding:clamp(6rem,12vh,8rem) clamp(1.2rem,6vw,6rem) 2rem}
-.hero-giant{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%) scaleY(2.02);z-index:1;white-space:nowrap;
+.hero-giant{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%) scaleY(2.89);z-index:1;white-space:nowrap;
   font-family:'Archivo Black','Anton',sans-serif;font-size:17.75vw;letter-spacing:-.105em;line-height:.9;user-select:none;pointer-events:none;
-  filter:blur(clamp(1.5px,.15vw,3px));opacity:.9;
   background:linear-gradient(180deg,#cf2a1f 0%,#df5148 50%,rgba(223,81,72,.72) 62%,rgba(223,81,72,.38) 71%,rgba(223,81,72,.13) 79%,rgba(223,81,72,0) 86%,rgba(223,81,72,0) 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent}
 .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:2rem}
@@ -113,7 +112,7 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .chip-a{top:8%;left:-1.2rem}
 .chip-b{bottom:22%;right:-1.2rem}
 .chip-c{bottom:-1rem;left:8%;background:var(--red);color:#fff}
-.about-photo-wrap{position:relative;z-index:2}
+.about-photo-wrap{position:relative}
 
 /* ============ EXPERIENCE ============ */
 .big-h{font-family:'Anton';font-size:clamp(2.4rem,6vw,5.2rem);line-height:.98;text-transform:uppercase}
@@ -202,7 +201,7 @@ footer a:hover{color:var(--red)}
 /* HERO: cut-out portrait stands IN FRONT of the giant PORTFOLIO word */
 .hero{justify-content:flex-end;min-height:clamp(470px,47vw,1150px);
   padding:clamp(4.75rem,9vh,6.5rem) clamp(1.2rem,6vw,6rem) 0}
-.hero-giant{top:35%}
+.hero-giant{top:51%}
 .hero-inner{z-index:3;grid-template-columns:minmax(0,27vw) 1fr;align-items:end;margin-bottom:0}
 .hero-inner h1{font-size:clamp(2.2rem,4.3vw,3.9rem)}
 .hero-inner .hero-hey{font-size:clamp(1.4rem,2.2vw,2rem)}
@@ -222,7 +221,7 @@ footer a:hover{color:var(--red)}
 
 /* ABOUT: cut-out portrait with callout lines + dark stats card */
 .about-cut{position:relative;max-width:680px;margin-inline:auto;display:flex;justify-content:center;align-items:flex-end}
-.about-photo-wrap{position:relative;z-index:2;
+.about-photo-wrap{position:relative;
   margin-bottom:calc(-1 * clamp(4.5rem,9vw,8rem) - 4vh)} /* photo sits at the bottom edge of the section */
 .about-cut .cut-img{position:relative;z-index:2;width:100%;height:auto;display:block;
   filter:drop-shadow(0 24px 36px rgba(12,12,14,.3))}
@@ -364,8 +363,7 @@ footer a:hover{color:var(--red)}
            While scrolling past, the whole section gets a slight monochrome filter, then returns to normal. -->
       <div class="about-cut">
         <div class="cut-stack">
-          <img class="cut-img" src="images/abouthelary.png" alt="Mark Helary Diaz"
-               width="883" height="1278" decoding="async" loading="eager"
+          <img class="cut-img" src="images/abouthelary.png" alt="Mark Helary Diaz" loading="lazy"
                onerror="if(!this.dataset.t){this.dataset.t=1;this.src='images/2ndimage helary.jpeg';}else{this.closest('.about-cut').classList.add('is-empty');this.remove();}">
         </div>
         <span class="callout callout-a">Automation mind</span>
