@@ -113,7 +113,7 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .chip-a{top:8%;left:-1.2rem}
 .chip-b{bottom:22%;right:-1.2rem}
 .chip-c{bottom:-1rem;left:8%;background:var(--red);color:#fff}
-.about-photo-wrap{position:relative}
+.about-photo-wrap{position:relative;z-index:2}
 
 /* ============ EXPERIENCE ============ */
 .big-h{font-family:'Anton';font-size:clamp(2.4rem,6vw,5.2rem);line-height:.98;text-transform:uppercase}
@@ -222,7 +222,7 @@ footer a:hover{color:var(--red)}
 
 /* ABOUT: cut-out portrait with callout lines + dark stats card */
 .about-cut{position:relative;max-width:680px;margin-inline:auto;display:flex;justify-content:center;align-items:flex-end}
-.about-photo-wrap{position:relative;
+.about-photo-wrap{position:relative;z-index:2;
   margin-bottom:calc(-1 * clamp(4.5rem,9vw,8rem) - 4vh)} /* photo sits at the bottom edge of the section */
 .about-cut .cut-img{position:relative;z-index:2;width:100%;height:auto;display:block;
   filter:drop-shadow(0 24px 36px rgba(12,12,14,.3))}
@@ -364,7 +364,8 @@ footer a:hover{color:var(--red)}
            While scrolling past, the whole section gets a slight monochrome filter, then returns to normal. -->
       <div class="about-cut">
         <div class="cut-stack">
-          <img class="cut-img" src="images/abouthelary.png" alt="Mark Helary Diaz" loading="lazy"
+          <img class="cut-img" src="images/abouthelary.png" alt="Mark Helary Diaz"
+               width="883" height="1278" decoding="async" loading="eager"
                onerror="if(!this.dataset.t){this.dataset.t=1;this.src='images/2ndimage helary.jpeg';}else{this.closest('.about-cut').classList.add('is-empty');this.remove();}">
         </div>
         <span class="callout callout-a">Automation mind</span>
