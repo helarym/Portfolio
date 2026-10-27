@@ -173,6 +173,28 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .pcard:nth-child(4n+2) .pcard-preview{background:linear-gradient(135deg,#26262e,#101014)}
 .pcard:nth-child(4n+3) .pcard-preview{background:linear-gradient(135deg,#2e1a2e,#120d14)}
 .pcard:nth-child(4n+4) .pcard-preview{background:linear-gradient(135deg,#14262e,#0d1214)}
+
+/* ============ DESIGN & CREATIVES featured work grid ============ */
+.dc-block{margin-top:3.4rem}
+.dc-note{color:rgba(244,241,236,.55);font-size:.95rem;line-height:1.6;margin-top:.5rem;max-width:56ch}
+.dc-grid{margin-top:1.8rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.wcard{background:var(--ink-2);border:1px solid var(--line-d);border-radius:18px;overflow:hidden;
+  display:flex;flex-direction:column;transition:.35s}
+.wcard:hover{border-color:var(--red);transform:translateY(-6px)}
+.wcard-img{aspect-ratio:16/10;overflow:hidden;background:linear-gradient(135deg,#26262e,#12121a);position:relative}
+.wcard-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.wcard:hover .wcard-img img{transform:scale(1.05)}
+.wcard-body{padding:1.25rem 1.35rem 1.45rem;display:flex;flex-direction:column;gap:.55rem;flex:1}
+.wcard-type{font-size:.66rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+.wcard h4{font-family:'Anton';font-size:1.3rem;text-transform:uppercase;letter-spacing:.02em;color:var(--cream)}
+.wcard p{color:rgba(244,241,236,.6);font-size:.85rem;line-height:1.65}
+.wcard-foot{margin-top:auto;padding-top:.95rem;border-top:1px dashed var(--line-d);font-size:.68rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;
+  color:rgba(244,241,236,.5)}
+.wcard-foot a{transition:.25s}
+.wcard-foot a:hover{color:var(--red)}
+@media(max-width:1020px){.dc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.dc-grid{grid-template-columns:1fr}}
 .pcard h3{font-family:'Anton';font-size:1.6rem;text-transform:uppercase;letter-spacing:.02em}
 .pcard p{margin-top:.5rem;color:rgba(244,241,236,.6);font-size:.88rem;line-height:1.6}
 .pcard-foot{margin-top:1.2rem;padding-top:1rem;border-top:1px dashed var(--line-d);font-size:.7rem;font-weight:700;
@@ -529,7 +551,7 @@ footer a:hover{color:var(--red)}
         <div class="pcard-preview">✦</div>
         <h3>Design & Creatives</h3>
         <p>UI/UX layouts, brand visuals, and scroll-stopping social content. Designed to look sharp — and to make sense.</p>
-        <div class="pcard-foot">Case study — slot ready ↗</div>
+        <div class="pcard-foot">Featured pieces below ↓</div>
       </div>
       <div class="pcard">
         <div class="pcard-num">02</div>
@@ -555,6 +577,67 @@ footer a:hover{color:var(--red)}
         <p>AI-hybrid campaigns and ads built around one thing: conversion. Strategy first, boosting second.</p>
         <div class="pcard-foot">Case study — slot ready ↗</div>
       </div>
+    </div>
+  </div>
+
+  <div class="dc-block reveal">
+    <div class="sec-tag">Design &amp; Creatives — selected pieces</div>
+    <p class="dc-note">Six client projects, organized the way I’d walk you through them in a case study — digital first, then the print and identity work.</p>
+    <div class="dc-grid">
+      <article class="wcard reveal">
+        <div class="wcard-img"><img src="https://drive.google.com/thumbnail?id=1X0nbAE6C486buPvhn-zq6r6GLqE1_Ssn&amp;sz=w1200" alt="Aetheria Events — Digital Landing Page · RSVP" loading="lazy" decoding="async" onerror="this.style.display='none'"></div>
+        <div class="wcard-body">
+          <div class="wcard-type">01 · Digital Landing Page · RSVP</div>
+          <h4>Aetheria Events</h4>
+          <p>An event landing page with an RSVP flow built to turn invites into confirmed guests — clear hierarchy, a fast path to yes, zero clutter.</p>
+          <div class="wcard-foot"><span>3 screens</span><a href="https://drive.google.com/drive/folders/1AtzA6gqy2D_-9L3diyDBREEg4eBRrQA_" target="_blank" rel="noopener">Full folder ↗</a></div>
+        </div>
+      </article>
+      <article class="wcard reveal">
+        <div class="wcard-img"><img src="https://drive.google.com/thumbnail?id=1dqXmUj9DESXboznfMysE6msBKqidfPb1&amp;sz=w1200" alt="Brother's Ramen — QR Standee · Digital Card UI/UX" loading="lazy" decoding="async" onerror="this.style.display='none'"></div>
+        <div class="wcard-body">
+          <div class="wcard-type">02 · QR Standee · Digital Card UI/UX</div>
+          <h4>Brother's Ramen</h4>
+          <p>A full touchpoint system for a ramen shop: a payment &amp; social QR standee for the counter and a digital card UI — one brand voice from print to screen.</p>
+          <div class="wcard-foot"><span>6 pieces</span><a href="https://drive.google.com/drive/folders/1QwuWE77Gcq98i5FBBpWOy190bER4-QMB" target="_blank" rel="noopener">Full folder ↗</a></div>
+        </div>
+      </article>
+      <article class="wcard reveal">
+        <div class="wcard-img"><img src="https://drive.google.com/thumbnail?id=1Xovn-NyNwsrHbaKoc18hC8PHTIHdx5m8&amp;sz=w1200" alt="Allanese Aesthetics — QR Standee · FB + Google Review" loading="lazy" decoding="async" onerror="this.style.display='none'"></div>
+        <div class="wcard-body">
+          <div class="wcard-type">03 · QR Standee · FB + Google Review</div>
+          <h4>Allanese Aesthetics</h4>
+          <p>A beauty-clinic standee engineered around two actions: follow on Facebook and leave a Google review — design that grows the business while it dresses the space.</p>
+          <div class="wcard-foot"><span>2 shots</span><a href="https://drive.google.com/drive/folders/1JgAALbmEmYQGzqs2l4F3OMnWGV0udxww" target="_blank" rel="noopener">Full folder ↗</a></div>
+        </div>
+      </article>
+      <article class="wcard reveal">
+        <div class="wcard-img"><img src="https://drive.google.com/thumbnail?id=1PzB1KczsbvGWmV2_9Tx4Hf_e3unkhWOf&amp;sz=w1200" alt="Food Stall X-Banner — Print · Signage" loading="lazy" decoding="async" onerror="this.style.display='none'"></div>
+        <div class="wcard-body">
+          <div class="wcard-type">04 · Print · Signage</div>
+          <h4>Food Stall X-Banner</h4>
+          <p>Street-food signage that reads from across the lot — bold type, honest visuals, built for the night market.</p>
+          <div class="wcard-foot"><span>3 layouts</span><a href="https://drive.google.com/drive/folders/1tX9-LWtqzBCOgCWtAyWEM-VjP3cAYHff" target="_blank" rel="noopener">Full folder ↗</a></div>
+        </div>
+      </article>
+      <article class="wcard reveal">
+        <div class="wcard-img"><img src="https://drive.google.com/thumbnail?id=1gYmTZiJJOhvBP_3ZREvrF6Xc0FMORDhP&amp;sz=w1200" alt="NSTP ID &amp; Tarpaulin — Print · ID System" loading="lazy" decoding="async" onerror="this.style.display='none'"></div>
+        <div class="wcard-body">
+          <div class="wcard-type">05 · Print · ID System</div>
+          <h4>NSTP ID &amp; Tarpaulin</h4>
+          <p>An official ID system and tarpaulin layout for NSTP officers, corps, and coordinators — formal, organized, and print-ready.</p>
+          <div class="wcard-foot"><span>5 files</span><a href="https://drive.google.com/drive/folders/11sPhQeOMF4N6BxYludQmYjH_dwxvnDQK" target="_blank" rel="noopener">Full folder ↗</a></div>
+        </div>
+      </article>
+      <article class="wcard reveal">
+        <div class="wcard-img"><img src="https://drive.google.com/thumbnail?id=1QiplGwjvteLALqpklHGfu0LHyy3_yvhd&amp;sz=w1200" alt="Brand Logos — Branding · Identity" loading="lazy" decoding="async" onerror="this.style.display='none'"></div>
+        <div class="wcard-body">
+          <div class="wcard-type">06 · Branding · Identity</div>
+          <h4>Brand Logos</h4>
+          <p>Identity marks crafted to work small, work big, and still look like the brand in between.</p>
+          <div class="wcard-foot"><span>2 marks</span><a href="https://drive.google.com/drive/folders/1g9i0C5yNU2y8e9t-TV3Y1EeXOV6pItrQ" target="_blank" rel="noopener">Full folder ↗</a></div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
