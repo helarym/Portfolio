@@ -220,10 +220,7 @@ footer a:hover{color:var(--red)}
   padding:1.35rem 1.9rem;font-weight:700;font-size:clamp(1.15rem,1.8vw,1.55rem);line-height:1.45;
   box-shadow:0 22px 44px -16px rgba(12,12,14,.42)}
 .hero-person{position:absolute;left:50%;top:1.5%;transform:translateX(-50%);z-index:2;width:60%;pointer-events:none}
-.hero-person img{width:100%;height:auto;display:block;
-  filter:drop-shadow(0 28px 40px rgba(12,12,14,.3))}
-.hero-person.hp-reveal img{opacity:0}
-.hero-person .hp-particles{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+.hero-person img{width:100%;height:auto;display:block}
 .hero-person.is-empty{width:min(380px,80vw);height:min(66vh,560px);align-items:center;justify-content:center;
   border:2px dashed rgba(12,12,14,.25);border-radius:22px}
 .hero-person.is-empty::after{content:'📷 add mark-hero.png (cut-out, no background)';color:rgba(12,12,14,.45);
@@ -330,7 +327,6 @@ footer a:hover{color:var(--red)}
            fetchpriority="high" decoding="async"
            onerror="this.parentElement.classList.add('is-empty');this.remove();">
     </picture>
-    <script>(function(){var p=document.currentScript.parentElement;p.classList.add('hp-reveal');setTimeout(function(){p.classList.remove('hp-reveal');var im=p.querySelector('img');if(im)im.style.opacity='';},7000);})();</script>
   </div>
 
   <!-- role card — sits near the hero portrait, big like the reference -->
@@ -665,149 +661,6 @@ onScrollFx();
 
 /* ===== duplicate marquee tracks for seamless infinite loop ===== */
 document.querySelectorAll('.loop, #projTrack').forEach(t => t.innerHTML += t.innerHTML);
-</script>
-<script>
-/* ===== Hero photo: particle fade-to-appear (plays once on load, transient) ===== */
-(function () {
-  var wrap = document.querySelector('.hero-person');
-  if (!wrap) return;
-  var img = wrap.querySelector('img');
-  if (!img) return;
-  var cv = null, raf = 0, finished = false;
-  function finish() {
-    if (finished) return;
-    finished = true;
-    if (raf) cancelAnimationFrame(raf);
-    wrap.classList.remove('hp-reveal');
-    if (cv && cv.parentNode) cv.parentNode.removeChild(cv);
-    img.style.opacity = '';
-    removeEventListener('resize', finish);
-  }
-  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { finish(); return; }
-  addEventListener('resize', finish);
-  function build() {
-    if (finished || !img.naturalWidth) return;
-    var w = wrap.clientWidth, h = wrap.clientHeight;
-    if (!w || !h) { finish(); return; }
-    try {
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      cv = document.createElement('canvas');
-      cv.className = 'hp-particles';
-      cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
-      wrap.appendChild(cv);
-      var ctx = cv.getContext('2d');
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var sh = 330, sw = Math.max(1, Math.round(sh * img.naturalWidth / img.naturalHeight));
-      var off = document.createElement('canvas');
-      off.width = sw; off.height = sh;
-      var octx = off.getContext('2d');
-      octx.drawImage(img, 0, 0, sw, sh);
-      var data = octx.getImageData(0, 0, sw, sh).data;
-      var pts = [];
-      for (var y = 0; y < sh; y += 2) for (var x = 0; x < sw; x += 2) {
-        var i = (y * sw + x) * 4;
-        if (data[i + 3] > 90) pts.push([x, y, data[i], data[i + 1], data[i + 2]]);
-      }
-      if (!pts.length) { finish(); return; }
-      var target = Math.max(800, Math.min(3800, Math.round(w * h / 290)));
-      for (var s = pts.length - 1; s > 0; s--) {
-        var j = (Math.random() * (s + 1)) | 0, t = pts[s]; pts[s] = pts[j]; pts[j] = t;
-      }
-      if (pts.length > target) pts.length = target;
-      /* per-color glow sprites: each halo is tinted with the photo's own color */
-      var spriteCache = {};
-      function glowSprite(key) {
-        var s = spriteCache[key];
-        if (s) return s;
-        s = document.createElement('canvas');
-        s.width = s.height = 32;
-        var g = s.getContext('2d');
-        var m = key.match(/\d+/g);
-        var col = m[0] + ',' + m[1] + ',' + m[2];
-        var grad = g.createRadialGradient(16, 16, 0, 16, 16, 16);
-        grad.addColorStop(0, 'rgba(' + col + ',1)');
-        grad.addColorStop(0.35, 'rgba(' + col + ',.4)');
-        grad.addColorStop(1, 'rgba(' + col + ',0)');
-        g.fillStyle = grad;
-        g.fillRect(0, 0, 32, 32);
-        spriteCache[key] = s;
-        return s;
-      }
-      /* 4 corner streams: each particle's origin is its target's nearest corner */
-      var parts = [], maxDr = Math.sqrt(w * w + h * h);
-      for (var k = 0; k < pts.length; k++) {
-        var p = pts[k];
-        var tx = p[0] / sw * w, ty = p[1] / sh * h;
-        var right = tx > w / 2, bottom = ty > h / 2;
-        var ox = right ? w * (1.06 + Math.random() * 0.32) : -w * (0.06 + Math.random() * 0.32);
-        var oy = bottom ? h * (1.06 + Math.random() * 0.32) : -h * (0.06 + Math.random() * 0.32);
-        /* gentle arcing path: quadratic bezier, control offset perpendicular */
-        var dx = tx - ox, dy = ty - oy;
-        var bend = (Math.random() - 0.5) * 0.32;
-        var cx = (ox + tx) / 2 - dy * bend, cy = (oy + ty) / 2 + dx * bend;
-        /* gradual build: stagger is mostly random so the image materializes slowly */
-        var dr = Math.sqrt((tx - ox) * (tx - ox) + (ty - oy) * (ty - oy)) / maxDr;
-        parts.push({
-          ox: ox, oy: oy, cx: cx, cy: cy, tx: tx, ty: ty,
-          c: 'rgb(' + p[2] + ',' + p[3] + ',' + p[4] + ')',
-          g: 'rgb(' + (p[2] >> 2 << 2) + ',' + (p[3] >> 2 << 2) + ',' + (p[4] >> 2 << 2) + ')',
-          s: 1.3 + Math.random() * 1.1,
-          a: 0.72 + Math.random() * 0.28,
-          d: dr * 300 + Math.random() * 1400
-        });
-      }
-      var t0 = performance.now();
-      img.style.opacity = '0';
-      function frame(now) {
-        if (finished) return;
-        var t = now - t0;
-        ctx.clearRect(0, 0, w, h);
-        var fade = t > 2350 ? Math.max(0, 1 - (t - 2350) / 900) : 1;
-        var x = 0, y = 0, a = 0, k = 0, e = 0, q = 0, p, i;
-        /* pass 1: additive glow blooms */
-        ctx.globalCompositeOperation = 'lighter';
-        for (i = 0; i < parts.length; i++) {
-          p = parts[i];
-          k = Math.min(1, Math.max(0, (t - p.d) / 1600));
-          if (k <= 0) continue;
-          e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;  /* easeInOutCubic */
-          q = 1 - e;
-          x = q * q * p.ox + 2 * q * e * p.cx + e * e * p.tx;
-          y = q * q * p.oy + 2 * q * e * p.cy + e * e * p.ty;
-          a = Math.min(1, k * 5.5) * fade * p.a;
-          if (a <= 0.012) continue;
-          ctx.globalAlpha = a * 0.52;
-          var r = p.s * 3.6;
-          ctx.drawImage(glowSprite(p.g), x - r, y - r, r * 2, r * 2);
-        }
-        /* pass 2: colored cores */
-        ctx.globalCompositeOperation = 'source-over';
-        for (i = 0; i < parts.length; i++) {
-          p = parts[i];
-          k = Math.min(1, Math.max(0, (t - p.d) / 1600));
-          if (k <= 0) continue;
-          e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
-          q = 1 - e;
-          x = q * q * p.ox + 2 * q * e * p.cx + e * e * p.tx;
-          y = q * q * p.oy + 2 * q * e * p.cy + e * e * p.ty;
-          a = Math.min(1, k * 5.5) * fade * p.a;
-          if (a <= 0.012) continue;
-          ctx.globalAlpha = a;
-          ctx.fillStyle = p.c;
-          ctx.fillRect(x - p.s / 2, y - p.s / 2, p.s, p.s);
-        }
-        ctx.globalAlpha = 1;
-        if (t > 2100) img.style.opacity = String(Math.min(1, (t - 2100) / 900));
-        if (t > 3400) { finish(); return; }
-        raf = requestAnimationFrame(frame);
-      }
-      raf = requestAnimationFrame(frame);
-    } catch (e) { finish(); }
-  }
-  img.addEventListener('error', finish);
-  if (img.complete && img.naturalWidth) setTimeout(build, 0);
-  else img.addEventListener('load', function () { setTimeout(build, 0); });
-})();
 </script>
 </body>
 </html>
