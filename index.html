@@ -687,7 +687,7 @@ document.querySelectorAll('.loop, #projTrack').forEach(t => t.innerHTML += t.inn
       wrap.appendChild(cv);
       var ctx = cv.getContext('2d');
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var sh = 280, sw = Math.max(1, Math.round(sh * img.naturalWidth / img.naturalHeight));
+      var sh = 330, sw = Math.max(1, Math.round(sh * img.naturalWidth / img.naturalHeight));
       var off = document.createElement('canvas');
       off.width = sw; off.height = sh;
       var octx = off.getContext('2d');
@@ -699,21 +699,30 @@ document.querySelectorAll('.loop, #projTrack').forEach(t => t.innerHTML += t.inn
         if (data[i + 3] > 90) pts.push([x, y, data[i], data[i + 1], data[i + 2]]);
       }
       if (!pts.length) { finish(); return; }
-      var target = Math.max(700, Math.min(3200, Math.round(w * h / 350)));
+      var target = Math.max(800, Math.min(3800, Math.round(w * h / 290)));
       for (var s = pts.length - 1; s > 0; s--) {
         var j = (Math.random() * (s + 1)) | 0, t = pts[s]; pts[s] = pts[j]; pts[j] = t;
       }
       if (pts.length > target) pts.length = target;
-      /* white radial bloom sprite for the glow pass */
-      var glow = document.createElement('canvas');
-      glow.width = glow.height = 32;
-      var gctx = glow.getContext('2d');
-      var grad = gctx.createRadialGradient(16, 16, 0, 16, 16, 16);
-      grad.addColorStop(0, 'rgba(255,255,255,1)');
-      grad.addColorStop(0.35, 'rgba(255,255,255,.42)');
-      grad.addColorStop(1, 'rgba(255,255,255,0)');
-      gctx.fillStyle = grad;
-      gctx.fillRect(0, 0, 32, 32);
+      /* per-color glow sprites: each halo is tinted with the photo's own color */
+      var spriteCache = {};
+      function glowSprite(key) {
+        var s = spriteCache[key];
+        if (s) return s;
+        s = document.createElement('canvas');
+        s.width = s.height = 32;
+        var g = s.getContext('2d');
+        var m = key.match(/\d+/g);
+        var col = m[0] + ',' + m[1] + ',' + m[2];
+        var grad = g.createRadialGradient(16, 16, 0, 16, 16, 16);
+        grad.addColorStop(0, 'rgba(' + col + ',1)');
+        grad.addColorStop(0.35, 'rgba(' + col + ',.4)');
+        grad.addColorStop(1, 'rgba(' + col + ',0)');
+        g.fillStyle = grad;
+        g.fillRect(0, 0, 32, 32);
+        spriteCache[key] = s;
+        return s;
+      }
       /* 4 corner streams: each particle's origin is its target's nearest corner */
       var parts = [], maxDr = Math.sqrt(w * w + h * h);
       for (var k = 0; k < pts.length; k++) {
@@ -731,6 +740,7 @@ document.querySelectorAll('.loop, #projTrack').forEach(t => t.innerHTML += t.inn
         parts.push({
           ox: ox, oy: oy, cx: cx, cy: cy, tx: tx, ty: ty,
           c: 'rgb(' + p[2] + ',' + p[3] + ',' + p[4] + ')',
+          g: 'rgb(' + (p[2] >> 2 << 2) + ',' + (p[3] >> 2 << 2) + ',' + (p[4] >> 2 << 2) + ')',
           s: 1.3 + Math.random() * 1.1,
           a: 0.72 + Math.random() * 0.28,
           d: dr * 300 + Math.random() * 1400
@@ -756,9 +766,9 @@ document.querySelectorAll('.loop, #projTrack').forEach(t => t.innerHTML += t.inn
           y = q * q * p.oy + 2 * q * e * p.cy + e * e * p.ty;
           a = Math.min(1, k * 5.5) * fade * p.a;
           if (a <= 0.012) continue;
-          ctx.globalAlpha = a * 0.38;
-          var r = p.s * 3.4;
-          ctx.drawImage(glow, x - r, y - r, r * 2, r * 2);
+          ctx.globalAlpha = a * 0.52;
+          var r = p.s * 3.6;
+          ctx.drawImage(glowSprite(p.g), x - r, y - r, r * 2, r * 2);
         }
         /* pass 2: colored cores */
         ctx.globalCompositeOperation = 'source-over';
