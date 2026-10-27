@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mark Helary Diaz — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Anton&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ============ CORE ============ */
@@ -22,6 +24,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);ove
 ::-webkit-scrollbar-track{background:var(--ink)}
 ::-webkit-scrollbar-thumb{background:var(--red);border-radius:9px}
 img{max-width:100%}
+picture{display:contents}
 a{color:inherit;text-decoration:none}
 .anton{font-family:'Anton',sans-serif}
 .script{font-family:'Caveat',cursive}
@@ -71,6 +74,11 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .loop{display:flex;width:max-content;gap:3rem;animation:loop var(--speed,30s) linear infinite;will-change:transform}
 .loop.reverse{animation-direction:reverse}
 @keyframes loop{to{transform:translateX(-50%)}}
+
+/* ============ BLACK STRIP MARQUEE ============ */
+.strip{background:var(--ink);padding:1.1rem 0;overflow:hidden;border-block:1px solid var(--ink)}
+.strip .loop span{font-family:'Anton';font-size:clamp(1rem,2.2vw,1.5rem);letter-spacing:.06em;color:var(--cream);white-space:nowrap}
+.strip .loop span i{color:var(--red);font-style:normal;margin-right:3rem}
 
 /* ============ SECTIONS ============ */
 .section{padding:clamp(4.5rem,9vw,8rem) clamp(1.2rem,6vw,6rem)}
@@ -212,8 +220,7 @@ footer a:hover{color:var(--red)}
   padding:1.35rem 1.9rem;font-weight:700;font-size:clamp(1.15rem,1.8vw,1.55rem);line-height:1.45;
   box-shadow:0 22px 44px -16px rgba(12,12,14,.42)}
 .hero-person{position:absolute;left:50%;top:1.5%;transform:translateX(-50%);z-index:2;width:60%;pointer-events:none}
-.hero-person img{width:100%;height:auto;display:block;
-  filter:drop-shadow(0 28px 40px rgba(12,12,14,.3))}
+.hero-person img{width:100%;height:auto;display:block}
 .hero-person.is-empty{width:min(380px,80vw);height:min(66vh,560px);align-items:center;justify-content:center;
   border:2px dashed rgba(12,12,14,.25);border-radius:22px}
 .hero-person.is-empty::after{content:'📷 add mark-hero.png (cut-out, no background)';color:rgba(12,12,14,.45);
@@ -314,8 +321,12 @@ footer a:hover{color:var(--red)}
   <!-- 🔁 PHOTO 1 (top): cut-out photo with NO background (transparent PNG) — images/Herohelary.png.
        It stands in front of the giant PORTFOLIO word. -->
   <div class="hero-person">
-    <img src="images/Herohelary.png" alt="Mark Helary Diaz"
-         onerror="this.parentElement.classList.add('is-empty');this.remove();">
+    <picture>
+      <source srcset="images/Herohelary.webp" type="image/webp">
+      <img src="images/Herohelary.png" alt="Mark Helary Diaz" width="1479" height="1339"
+           fetchpriority="high" decoding="async"
+           onerror="this.parentElement.classList.add('is-empty');this.remove();">
+    </picture>
   </div>
 
   <!-- role card — sits near the hero portrait, big like the reference -->
@@ -327,6 +338,15 @@ footer a:hover{color:var(--red)}
     <span>Based in the Philippines 🇵🇭</span>
   </div>
 </header>
+
+<!-- ============ STRIP ============ -->
+<div class="strip">
+  <div class="loop" style="--speed:26s">
+    <span>Digital Marketing <i>✦</i></span><span>UI / UX Design <i>✦</i></span>
+    <span>Automation <i>✦</i></span><span>Video Editing <i>✦</i></span>
+    <span>AI-Hybrid Workflows <i>✦</i></span><span>Social Media Creatives <i>✦</i></span>
+  </div>
+</div>
 
 <!-- ============ STATS (count-up animation) ============ -->
 <section class="section" style="padding-top:0;padding-bottom:0">
@@ -363,9 +383,12 @@ footer a:hover{color:var(--red)}
            While scrolling past, the whole section gets a slight monochrome filter, then returns to normal. -->
       <div class="about-cut">
         <div class="cut-stack">
+          <picture>
+          <source srcset="images/abouthelary.webp" type="image/webp">
           <img class="cut-img" src="images/abouthelary.png" alt="Mark Helary Diaz"
                width="883" height="1278" decoding="async" loading="eager"
                onerror="if(!this.dataset.t){this.dataset.t=1;this.src='images/2ndimage helary.jpeg';}else{this.closest('.about-cut').classList.add('is-empty');this.remove();}">
+          </picture>
         </div>
         <span class="callout callout-a">Automation mind</span>
         <span class="callout callout-b">Creative eye</span>
