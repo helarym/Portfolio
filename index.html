@@ -235,7 +235,7 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 /* ============ work slideshow inside pcard preview ============ */
 .pcard-preview.has-slides{display:block;padding:0;overflow:hidden}
 .pcard-preview.has-slides::after{display:none}
-.pslide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:pslide 21s infinite}
+.pslide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:pslide 21s infinite;transition:opacity .7s ease}
 .pslide:nth-child(1){animation-delay:0s;opacity:1}   /* visible base state: never an empty box */.pslide:nth-child(2){animation-delay:3s}
 .pslide:nth-child(3){animation-delay:6s}.pslide:nth-child(4){animation-delay:9s}
 .pslide:nth-child(5){animation-delay:12s}.pslide:nth-child(6){animation-delay:15s}
@@ -745,6 +745,24 @@ function onScrollFx() { requestAnimationFrame(() => { monoMoment(); leadWord(); 
 addEventListener('scroll', onScrollFx, { passive: true });
 addEventListener('resize', onScrollFx);
 onScrollFx();
+
+/* ===== slideshow fallback: rotate by timer when CSS animation is off ===== */
+(function(){
+  const slides = [...document.querySelectorAll('.pcard-preview.has-slides .pslide')];
+  if (!slides.length) return;
+  // if the browser is really animating them, leave well alone
+  const probe = getComputedStyle(slides[0]);
+  if (probe.animationName && probe.animationName !== 'none' &&
+      probe.animationDuration !== '0s') return;
+  slides.forEach(s => { s.style.animation = 'none'; s.style.opacity = '0'; });
+  slides[0].style.opacity = '1';
+  let i = 0;
+  setInterval(() => {
+    slides[i].style.opacity = '0';
+    i = (i + 1) % slides.length;
+    slides[i].style.opacity = '1';
+  }, 3500);
+})();
 
 /* ===== duplicate marquee tracks for seamless infinite loop ===== */
 document.querySelectorAll('.loop, #projTrack').forEach(t => t.innerHTML += t.innerHTML);
