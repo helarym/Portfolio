@@ -771,6 +771,43 @@ onScrollFx();
 /* ===== duplicate marquee tracks for seamless infinite loop ===== */
 document.querySelectorAll('.loop, #projTrack').forEach(t => t.innerHTML += t.innerHTML);
 
+/* ===== marquees: driven by JS so they move on every device ===== */
+(function(){
+  var tracks = Array.prototype.slice.call(document.querySelectorAll('.loop, #projTrack'));
+  tracks.forEach(function(el){
+    var cs = getComputedStyle(el);
+    // read the per-row --speed first: reduced-motion zeroes animationDuration
+    var inline = parseFloat((el.style.getPropertyValue('--speed') || '').trim()) || 0;
+    var dur = inline || parseFloat(cs.animationDuration) || 30;
+    var reverse = (cs.animationDirection || '').indexOf('reverse') > -1;
+    el.style.animation = 'none';
+
+    var half = Math.max(el.scrollWidth / 2, 1);
+    var x = reverse ? -half : 0;
+    var speed = half / dur;          // px per second
+    var last = null;
+
+    function measure(){ half = Math.max(el.scrollWidth / 2, 1); speed = half / dur; }
+
+    function frame(now){
+      if (last === null) last = now;
+      var dt = Math.min(now - last, 80) / 1000;   // clamp so tab-switches don't jump
+      last = now;
+      var hovered = el.matches(':hover') || (el.parentElement && el.parentElement.matches(':hover'));
+      if (!hovered){
+        x += (reverse ? 1 : -1) * speed * dt;
+        if (x <= -half) x += half;
+        if (x > 0) x -= half;
+        el.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+      }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+    addEventListener('resize', measure);
+    if (el.id) setTimeout(measure, 400);         // fonts/images settle after paint
+  });
+})();
+
 /* ===== cover slideshows: rotate every card, including the duplicated set ===== */
 document.querySelectorAll('.pcard-preview.has-slides').forEach(function(card){
   var slides = Array.prototype.slice.call(card.querySelectorAll('.pslide'));

@@ -770,6 +770,30 @@ h1 em{
     }, 80);
   }
 
+  // ---------- ticker: JS-driven so it moves on every device ----------
+  (function(){
+    var el = document.querySelector('.strip-inner');
+    if(!el) return;
+    var cs = getComputedStyle(el);
+    var dur = parseFloat(cs.animationDuration) || 26;
+    el.style.animation = 'none';
+    var half = Math.max(el.scrollWidth / 2, 1);
+    var speed = half / dur, x = 0, last = null;
+    function frame(now){
+      if(last === null) last = now;
+      var dt = Math.min(now - last, 80) / 1000;
+      last = now;
+      if(!el.matches(':hover')){
+        x -= speed * dt;
+        if(-x >= (half = Math.max(el.scrollWidth / 2, 1))) x += half;
+        el.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+      }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+    addEventListener('resize', function(){ half = Math.max(el.scrollWidth / 2, 1); speed = half / dur; });
+  })();
+
   // ---------- play on request, inside the cropped clipper ----------
   document.querySelectorAll('.vid-frame').forEach(function(frame){
     var btn = frame.querySelector('.vid-play');
