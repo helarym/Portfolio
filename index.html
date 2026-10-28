@@ -174,6 +174,23 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .pcard:nth-child(4n+3) .pcard-preview{background:linear-gradient(135deg,#2e1a2e,#120d14)}
 .pcard:nth-child(4n+4) .pcard-preview{background:linear-gradient(135deg,#14262e,#0d1214)}
 
+/* ============ video card preview ============ */
+.pcard-preview.is-video{background:linear-gradient(140deg,#2a1315,#101014);position:relative;overflow:hidden}
+.pcard-preview.is-video::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 1px,transparent 1px 26px);
+  opacity:.5;pointer-events:none;
+}
+.play-ring{
+  position:relative;width:3.6rem;height:3.6rem;border:1px solid var(--red);border-radius:50%;
+  display:grid;place-items:center;color:var(--red);font-size:.85rem;padding-left:.22rem;
+  transition:transform .3s ease,background .3s ease;
+}
+.pcard:hover .play-ring{transform:scale(1.08);background:rgba(201,44,29,.12)}
+.play-ring::after{
+  content:'';position:absolute;inset:-9px;border:1px solid rgba(201,44,29,.28);border-radius:50%;
+}
+
 /* ============ work slideshow inside pcard preview ============ */
 .pcard-preview.has-slides{display:block;padding:0;overflow:hidden}
 .pcard-preview.has-slides::after{display:none}
@@ -563,10 +580,10 @@ footer a:hover{color:var(--red)}
       <div class="pcard">
         <div class="pcard-num">03</div>
         <div class="pcard-tags"><span>Cinematic</span><span>Montage</span><span>Reels</span></div>
-        <div class="pcard-preview">▶</div>
+        <div class="pcard-preview is-video"><span class="play-ring">▶</span></div>
         <h3>Video Editing</h3>
         <p>Cinematic cuts, montages, and reels with rhythm. Pacing that keeps thumbs from scrolling.</p>
-        <div class="pcard-foot">Case study — slot ready ↗</div>
+        <div class="pcard-foot"><a class="pcard-cta" href="works.html#video">VIEW ALL ↗</a></div>
       </div>
       <div class="pcard">
         <div class="pcard-num">04</div>
