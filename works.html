@@ -239,6 +239,34 @@ h1 em{
 .shots.stack{columns:1}
 .shots.stack figure{max-width:62rem}
 
+/* ---------- video chapter ---------- */
+.chapter-tag{
+  display:inline-flex;align-items:center;gap:.55rem;margin-bottom:.7rem;
+  font-family:'IBM Plex Mono',monospace;font-size:.58rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--red);
+}
+.chapter-tag::before{content:"";width:1.6rem;height:1px;background:var(--red)}
+.vids{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));
+  gap:clamp(.8rem,1.6vw,1.2rem);
+}
+.vid{background:var(--dark);border:1px solid var(--line);overflow:hidden;transition:border-color .3s ease}
+.vid:hover{border-color:#3d3d3d}
+.vid-frame{position:relative;aspect-ratio:16/9;background:#0d0d0d}
+.vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.vid-meta{
+  display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
+  padding:.7rem .85rem;border-top:1px solid var(--line);
+}
+.vid h3{
+  font-family:'Anton',sans-serif;font-weight:400;font-size:1rem;
+  line-height:1.15;letter-spacing:.01em;text-transform:uppercase;
+}
+.vid-meta span{
+  font-family:'IBM Plex Mono',monospace;font-size:.54rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--gray-2);flex:0 0 auto;text-align:right;
+}
+
 /* ---------- footer ---------- */
 .foot{
   padding:clamp(3rem,7vw,5.5rem) var(--pad) clamp(2rem,4vw,3rem);
@@ -309,11 +337,11 @@ h1 em{
   <div class="hero-inner">
     <p class="eyebrow">Selected archive · 2024—2026</p>
     <h1>Every piece,<br><em>organised.</em></h1>
-    <p class="hero-lede">Websites, brand systems, print and social work — each project collected in full, in one place. No loose files, no hunting through folders.</p>
+    <p class="hero-lede">Websites, brand systems, print, social and motion work — each project collected in full, in one place. No loose files, no hunting through folders.</p>
     <div class="hero-stats">
-      <div class="stat"><b>08</b><span>Projects</span></div>
-      <div class="stat"><b>28</b><span>Pieces</span></div>
-      <div class="stat"><b>05</b><span>Disciplines</span></div>
+      <div class="stat"><b>09</b><span>Projects</span></div>
+      <div class="stat"><b>31</b><span>Pieces</span></div>
+      <div class="stat"><b>03</b><span>Videos</span></div>
       <div class="stat"><b>2026</b><span>Latest</span></div>
     </div>
   </div>
@@ -336,6 +364,7 @@ h1 em{
   <a href="#food-stall"><b>06</b>Food Stall</a>
   <a href="#nstp"><b>07</b>NSTP</a>
   <a href="#brand-logos"><b>08</b>Brand Logos</a>
+  <a href="#video" class="is-video"><b>09</b>Video Editing</a>
 </nav>
 
 <main>
@@ -494,6 +523,40 @@ h1 em{
     <div class="shots">
       <figure><img src="https://lh3.googleusercontent.com/d/1QiplGwjvteLALqpklHGfu0LHyy3_yvhd=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1QiplGwjvteLALqpklHGfu0LHyy3_yvhd&amp;sz=w1200'" alt="Brand logo sheet" loading="lazy" decoding="async"><figcaption><span>Logotypes</span><span class="count">1 / 2</span></figcaption></figure>
       <figure><img src="https://lh3.googleusercontent.com/d/1um6l9aOYpoZObNBpug212xn5z3a5kw0R=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1um6l9aOYpoZObNBpug212xn5z3a5kw0R&amp;sz=w1200'" alt="Brand logo marks" loading="lazy" decoding="async"><figcaption><span>Marks</span><span class="count">2 / 2</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="work reveal" id="video">
+    <div class="work-head">
+      <div class="work-title">
+        <span class="work-num">09</span>
+        <div>
+          <span class="chapter-tag">Chapter 02 — Motion</span>
+          <h2>Video <em>Editing</em></h2>
+          <ul class="tags"><li>Montage</li><li>Trailer</li><li>Short Film</li><li>Sound</li></ul>
+        </div>
+      </div>
+      <p class="work-desc">Edits built around <strong>rhythm and pace</strong> — an opener that sets a tone, a trailer that withholds just enough, and a short film cut for performance and clarity. Cuts, sound and titles tuned so the story lands on the first watch.</p>
+    </div>
+    <div class="vids">
+      <article class="vid">
+        <div class="vid-frame">
+          <iframe src="https://drive.google.com/file/d/1-GrqPXH5hv4YC4CMAovgNakTAkS_Ka9j/preview" title="NSTP Intro Montage" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+        <div class="vid-meta"><h3>NSTP Intro Montage</h3><span>Montage · Event Opener</span></div>
+      </article>
+      <article class="vid">
+        <div class="vid-frame">
+          <iframe src="https://drive.google.com/file/d/1V40adyZBTUaNYJPvuH3VBfg_Hqs0at47/preview" title="Obligations and Contract Trailer" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+        <div class="vid-meta"><h3>Obligations and Contract Trailer</h3><span>Trailer · Narrative Cut</span></div>
+      </article>
+      <article class="vid">
+        <div class="vid-frame">
+          <iframe src="https://drive.google.com/file/d/1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG/preview" title="Purposive Communication Short Movie" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+        <div class="vid-meta"><h3>Purposive Communication Short Movie</h3><span>Short Film · Dialogue Edit</span></div>
+      </article>
     </div>
   </section>
 
