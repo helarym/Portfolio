@@ -177,11 +177,6 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 /* ============ video card preview ============ */
 .pcard-preview.is-video{background:linear-gradient(140deg,#2a1315,#101014);position:relative;overflow:hidden}
 .pcard-preview.is-video::after{display:none}          /* no "drop image here" caption */
-/* Purposive Communication short movie - designed showcase frame */
-.vstill{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
-  filter:brightness(1.55) contrast(1.08) saturate(1.12);
-}
 /* soft scrim so the type and ring always sit on something readable */
 .vscrim{
   position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -211,7 +206,20 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .pcard-preview.is-video.playing .vloop-badge{display:inline-block}
 .vloop-badge::before{content:"\25CF";color:var(--red);margin-right:.35rem;font-size:.5rem}
 /* keep the ring legible over photography */
-.pcard-preview.is-video .play-ring{position:relative;z-index:2}
+.pcard-preview.is-video.has-slides .play-ring{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;
+}
+.pcard:hover .pcard-preview.is-video.has-slides .play-ring{
+  transform:translate(-50%,-50%) scale(1.08);
+}
+/* video frames skew dark - lift them so they read like the design covers */
+.pcard-preview.is-video .pslide{filter:brightness(1.5) contrast(1.06) saturate(1.1)}
+/* five slides, three seconds each */
+.pcard-preview.is-video .pslide{animation:pslideV 15s infinite}
+@keyframes pslideV{
+  0%{opacity:0}1.6%{opacity:1}15.8%{opacity:1}20%{opacity:0}100%{opacity:0}
+}
+.pcard-preview.is-video .pslide:nth-child(1){opacity:1}
 .pcard-preview.is-video .play-ring::before{
   content:'';position:absolute;inset:-1.4rem;border-radius:50%;
   background:radial-gradient(circle,rgba(10,10,12,.62),rgba(10,10,12,0) 70%);
@@ -627,8 +635,8 @@ footer a:hover{color:var(--red)}
       <div class="pcard">
         <div class="pcard-num">03</div>
         <div class="pcard-tags"><span>Cinematic</span><span>Montage</span><span>Reels</span></div>
-        <div class="pcard-preview is-video"><img class="vstill" src="https://drive.google.com/thumbnail?id=1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG&amp;sz=w1200" onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/d/1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG=w1200';this.addEventListener('error',function(){this.style.display='none'},{once:true})" alt="Purposive Communication Short Movie — frame at 0:06" decoding="async"><span class="vscrim"></span><span class="play-ring">▶</span></div>
-        <div class="vcap"><span class="vcap-title">Purposive Communication</span><span class="vcap-time">0:06</span></div>
+        <div class="pcard-preview is-video has-slides"><img class="pslide" src="https://drive.google.com/thumbnail?id=1-GrqPXH5hv4YC4CMAovgNakTAkS_Ka9j&amp;sz=w1200" onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/d/1-GrqPXH5hv4YC4CMAovgNakTAkS_Ka9j=w1200'" alt="NSTP Intro Montage" decoding="async"><img class="pslide" src="https://drive.google.com/thumbnail?id=1V40adyZBTUaNYJPvuH3VBfg_Hqs0at47&amp;sz=w1200" onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/d/1V40adyZBTUaNYJPvuH3VBfg_Hqs0at47=w1200'" alt="Obligations and Contract Trailer" decoding="async"><img class="pslide" src="https://drive.google.com/thumbnail?id=1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG&amp;sz=w1200" onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/d/1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG=w1200'" alt="Purposive Communication Short Movie" decoding="async"><img class="pslide" src="https://drive.google.com/thumbnail?id=1OytBRkCElZUg-LmZ3KNZfxunX18f53CO&amp;sz=w1200" onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/d/1OytBRkCElZUg-LmZ3KNZfxunX18f53CO=w1200'" alt="Aetheria Events AI generated shorts" decoding="async"><img class="pslide" src="https://drive.google.com/thumbnail?id=1Qn2Fj1F6ku-4JRl7Qpl35Fjs7pRvqDuK&amp;sz=w1200" onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/d/1Qn2Fj1F6ku-4JRl7Qpl35Fjs7pRvqDuK=w1200'" alt="TAPIND AI generated reels" decoding="async"><span class="vscrim"></span><span class="play-ring">▶</span></div>
+        <div class="vcap"><span class="vcap-title">Five selected edits</span><span class="vcap-time">Preview</span></div>
         <h3>Video Editing</h3>
         <p>Cinematic cuts, montages, and reels with rhythm. Pacing that keeps thumbs from scrolling.</p>
         <div class="pcard-foot"><a class="pcard-cta" href="works.html#video">VIEW ALL ↗</a></div>
