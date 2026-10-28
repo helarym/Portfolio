@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="All design & creative works by Mark Helary Diaz — landing pages, brand identities, print collateral and digital systems, organized per project.">
+<title>Works — Mark Helary Diaz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo+Narrow:wght@400;700&family=Anton&family=Source+Serif+4:ital,opsz,wght@1,8..60,400;1,8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#131313;
+  --dark:#1c1c1c;
+  --cream:#f1ede6;
+  --gray:#8c8880;
+  --gray-2:#6a6862;
+  --red:#c92c1d;
+  --red-bright:#e23122;
+  --line:#d8d2c6;
+  --line-d:#3c3c3c;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+img{display:block}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);
+  color:var(--cream);
+  font-family:'Archivo',sans-serif;
+  line-height:1.55;
+  overflow-x:hidden;
+}
+::selection{background:var(--red-bright);color:var(--cream)}
+a{color:inherit;text-decoration:none}
+
+.sec-tag{
+  display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--gray);
+  border:1px solid var(--line-d);padding:.42rem .85rem;
+}
+
+/* ============ nav ============ */
+nav{
+  position:sticky;top:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.15rem 4vw;
+  background:rgba(19,19,19,.93);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-d);
+}
+.logo{font-family:'Archivo Black';font-size:1.05rem;letter-spacing:.06em;color:var(--cream)}
+.logo em{font-style:normal;color:var(--red-bright)}
+.nav-links{display:flex;gap:2.1rem}
+.nav-links a{
+  position:relative;font-family:'Archivo Narrow',sans-serif;font-size:.83rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--gray);transition:.25s;
+}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:-.35rem;width:0;height:2px;
+  background:var(--red-bright);transition:width .28s ease;
+}
+.nav-links a:hover{color:var(--cream)}
+.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--cream)}
+.nav-links a.active::after{width:100%}
+
+/* ============ works hero ============ */
+.works-hero{
+  position:relative;
+  padding:6.5rem 4vw 4.5rem;
+  border-bottom:1px solid var(--line-d);
+}
+.works-hero-bg{
+  position:absolute;right:-2%;top:-8%;z-index:0;pointer-events:none;
+  font-family:'Anton',sans-serif;font-size:20vw;line-height:.85;
+  letter-spacing:-.02em;text-transform:uppercase;
+  color:var(--red);opacity:.09;user-select:none;white-space:nowrap;
+}
+.works-hero-inner{position:relative;z-index:1;max-width:1380px;margin:0 auto}
+.works-hero h1{
+  margin-top:1.8rem;
+  font-family:'Archivo Black';
+  font-size:clamp(3rem,8.5vw,8.2rem);
+  line-height:.92;letter-spacing:-.032em;text-transform:uppercase;
+}
+.works-hero h1 em{
+  font-style:normal;color:var(--red-bright);
+  font-family:'Source Serif 4',serif;font-weight:600;
+  text-transform:none;letter-spacing:-.01em;
+}
+.works-hero p{
+  margin-top:2rem;max-width:640px;
+  font-family:'Archivo Narrow',sans-serif;font-size:1.12rem;color:var(--gray);
+}
+.works-hero .mini-mark{
+  display:inline-flex;align-items:center;gap:.55rem;margin-top:2.4rem;
+  font-family:'IBM Plex Mono',monospace;font-size:.7rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gray-2);
+}
+.works-hero .mini-mark .dot{width:.55rem;height:.55rem;background:var(--red-bright)}
+
+/* ============ strip marquee ============ */
+.strip{background:var(--cream);color:var(--ink);padding:1.15rem 0;overflow:hidden;border-block:1px solid var(--cream)}
+.strip .loop{display:flex;width:max-content;animation:loop 26s linear infinite}
+.strip .loop span{
+  font-family:'Anton',sans-serif;font-size:1.65rem;line-height:1;
+  text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;padding-right:1.4rem;
+}
+.strip .loop span i{font-style:normal;color:var(--red);margin-right:1.4rem}
+@keyframes loop{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============ works list ============ */
+.works-list{padding:2.5rem 4vw 6rem}
+.work{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(260px,1fr) minmax(0,1.75fr);
+  gap:3.5rem;
+  padding:5.5rem 0;
+  border-top:1px solid var(--line-d);
+  max-width:1380px;margin:0 auto;
+}
+.work:first-child{border-top:none;padding-top:4.25rem}
+.work-meta .num{
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;
+  letter-spacing:.22em;color:var(--gray-2);
+}
+.work-meta h2{
+  margin-top:1.25rem;
+  font-family:'Archivo Black';
+  font-size:clamp(1.75rem,2.6vw,2.55rem);
+  line-height:1.02;letter-spacing:-.018em;text-transform:uppercase;
+}
+.work-type{
+  margin-top:1.15rem;display:flex;flex-wrap:wrap;gap:.55rem;
+}
+.work-type span{
+  font-family:'Archivo Narrow',sans-serif;font-size:.72rem;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--cream);
+  border:1px solid var(--line-d);padding:.42rem .85rem;
+}
+.work-desc{
+  margin-top:1.55rem;max-width:440px;
+  font-family:'Archivo Narrow',sans-serif;font-size:1.03rem;color:var(--gray);
+}
+.work-links{margin-top:2.15rem;display:flex;flex-direction:column;gap:.85rem;align-items:flex-start}
+.work-links a{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:'Archivo Narrow',sans-serif;font-size:.82rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;
+  border-bottom:1px solid var(--line-d);padding-bottom:.35rem;
+  transition:.25s;
+}
+.work-links a.folder{color:var(--red-bright);border-color:var(--red-bright)}
+.work-links a:hover{opacity:.72}
+
+.work-gallery{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:1.15rem;
+  align-content:start;
+}
+.work-gallery figure{
+  position:relative;overflow:hidden;background:var(--dark);
+  border:1px solid var(--line-d);
+}
+.work-gallery figure.wide{grid-column:1/-1}
+.work-gallery img{
+  width:100%;aspect-ratio:16/10;object-fit:cover;
+  transition:transform .45s ease;
+}
+.work-gallery figure.wide img{aspect-ratio:21/9}
+.work-gallery figure:hover img{transform:scale(1.045)}
+.work-gallery figcaption{
+  position:absolute;left:0;bottom:0;right:0;
+  padding:.65rem .95rem;
+  font-family:'IBM Plex Mono',monospace;font-size:.62rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--cream);
+  background:linear-gradient(to top,rgba(19,19,19,.78),rgba(19,19,19,0));
+  opacity:0;transition:opacity .3s ease;
+}
+.work-gallery figure:hover figcaption{opacity:1}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ footer ============ */
+footer{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;
+  padding:1.85rem 4vw;
+  border-top:1px solid var(--line-d);
+  font-family:'Archivo Narrow',sans-serif;font-size:.82rem;color:var(--gray-2);
+}
+footer .top-btn{
+  font-family:'Archivo Narrow',sans-serif;font-size:.78rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gray);transition:.25s;background:none;border:none;cursor:pointer;
+}
+footer .top-btn:hover{color:var(--cream)}
+
+@media(max-width:1000px){
+  .work{grid-template-columns:1fr;gap:2.35rem;padding:4.5rem 0}
+}
+@media(max-width:640px){
+  .nav-links{gap:1.05rem}
+  .nav-links a{font-size:.72rem;letter-spacing:.12em}
+  .works-hero{padding:4.5rem 6vw 3.25rem}
+  .works-hero h1{font-size:clamp(2.75rem,13.5vw,5.5rem)}
+  .works-hero-bg{font-size:34vw;top:-4%}
+  .strip .loop span{font-size:1.35rem}
+  .work-gallery{grid-template-columns:1fr}
+  .work-gallery figure.wide{grid-column:auto}
+  .work-gallery figure.wide img{aspect-ratio:16/10}
+  footer{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">MD<em>.</em></a>
+  <div class="nav-links">
+    <a class="active" href="works.html">Work</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="works-hero">
+  <div class="works-hero-bg">Works.</div>
+  <div class="works-hero-inner">
+    <div class="sec-tag">Design &amp; Creatives — all works</div>
+    <h1>Every piece,<br><em>organized.</em></h1>
+    <p>Landing pages, brand identities, print collateral and digital systems — grouped by project, in the order they were built. Open any folder for the full set of files.</p>
+    <div class="mini-mark"><span class="dot"></span> Selected archive · 2024—2026</div>
+  </div>
+</header>
+
+<div class="strip" aria-hidden="true">
+  <div class="loop">
+    <span><i>✦</i>Design<i>✦</i>Strategy<i>✦</i>UI / UX<i>✦</i>Print<i>✦</i>Branding<i>✦</i>Build<i>✦</i></span>
+    <span><i>✦</i>Design<i>✦</i>Strategy<i>✦</i>UI / UX<i>✦</i>Print<i>✦</i>Branding<i>✦</i>Build<i>✦</i></span>
+    <span><i>✦</i>Design<i>✦</i>Strategy<i>✦</i>UI / UX<i>✦</i>Print<i>✦</i>Branding<i>✦</i>Build<i>✦</i></span>
+    <span><i>✦</i>Design<i>✦</i>Strategy<i>✦</i>UI / UX<i>✦</i>Print<i>✦</i>Branding<i>✦</i>Build<i>✦</i></span>
+  </div>
+</div>
+
+<main class="works-list">
+
+  <!-- 01 · AE WEBSITE -->
+  <section class="work reveal" id="ae-website">
+    <div class="work-meta">
+      <div class="num">01 / 07</div>
+      <h2>Aetheria Events<br>Website</h2>
+      <div class="work-type"><span>Web Design</span><span>Build</span></div>
+      <p class="work-desc">The full Aetheria Events website — a complete, multi-section home on the web that carries the brand past the landing page. Designed screen by screen to keep the elegance consistent everywhere.</p>
+      <div class="work-links">
+        <a class="folder" href="https://drive.google.com/drive/folders/1KPa55BBjZCBf2gI8ndqQHsKs-KotrhvL" target="_blank" rel="noopener">Open full folder ↗</a>
+      </div>
+    </div>
+    <div class="work-gallery">
+      <figure class="wide"><img src="https://drive.google.com/thumbnail?id=1ZsL3shtZfL2-bCNbd0zVmefg6yZYiBna&amp;sz=w1200" alt="Aetheria Events website — screen 1" loading="lazy" decoding="async"><figcaption>Home · Hero</figcaption></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=15h_rhTLDkRBUiyk-tvUvg_7iGIVB5xZl&amp;sz=w800" alt="Aetheria Events website — screen 2" loading="lazy" decoding="async"><figcaption>Section</figcaption></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=1x9rQ-pvgnyBn3GhuqCqLBRt_fV_zgSmq&amp;sz=w800" alt="Aetheria Events website — screen 3" loading="lazy" decoding="async"><figcaption>Section</figcaption></figure>
+      <figure class="wide"><img src="https://drive.google.com/thumbnail?id=1ZUFzUqvcHRXakR6uceolHMms_HpGC0zj&amp;sz=w1200" alt="Aetheria Events website — screen 4" loading="lazy" decoding="async"><figcaption>Footer · Contact</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 02 · AETHERIA LANDING PAGE -->
+  <section class="work reveal" id="aetheria-landing">
+    <div class="work-meta">
+      <div class="num">02 / 07</div>
+      <h2>Aetheria Events<br>Landing Page &amp; RSVP</h2>
+      <div class="work-type"><span>UI/UX</span><span>Web</span><span>Invites</span></div>
+      <p class="work-desc">An event landing page with an RSVP flow built to turn invites into confirmed guests — clear hierarchy, a fast path to yes, zero clutter.</p>
+      <div class="work-links">
+        <a class="folder" href="https://drive.google.com/drive/folders/1AtzA6gqy2D_-9L3diyDBREEg4eBRrQA_" target="_blank" rel="noopener">Open full folder ↗</a>
+      </div>
+    </div>
+    <div class="work-gallery">
+      <figure class="wide"><img src="https://drive.google.com/thumbnail?id=1X0nbAE6C486buPvhn-zq6r6GLqE1_Ssn&amp;sz=w1200" alt="Aetheria landing page" loading="lazy" decoding="async"><figcaption>Landing page</figcaption></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=1aHdQf_vu_2fbGq_GvQNL_ZEqMKLByRYa&amp;sz=w800" alt="Aetheria RSVP flow" loading="lazy" decoding="async"><figcaption>RSVP flow</figcaption></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=1ISfOE3hxzoAiFVf2IuzKyUcjlI1DPFR2&amp;sz=w800" alt="Aetheria invite" loading="lazy" decoding="async"><figcaption>Digital invite</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 03 · BROTHER'S RAMEN -->
+  <section class="work reveal" id="brothers-ramen">
+    <div class="work-meta">
+      <div class="num">03 / 07</div>
+      <h2>Brother's Ramen</h2>
+      <div class="work-type"><span>Branding</span><span>UI/UX</span><span>Print</span></div>
+      <p class="work-desc">A full touchpoint system for a ramen shop: a payment &amp; social QR standee for the counter and a digital card UI — one brand voice from print to screen.</p>
+      <div class="work-links">
+        <a class="folder" href="https://drive.google.com/drive/folders/1QwuWE77Gcq98i5FBBpWOy190bER4-QMB" target="_blank" rel="noopener">Open full folder ↗</a>
+      </div>
+    </div>
+    <div class="work-gallery">
+      <figure class="wide"><img src="https://drive.google.com/thumbnail?id=1dqXmUj9DESXboznfMysE6msBKqidfPb1&amp;sz=w1200" alt="Brother's Ramen counter standee mockup" loading="lazy" decoding="async"><figcaption>Counter standee mockup</figcaption></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=1-A0KGpGQPuIWNvgvgDzzfq4T3JofFwQg&amp;sz=w800" alt="Brother's Ramen standee artwork" loading="lazy" decoding="async"><figcaption>Standee artwork</figcaption></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=1FWjk2SD--PJJ4b4gQflrmXyG4ki_tgzG&amp;sz=w800" alt="Brother's Ramen digital card" loading="lazy" decoding="async"><figcaption>Digital card UI</figcaption></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=15VZXaEM5QqvCPUsyJ0PrR9PJaLbpDRsm&amp;sz=w800" alt="Brother's Ramen QR payment UI" loading="lazy" decoding="async"><figcaption>QR payment UI</figcaption></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=13PzKlPl0w-fFUVV6QGYco00rgTUSBcKz&amp;sz=w800" alt="Brother's Ramen social QR panel" loading="lazy" decoding="async"><figcaption>Social QR panel</figcaption></figure>
+      <figure class="wide"><img src="https://drive.google.com/thumbnail?id=1MMvMEYB0AWJpmDkuG5qvKX8yZYgtxjwJ&amp;sz=w1200" alt="Brother's Ramen system overview" loading="lazy" decoding="async"><figcaption>System overview</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 04 · ALLANESE AESTHETICS -->
+  <section class="work reveal" id="allanese">
+    <div class="work-meta">
+      <div class="num">04 / 07</div>
+      <h2>Allanese<br>Aesthetics</h2>
+      <div class="work-type"><span>Print</span><span>Collateral</span></div>
+      <p class="work-desc">A beauty-clinic standee engineered around two actions: follow on Facebook and leave a Google review. Soft visuals, sharp information hierarchy.</p>
+      <div class="work-links">
+        <a class="folder" href="https://drive.google.com/drive/folders/1JgAALbmEmYQGzqs2l4F3OMnWGV0udxww" target="_blank" rel="noopener">Open full folder ↗</a>
+      </div>
+    </div>
+    <div class="work-gallery">
+      <figure class="wide"><img src="https://drive.google.com/thumbnail?id=1Xovn-NyNwsrHbaKoc18hC8PHTIHdx5m8&amp;sz=w1200" alt="Allanese Aesthetics standee" loading="lazy" decoding="async"><figcaption>QR standee</figcaption></figure>
+      <figure class="wide"><img src="https://drive.google.com/thumbnail?id=1or-kUUNEeIbvDLG49d5EAeaqvAt-pCKh&amp;sz=w1200" alt="Allanese Aesthetics standee variant" loading="lazy" decoding="async"><figcaption>Variant</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 05 · FOOD STALL X-BANNER -->
+  <section class="work reveal" id="food-stall">
+    <div class="work-meta">
+      <div class="num">05 / 07</div>
+      <h2>Food Stall<br>X-Banner</h2>
+      <div class="work-type"><span>Print</span><span>Signage</span></div>
+      <p class="work-desc">Street-food signage that reads from across the lot — bold type, honest visuals, built for the night market.</p>
+      <div class="work-links">
+        <a class="folder" href="https://drive.google.com/drive/folders/1tX9-LWtqzBCOgCWtAyWEM-VjP3cAYHff" target="_blank" rel="noopener">Open full folder ↗</a>
+      </div>
+    </div>
+    <div class="work-gallery">
+      <figure class="wide"><img src="https://drive.google.com/thumbnail?id=1PzB1KczsbvGWmV2_9Tx4Hf_e3unkhWOf&amp;sz=w1200" alt="Food stall X-banner artwork" loading="lazy" decoding="async"><figcaption>Final layout</figcaption></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=1MmCzshy6JkAY3g2_01VcqDYIvuH8gZw5&amp;sz=w800" alt="Food stall X-banner detail" loading="lazy" decoding="async"><figcaption>Detail</figcaption></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=11wRIwYxBralPdU8mst9RaahAPAPMVMR0&amp;sz=w800" alt="Food stall X-banner mockup" loading="lazy" decoding="async"><figcaption>Mockup</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 06 · NSTP ID & TARP -->
+  <section class="work reveal" id="nstp">
+    <div class="work-meta">
+      <div class="num">06 / 07</div>
+      <h2>NSTP ID<br>&amp; Tarpaulin</h2>
+      <div class="work-type"><span>Print</span><span>ID System</span></div>
+      <p class="work-desc">An official ID system and tarpaulin layout for NSTP officers, corps, and coordinators — formal, organized, print-ready.</p>
+      <div class="work-links">
+        <a class="folder" href="https://drive.google.com/drive/folders/11sPhQeOMF4N6BxYludQmYjH_dwxvnDQK" target="_blank" rel="noopener">Open full folder ↗</a>
+      </div>
+    </div>
+    <div class="work-gallery">
+      <figure class="wide"><img src="https://drive.google.com/thumbnail?id=1gYmTZiJJOhvBP_3ZREvrF6Xc0FMORDhP&amp;sz=w1200" alt="NSTP officer ID" loading="lazy" decoding="async"><figcaption>Officer ID</figcaption></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=1jc0guLzoiKU80-7sqj8VtO2QIbc1m3HV&amp;sz=w800" alt="NSTP corps ID" loading="lazy" decoding="async"><figcaption>Corps ID</figcaption></figure>
+      <figure><img src="https://drive.google.com/thumbnail?id=1uJLNisH86htgOU6IfjJZ4-Dx-Ea7q84I&amp;sz=w800" alt="NSTP coordinator ID" loading="lazy" decoding="async"><figcaption>Coordinator ID</figcaption></figure>
+      <figure class="wide"><img src="https://drive.google.com/thumbnail?id=1xQAuGKAOIpVa-Dcj8Y6y3aeWzJnXl2za&amp;sz=w1200" alt="NSTP tarpaulin layout" loading="lazy" decoding="async"><figcaption>Tarpaulin layout</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 07 · BRAND LOGOS -->
+  <section class="work reveal" id="brand-logos">
+    <div class="work-meta">
+      <div class="num">07 / 07</div>
+      <h2>Brand<br>Logos</h2>
+      <div class="work-type"><span>Branding</span><span>Identity</span></div>
+      <p class="work-desc">Identity marks crafted to work small, work big, and still look like the brand in between.</p>
+      <div class="work-links">
+        <a class="folder" href="https://drive.google.com/drive/folders/1g9i0C5yNU2y8e9t-TV3Y1EeXOV6pItrQ" target="_blank" rel="noopener">Open full folder ↗</a>
+      </div>
+    </div>
+    <div class="work-gallery">
+      <figure class="wide"><img src="https://drive.google.com/thumbnail?id=1QiplGwjvteLALqpklHGfu0LHyy3_yvhd&amp;sz=w1200" alt="Brand logo marks" loading="lazy" decoding="async"><figcaption>Logo marks</figcaption></figure>
+      <figure class="wide"><img src="https://drive.google.com/thumbnail?id=1um6l9aOYpoZObNBpug212xn5z3a5kw0R&amp;sz=w1200" alt="Brand logo applications" loading="lazy" decoding="async"><figcaption>Applications</figcaption></figure>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>© 2026 Mark Helary Diaz</div>
+  <div>Valenzuela City, PH</div>
+  <button class="top-btn" id="toTop">↑ Back to top</button>
+</footer>
+
+<script>
+// expand ticker for seamless marquee loop
+document.querySelectorAll('.strip .loop').forEach(function(loop){
+  loop.innerHTML = loop.innerHTML + loop.innerHTML;
+});
+// back to top
+document.getElementById('toTop').addEventListener('click', function(){
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+// reveal on scroll
+if ('IntersectionObserver' in window) {
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+} else {
+  document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+}
+</script>
+
+</body>
+</html>
