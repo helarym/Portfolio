@@ -173,6 +173,17 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .pcard:nth-child(4n+2) .pcard-preview{background:linear-gradient(135deg,#26262e,#101014)}
 .pcard:nth-child(4n+3) .pcard-preview{background:linear-gradient(135deg,#2e1a2e,#120d14)}
 .pcard:nth-child(4n+4) .pcard-preview{background:linear-gradient(135deg,#14262e,#0d1214)}
+
+/* ============ work slideshow inside pcard preview ============ */
+.pcard-preview.has-slides{display:block;padding:0;overflow:hidden}
+.pcard-preview.has-slides::after{display:none}
+.pslide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:pslide 21s infinite}
+.pslide:nth-child(1){animation-delay:0s}.pslide:nth-child(2){animation-delay:3.5s}
+.pslide:nth-child(3){animation-delay:7s}.pslide:nth-child(4){animation-delay:10.5s}
+.pslide:nth-child(5){animation-delay:14s}.pslide:nth-child(6){animation-delay:17.5s}
+@keyframes pslide{0%{opacity:0}2%{opacity:1}13%{opacity:1}16%{opacity:0}100%{opacity:0}}
+.pcard-cta{color:var(--red);text-decoration:none;letter-spacing:.14em;transition:.25s}
+.pcard-cta:hover{opacity:.75}
 .pcard h3{font-family:'Anton';font-size:1.6rem;text-transform:uppercase;letter-spacing:.02em}
 .pcard p{margin-top:.5rem;color:rgba(244,241,236,.6);font-size:.88rem;line-height:1.6}
 .pcard-foot{margin-top:1.2rem;padding-top:1rem;border-top:1px dashed var(--line-d);font-size:.7rem;font-weight:700;
@@ -526,10 +537,17 @@ footer a:hover{color:var(--red)}
       <div class="pcard">
         <div class="pcard-num">01</div>
         <div class="pcard-tags"><span>UI/UX</span><span>Social Media</span><span>Branding</span></div>
-        <div class="pcard-preview">✦</div>
+        <div class="pcard-preview has-slides">
+        <img class="pslide" src="https://drive.google.com/thumbnail?id=1ZsL3shtZfL2-bCNbd0zVmefg6yZYiBna&amp;sz=w1200" alt="Aetheria Events Website" loading="lazy" decoding="async">
+        <img class="pslide" src="https://drive.google.com/thumbnail?id=1X0nbAE6C486buPvhn-zq6r6GLqE1_Ssn&amp;sz=w1200" alt="Aetheria Events Landing Page" loading="lazy" decoding="async">
+        <img class="pslide" src="https://drive.google.com/thumbnail?id=1dqXmUj9DESXboznfMysE6msBKqidfPb1&amp;sz=w1200" alt="Brother's Ramen" loading="lazy" decoding="async">
+        <img class="pslide" src="https://drive.google.com/thumbnail?id=1Xovn-NyNwsrHbaKoc18hC8PHTIHdx5m8&amp;sz=w1200" alt="Allanese Aesthetics" loading="lazy" decoding="async">
+        <img class="pslide" src="https://drive.google.com/thumbnail?id=1PzB1KczsbvGWmV2_9Tx4Hf_e3unkhWOf&amp;sz=w1200" alt="Food Stall X-Banner" loading="lazy" decoding="async">
+        <img class="pslide" src="https://drive.google.com/thumbnail?id=1QiplGwjvteLALqpklHGfu0LHyy3_yvhd&amp;sz=w1200" alt="Brand Logos" loading="lazy" decoding="async">
+      </div>
         <h3>Design & Creatives</h3>
         <p>UI/UX layouts, brand visuals, and scroll-stopping social content. Designed to look sharp — and to make sense.</p>
-        <div class="pcard-foot">Case study — slot ready ↗</div>
+        <div class="pcard-foot"><a class="pcard-cta" href="works.html">VIEW ALL ↗</a></div>
       </div>
       <div class="pcard">
         <div class="pcard-num">02</div>
@@ -557,6 +575,7 @@ footer a:hover{color:var(--red)}
       </div>
     </div>
   </div>
+
 </section>
 
 <!-- ============ PROCESS ============ -->
