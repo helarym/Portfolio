@@ -215,11 +215,8 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 /* video frames skew dark - lift them so they read like the design covers */
 .pcard-preview.is-video .pslide{filter:brightness(1.5) contrast(1.06) saturate(1.1)}
 /* five slides, three seconds each */
-.pcard-preview.is-video .pslide{animation:pslideV 15s infinite}
-@keyframes pslideV{
-  0%{opacity:0}1.6%{opacity:1}15.8%{opacity:1}20%{opacity:0}100%{opacity:0}
+1.6%{opacity:1}15.8%{opacity:1}20%{opacity:0}100%{opacity:0}
 }
-.pcard-preview.is-video .pslide:nth-child(1){opacity:1}
 .pcard-preview.is-video .play-ring::before{
   content:'';position:absolute;inset:-1.4rem;border-radius:50%;
   background:radial-gradient(circle,rgba(10,10,12,.62),rgba(10,10,12,0) 70%);
@@ -243,13 +240,11 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 /* ============ work slideshow inside pcard preview ============ */
 .pcard-preview.has-slides{display:block;padding:0;overflow:hidden}
 .pcard-preview.has-slides::after{display:none}
-.pslide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:pslide 21s infinite;transition:opacity .7s ease}
-.pslide:nth-child(1){animation-delay:0s;opacity:1}   /* visible base state: never an empty box */.pslide:nth-child(2){animation-delay:3s}
-.pslide:nth-child(3){animation-delay:6s}.pslide:nth-child(4){animation-delay:9s}
-.pslide:nth-child(5){animation-delay:12s}.pslide:nth-child(6){animation-delay:15s}
-.pslide:nth-child(7){animation-delay:18s}
-/* overlapping crossfade — at least one slide always visible */
-@keyframes pslide{0%{opacity:0}1.6%{opacity:1}11.4%{opacity:1}16%{opacity:0}100%{opacity:0}}
+.pslide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
+.pslide.is-on{opacity:1}
+.pslide:first-child{opacity:1}
+   /* visible base state: never an empty box *//* overlapping crossfade — at least one slide always visible */
+1.6%{opacity:1}11.4%{opacity:1}16%{opacity:0}100%{opacity:0}}
 .pcard-cta{color:var(--red);text-decoration:none;letter-spacing:.14em;transition:.25s}
 .pcard-cta:hover{opacity:.75}
 .pcard h3{font-family:'Anton';font-size:1.6rem;text-transform:uppercase;letter-spacing:.02em}
@@ -373,8 +368,6 @@ footer a:hover{color:var(--red)}
   /* the archive marquee and the card slideshow ARE the content: keep them
      running, just slower and gentler */
   .proj-track{animation:loop 60s linear infinite!important}
-  .pslide{animation:pslide 28s infinite!important}
-  .pslide:nth-child(1){opacity:1}
   .strip .loop{animation:loop 40s linear infinite!important}
 }
 </style>
@@ -774,26 +767,22 @@ onScrollFx();
   });
 })();
 
-/* ===== slideshow fallback: rotate by timer when CSS animation is off ===== */
-(function(){
-  const slides = [...document.querySelectorAll('.pcard-preview.has-slides .pslide')];
-  if (!slides.length) return;
-  // if the browser is really animating them, leave well alone
-  const probe = getComputedStyle(slides[0]);
-  if (probe.animationName && probe.animationName !== 'none' &&
-      probe.animationDuration !== '0s') return;
-  slides.forEach(s => { s.style.animation = 'none'; s.style.opacity = '0'; });
-  slides[0].style.opacity = '1';
-  let i = 0;
-  setInterval(() => {
+/* ===== cover slideshows: one rotator per card, runs after duplication ===== */
+/* ===== duplicate marquee tracks for seamless infinite loop ===== */
+document.querySelectorAll('.loop, #projTrack').forEach(t => t.innerHTML += t.innerHTML);
+
+/* ===== cover slideshows: rotate every card, including the duplicated set ===== */
+document.querySelectorAll('.pcard-preview.has-slides').forEach(function(card){
+  var slides = Array.prototype.slice.call(card.querySelectorAll('.pslide'));
+  if (slides.length < 2) return;
+  slides.forEach(function(s, n){ s.style.opacity = n === 0 ? '1' : '0'; });
+  var i = 0;
+  setInterval(function(){
     slides[i].style.opacity = '0';
     i = (i + 1) % slides.length;
     slides[i].style.opacity = '1';
-  }, 3500);
-})();
-
-/* ===== duplicate marquee tracks for seamless infinite loop ===== */
-document.querySelectorAll('.loop, #projTrack').forEach(t => t.innerHTML += t.innerHTML);
+  }, 3200);
+});
 </script>
 </body>
 </html>
