@@ -177,20 +177,37 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 /* ============ video card preview ============ */
 .pcard-preview.is-video{background:linear-gradient(140deg,#2a1315,#101014);position:relative;overflow:hidden}
 .pcard-preview.is-video::after{display:none}          /* no "drop image here" caption */
-/* Purposive Communication short movie - static showcase frame */
+/* Purposive Communication short movie - designed showcase frame */
 .vstill{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  filter:saturate(.92) contrast(1.03);z-index:0;
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+  filter:brightness(1.55) contrast(1.08) saturate(1.12);
 }
-/* frame number chip, bottom-left */
-.vframe-num{
-  position:absolute;left:.7rem;bottom:.7rem;z-index:3;
-  font-family:'IBM Plex Mono',monospace;font-size:.53rem;letter-spacing:.15em;
-  text-transform:uppercase;color:rgba(244,241,236,.85);
-  background:rgba(10,10,12,.58);border:1px solid rgba(255,255,255,.14);
-  padding:.2rem .44rem;backdrop-filter:blur(4px);
+/* soft scrim so the type and ring always sit on something readable */
+.vscrim{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(10,10,12,.42),rgba(10,10,12,.05) 38%,rgba(10,10,12,.78));
 }
-.vframe-num::before{content:"\25B6";color:var(--red);margin-right:.35rem;font-size:.45rem}
+/* play ring */
+.pcard-preview.is-video .play-ring{position:relative;z-index:3}
+/* bottom caption: what it is, and where in the cut */
+.vcap{
+  position:absolute;left:0;right:0;bottom:0;z-index:3;
+  display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;
+  padding:.7rem .85rem .75rem;
+  font-family:'IBM Plex Mono',monospace;text-transform:uppercase;
+}
+.vcap-title{
+  font-size:.56rem;letter-spacing:.14em;color:rgba(244,241,236,.92);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.vcap-time{font-size:.54rem;letter-spacing:.12em;color:var(--red);flex:0 0 auto}
+.vcap-time::before{content:"\25CF";margin-right:.32rem;font-size:.45rem}
+/* the 10 second preview span, drawn as a progress hairline */
+.vbar{
+  position:absolute;left:.85rem;right:.85rem;bottom:.55rem;z-index:3;height:1px;
+  background:rgba(244,241,236,.22);
+}
+.vbar i{position:absolute;inset:0 auto 0 0;width:38%;background:var(--red)}
 .vloop-badge{
   position:absolute;left:.7rem;bottom:.7rem;z-index:3;display:none;
   font-family:'IBM Plex Mono',monospace;font-size:.53rem;letter-spacing:.15em;
@@ -611,7 +628,7 @@ footer a:hover{color:var(--red)}
       <div class="pcard">
         <div class="pcard-num">03</div>
         <div class="pcard-tags"><span>Cinematic</span><span>Montage</span><span>Reels</span></div>
-        <div class="pcard-preview is-video"><img class="vstill" src="https://drive.google.com/thumbnail?id=1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG&amp;sz=w1200" onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/d/1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG=w1200';this.addEventListener('error',function(){this.style.display='none'},{once:true})" alt="Purposive Communication Short Movie — frame from 0:06" decoding="async"><span class="play-ring">▶</span><span class="vframe-num">Preview · 0:06</span></div>
+        <div class="pcard-preview is-video"><img class="vstill" src="https://drive.google.com/thumbnail?id=1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG&amp;sz=w1200" onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/d/1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG=w1200';this.addEventListener('error',function(){this.style.display='none'},{once:true})" alt="Purposive Communication Short Movie — frame at 0:06" decoding="async"><span class="vscrim"></span><span class="play-ring">▶</span><span class="vcap"><span class="vcap-title">Purposive Communication</span><span class="vcap-time">0:06</span></span><span class="vbar"><i></i></span></div>
         <h3>Video Editing</h3>
         <p>Cinematic cuts, montages, and reels with rhythm. Pacing that keeps thumbs from scrolling.</p>
         <div class="pcard-foot"><a class="pcard-cta" href="works.html#video">VIEW ALL ↗</a></div>

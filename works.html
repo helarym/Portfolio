@@ -289,6 +289,36 @@ h1 em{
 .vid:hover{border-color:#3d3d3d}
 .vid-frame{position:relative;aspect-ratio:16/9;background:#0d0d0d}
 .vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+/* native playback: no Drive player chrome, no links out */
+.vid-poster{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;
+  filter:brightness(1.42) contrast(1.06) saturate(1.08);
+  transition:filter .35s ease;
+}
+.vid:hover .vid-poster{filter:brightness(1.55) contrast(1.08) saturate(1.12)}
+.vid-scrim{
+  position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(180deg,rgba(10,10,12,.25),rgba(10,10,12,0) 45%,rgba(10,10,12,.55));
+}
+.vid-play{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--cream);cursor:pointer;
+  background:rgba(10,10,12,.5);border:1px solid rgba(244,241,236,.35);
+  padding:.62rem 1rem;backdrop-filter:blur(6px);transition:.25s ease;
+}
+.vid-play:hover{background:var(--red);border-color:var(--red);color:#fff}
+.vid-play::before{content:"\25B6";color:var(--red);font-size:.55rem}
+.vid-play:hover::before{color:#fff}
+.vid-player{
+  position:absolute;inset:0;width:100%;height:100%;z-index:5;
+  background:#0d0d0d;display:none;object-fit:contain;
+}
+.vid-frame.is-playing .vid-poster,
+.vid-frame.is-playing .vid-play,
+.vid-frame.is-playing .vid-scrim{display:none}
+.vid-frame.is-playing .vid-player{display:block}
 .vid-meta{
   display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
   padding:.7rem .85rem;border-top:1px solid var(--line);
@@ -597,31 +627,56 @@ h1 em{
     <div class="vids">
       <article class="vid" id="vid-montage">
         <div class="vid-frame">
-          <iframe src="https://drive.google.com/file/d/1-GrqPXH5hv4YC4CMAovgNakTAkS_Ka9j/preview" title="NSTP Intro Montage" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
+          <img class="vid-poster" src="https://drive.google.com/thumbnail?id=1-GrqPXH5hv4YC4CMAovgNakTAkS_Ka9j&amp;sz=w1280" alt="NSTP Intro Montage" loading="lazy" decoding="async">
+          <span class="vid-scrim"></span>
+          <button class="vid-play" type="button">Play</button>
+          <video class="vid-player" controls playsinline preload="none" title="NSTP Intro Montage">
+            <source src="https://drive.usercontent.google.com/download?id=1-GrqPXH5hv4YC4CMAovgNakTAkS_Ka9j&amp;export=download" type="video/mp4">
+          </video>
         </div>
         <div class="vid-meta"><h3>NSTP Intro Montage</h3><span>Montage · Event Opener</span></div>
       </article>
       <article class="vid" id="vid-trailer">
         <div class="vid-frame">
-          <iframe src="https://drive.google.com/file/d/1V40adyZBTUaNYJPvuH3VBfg_Hqs0at47/preview" title="Obligations and Contract Trailer" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
+          <img class="vid-poster" src="https://drive.google.com/thumbnail?id=1V40adyZBTUaNYJPvuH3VBfg_Hqs0at47&amp;sz=w1280" alt="Obligations and Contract Trailer" loading="lazy" decoding="async">
+          <span class="vid-scrim"></span>
+          <button class="vid-play" type="button">Play</button>
+          <video class="vid-player" controls playsinline preload="none" title="Obligations and Contract Trailer">
+            <source src="https://drive.usercontent.google.com/download?id=1V40adyZBTUaNYJPvuH3VBfg_Hqs0at47&amp;export=download" type="video/mp4">
+          </video>
         </div>
         <div class="vid-meta"><h3>Obligations and Contract Trailer</h3><span>Trailer · Narrative Cut</span></div>
       </article>
       <article class="vid" id="vid-short">
         <div class="vid-frame">
-          <iframe src="https://drive.google.com/file/d/1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG/preview" title="Purposive Communication Short Movie" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
+          <img class="vid-poster" src="https://drive.google.com/thumbnail?id=1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG&amp;sz=w1280" alt="Purposive Communication Short Movie" loading="lazy" decoding="async">
+          <span class="vid-scrim"></span>
+          <button class="vid-play" type="button">Play</button>
+          <video class="vid-player" controls playsinline preload="none" title="Purposive Communication Short Movie">
+            <source src="https://drive.usercontent.google.com/download?id=1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG&amp;export=download" type="video/mp4">
+          </video>
         </div>
         <div class="vid-meta"><h3>Purposive Communication Short Movie</h3><span>Short Film · Dialogue Edit</span></div>
       </article>
       <article class="vid" id="vid-ai-shorts">
         <div class="vid-frame">
-          <iframe src="https://drive.google.com/file/d/1OytBRkCElZUg-LmZ3KNZfxunX18f53CO/preview" title="Aetheria Events — AI Generated Shorts" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
+          <img class="vid-poster" src="https://drive.google.com/thumbnail?id=1OytBRkCElZUg-LmZ3KNZfxunX18f53CO&amp;sz=w1280" alt="Aetheria Events AI generated shorts" loading="lazy" decoding="async">
+          <span class="vid-scrim"></span>
+          <button class="vid-play" type="button">Play</button>
+          <video class="vid-player" controls playsinline preload="none" title="Aetheria Events AI generated shorts">
+            <source src="https://drive.usercontent.google.com/download?id=1OytBRkCElZUg-LmZ3KNZfxunX18f53CO&amp;export=download" type="video/mp4">
+          </video>
         </div>
         <div class="vid-meta"><h3>Aetheria Events — AI Generated Shorts</h3><span>AI Shorts · Brand Content</span></div>
       </article>
       <article class="vid" id="vid-ai-reels">
         <div class="vid-frame">
-          <iframe src="https://drive.google.com/file/d/1Qn2Fj1F6ku-4JRl7Qpl35Fjs7pRvqDuK/preview" title="TAPIND — AI Generated Reels" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
+          <img class="vid-poster" src="https://drive.google.com/thumbnail?id=1Qn2Fj1F6ku-4JRl7Qpl35Fjs7pRvqDuK&amp;sz=w1280" alt="TAPIND AI generated reels" loading="lazy" decoding="async">
+          <span class="vid-scrim"></span>
+          <button class="vid-play" type="button">Play</button>
+          <video class="vid-player" controls playsinline preload="none" title="TAPIND AI generated reels">
+            <source src="https://drive.usercontent.google.com/download?id=1Qn2Fj1F6ku-4JRl7Qpl35Fjs7pRvqDuK&amp;export=download" type="video/mp4">
+          </video>
         </div>
         <div class="vid-meta"><h3>TAPIND — AI Generated Reels</h3><span>AI Reels · Social Campaign</span></div>
       </article>
@@ -741,6 +796,18 @@ h1 em{
       if(t) t.scrollIntoView({block:'start'});
     }, 80);
   }
+
+  // ---------- play in place: native player, no Drive chrome ----------
+  document.querySelectorAll('.vid-frame').forEach(function(frame){
+    var btn = frame.querySelector('.vid-play');
+    var vid = frame.querySelector('.vid-player');
+    if(!btn || !vid) return;
+    btn.addEventListener('click', function(){
+      frame.classList.add('is-playing');
+      var p = vid.play();
+      if(p && p.catch) p.catch(function(){});
+    });
+  });
 
   // reveal on scroll
   var io = new IntersectionObserver(function(entries){
