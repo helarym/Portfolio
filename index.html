@@ -181,7 +181,8 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .pslide:nth-child(1){animation-delay:0s}.pslide:nth-child(2){animation-delay:3.5s}
 .pslide:nth-child(3){animation-delay:7s}.pslide:nth-child(4){animation-delay:10.5s}
 .pslide:nth-child(5){animation-delay:14s}.pslide:nth-child(6){animation-delay:17.5s}
-@keyframes pslide{0%{opacity:0}2%{opacity:1}13%{opacity:1}16%{opacity:0}100%{opacity:0}}
+/* overlapping crossfade — at least one slide always visible */
+@keyframes pslide{0%{opacity:0}2.5%{opacity:1}14.3%{opacity:1}20%{opacity:0}100%{opacity:0}}
 .pcard-cta{color:var(--red);text-decoration:none;letter-spacing:.14em;transition:.25s}
 .pcard-cta:hover{opacity:.75}
 .pcard h3{font-family:'Anton';font-size:1.6rem;text-transform:uppercase;letter-spacing:.02em}
@@ -538,12 +539,12 @@ footer a:hover{color:var(--red)}
         <div class="pcard-num">01</div>
         <div class="pcard-tags"><span>UI/UX</span><span>Social Media</span><span>Branding</span></div>
         <div class="pcard-preview has-slides">
-        <img class="pslide" src="https://drive.google.com/thumbnail?id=1ZsL3shtZfL2-bCNbd0zVmefg6yZYiBna&amp;sz=w1200" alt="Aetheria Events Website" loading="lazy" decoding="async">
-        <img class="pslide" src="https://drive.google.com/thumbnail?id=1X0nbAE6C486buPvhn-zq6r6GLqE1_Ssn&amp;sz=w1200" alt="Aetheria Events Landing Page" loading="lazy" decoding="async">
-        <img class="pslide" src="https://drive.google.com/thumbnail?id=1dqXmUj9DESXboznfMysE6msBKqidfPb1&amp;sz=w1200" alt="Brother's Ramen" loading="lazy" decoding="async">
-        <img class="pslide" src="https://drive.google.com/thumbnail?id=1Xovn-NyNwsrHbaKoc18hC8PHTIHdx5m8&amp;sz=w1200" alt="Allanese Aesthetics" loading="lazy" decoding="async">
-        <img class="pslide" src="https://drive.google.com/thumbnail?id=1PzB1KczsbvGWmV2_9Tx4Hf_e3unkhWOf&amp;sz=w1200" alt="Food Stall X-Banner" loading="lazy" decoding="async">
-        <img class="pslide" src="https://drive.google.com/thumbnail?id=1QiplGwjvteLALqpklHGfu0LHyy3_yvhd&amp;sz=w1200" alt="Brand Logos" loading="lazy" decoding="async">
+        <img class="pslide" src="https://lh3.googleusercontent.com/d/1ZsL3shtZfL2-bCNbd0zVmefg6yZYiBna=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1ZsL3shtZfL2-bCNbd0zVmefg6yZYiBna&amp;sz=w1200'" alt="Aetheria Events Website" decoding="async">
+        <img class="pslide" src="https://lh3.googleusercontent.com/d/1X0nbAE6C486buPvhn-zq6r6GLqE1_Ssn=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1X0nbAE6C486buPvhn-zq6r6GLqE1_Ssn&amp;sz=w1200'" alt="Aetheria Events Landing Page" decoding="async">
+        <img class="pslide" src="https://lh3.googleusercontent.com/d/1dqXmUj9DESXboznfMysE6msBKqidfPb1=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1dqXmUj9DESXboznfMysE6msBKqidfPb1&amp;sz=w1200'" alt="Brother's Ramen" decoding="async">
+        <img class="pslide" src="https://lh3.googleusercontent.com/d/1Xovn-NyNwsrHbaKoc18hC8PHTIHdx5m8=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1Xovn-NyNwsrHbaKoc18hC8PHTIHdx5m8&amp;sz=w1200'" alt="Allanese Aesthetics" decoding="async">
+        <img class="pslide" src="https://lh3.googleusercontent.com/d/1PzB1KczsbvGWmV2_9Tx4Hf_e3unkhWOf=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1PzB1KczsbvGWmV2_9Tx4Hf_e3unkhWOf&amp;sz=w1200'" alt="Food Stall X-Banner" decoding="async">
+        <img class="pslide" src="https://lh3.googleusercontent.com/d/1QiplGwjvteLALqpklHGfu0LHyy3_yvhd=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1QiplGwjvteLALqpklHGfu0LHyy3_yvhd&amp;sz=w1200'" alt="Brand Logos" decoding="async">
       </div>
         <h3>Design & Creatives</h3>
         <p>UI/UX layouts, brand visuals, and scroll-stopping social content. Designed to look sharp — and to make sense.</p>
