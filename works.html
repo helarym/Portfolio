@@ -129,6 +129,40 @@ h1 em{
 .strip span i{color:var(--red);font-style:normal;padding-left:1.6rem}
 @keyframes slide{to{transform:translateX(-50%)}}
 
+/* ---------- service tabs ---------- */
+:root{--navh:3.9rem}
+.tabbar{
+  position:sticky;top:var(--navh);z-index:70;
+  display:grid;grid-template-columns:1fr 1fr;
+  background:rgba(19,19,19,.94);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.tab{
+  display:flex;align-items:center;gap:.7rem;
+  padding:clamp(.85rem,1.8vw,1.2rem) clamp(.9rem,2.4vw,1.6rem);
+  background:none;border:0;border-bottom:2px solid transparent;
+  color:var(--gray);cursor:pointer;text-align:left;
+  font-family:'IBM Plex Mono',monospace;text-transform:uppercase;
+  transition:color .25s ease,border-color .25s ease,background .25s ease;
+}
+.tab + .tab{border-left:1px solid var(--line)}
+.tab:hover{color:var(--cream);background:rgba(255,255,255,.02)}
+.tab-num{font-size:.56rem;letter-spacing:.14em;color:var(--gray-2)}
+.tab-label{
+  font-family:'Anton',sans-serif;font-size:clamp(.95rem,1.9vw,1.28rem);
+  letter-spacing:.01em;line-height:1;
+}
+.tab-count{
+  margin-left:auto;font-size:.56rem;letter-spacing:.12em;
+  color:var(--gray-2);border:1px solid var(--line);padding:.1rem .38rem;
+}
+.tab.is-active{color:var(--cream);border-bottom-color:var(--red);background:rgba(201,44,29,.05)}
+.tab.is-active .tab-num,.tab.is-active .tab-count{color:var(--red);border-color:rgba(201,44,29,.45)}
+.panel[hidden]{display:none}
+.panel.is-active{animation:panelIn .42s ease both}
+@keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
 /* ---------- contents ---------- */
 .contents{
   padding:clamp(1.6rem,3vw,2.4rem) var(--pad);
@@ -148,13 +182,14 @@ h1 em{
 }
 .contents a:hover{color:var(--ink);background:var(--cream);border-color:var(--cream)}
 .contents a b{color:var(--red);font-weight:500;margin-right:.4rem}
+.contents[hidden]{display:none}
 .contents a:hover b{color:var(--ink)}
 
 /* ---------- work section ---------- */
 .work{
   padding:clamp(2.6rem,6vw,4.6rem) var(--pad);
   border-bottom:1px solid var(--line);
-  scroll-margin-top:5rem;
+  scroll-margin-top:calc(var(--navh) + 4.4rem);
 }
 .work-head{
   display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
@@ -339,9 +374,9 @@ h1 em{
     <h1>Every piece,<br><em>organised.</em></h1>
     <p class="hero-lede">Websites, brand systems, print, social and motion work — each project collected in full, in one place. No loose files, no hunting through folders.</p>
     <div class="hero-stats">
-      <div class="stat"><b>09</b><span>Projects</span></div>
-      <div class="stat"><b>31</b><span>Pieces</span></div>
-      <div class="stat"><b>03</b><span>Videos</span></div>
+      <div class="stat"><b>08</b><span>Design projects</span></div>
+      <div class="stat"><b>03</b><span>Video edits</span></div>
+      <div class="stat"><b>05</b><span>Disciplines</span></div>
       <div class="stat"><b>2026</b><span>Latest</span></div>
     </div>
   </div>
@@ -354,7 +389,16 @@ h1 em{
   </div>
 </div>
 
-<nav class="contents" aria-label="Jump to project">
+<div class="tabbar" id="tabs" role="tablist" aria-label="Service">
+  <button class="tab is-active" data-tab="design" role="tab" aria-selected="true" aria-controls="panel-design">
+    <span class="tab-num">01</span><span class="tab-label">Design &amp; Creatives</span><span class="tab-count">08</span>
+  </button>
+  <button class="tab" data-tab="video" role="tab" aria-selected="false" aria-controls="panel-video">
+    <span class="tab-num">02</span><span class="tab-label">Video Editing</span><span class="tab-count">03</span>
+  </button>
+</div>
+
+<nav class="contents" data-panel="design" aria-label="Jump to project">
   <span class="contents-label">Jump to</span>
   <a href="#ae-website"><b>01</b>Aetheria Website</a>
   <a href="#alr-steel"><b>02</b>ALR Steel</a>
@@ -364,10 +408,17 @@ h1 em{
   <a href="#food-stall"><b>06</b>Food Stall</a>
   <a href="#nstp"><b>07</b>NSTP</a>
   <a href="#brand-logos"><b>08</b>Brand Logos</a>
-  <a href="#video" class="is-video"><b>09</b>Video Editing</a>
+</nav>
+
+<nav class="contents" data-panel="video" aria-label="Jump to edit" hidden>
+  <span class="contents-label">Three edits</span>
+  <a href="#vid-montage"><b>01</b>NSTP Intro Montage</a>
+  <a href="#vid-trailer"><b>02</b>Obligations &amp; Contract</a>
+  <a href="#vid-short"><b>03</b>Purposive Comms</a>
 </nav>
 
 <main>
+  <div class="panel is-active" id="panel-design">
 
   <section class="work reveal" id="ae-website">
     <div class="work-head">
@@ -526,12 +577,15 @@ h1 em{
     </div>
   </section>
 
+  </div><!-- /panel-design -->
+
+  <div class="panel" id="panel-video" hidden>
   <section class="work reveal" id="video">
     <div class="work-head">
       <div class="work-title">
-        <span class="work-num">09</span>
+        <span class="work-num">02</span>
         <div>
-          <span class="chapter-tag">Chapter 02 — Motion</span>
+          <span class="chapter-tag">Separate service · three edits</span>
           <h2>Video <em>Editing</em></h2>
           <ul class="tags"><li>Montage</li><li>Trailer</li><li>Short Film</li><li>Sound</li></ul>
         </div>
@@ -539,19 +593,19 @@ h1 em{
       <p class="work-desc">Edits built around <strong>rhythm and pace</strong> — an opener that sets a tone, a trailer that withholds just enough, and a short film cut for performance and clarity. Cuts, sound and titles tuned so the story lands on the first watch.</p>
     </div>
     <div class="vids">
-      <article class="vid">
+      <article class="vid" id="vid-montage">
         <div class="vid-frame">
           <iframe src="https://drive.google.com/file/d/1-GrqPXH5hv4YC4CMAovgNakTAkS_Ka9j/preview" title="NSTP Intro Montage" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
         <div class="vid-meta"><h3>NSTP Intro Montage</h3><span>Montage · Event Opener</span></div>
       </article>
-      <article class="vid">
+      <article class="vid" id="vid-trailer">
         <div class="vid-frame">
           <iframe src="https://drive.google.com/file/d/1V40adyZBTUaNYJPvuH3VBfg_Hqs0at47/preview" title="Obligations and Contract Trailer" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
         <div class="vid-meta"><h3>Obligations and Contract Trailer</h3><span>Trailer · Narrative Cut</span></div>
       </article>
-      <article class="vid">
+      <article class="vid" id="vid-short">
         <div class="vid-frame">
           <iframe src="https://drive.google.com/file/d/1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG/preview" title="Purposive Communication Short Movie" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
@@ -559,6 +613,8 @@ h1 em{
       </article>
     </div>
   </section>
+
+  </div><!-- /panel-video -->
 
 </main>
 
@@ -583,6 +639,94 @@ h1 em{
     if(img.complete && img.naturalWidth) img.classList.add('is-loaded');
     else img.addEventListener('load', function(){ img.classList.add('is-loaded'); });
   });
+
+  // keep the sticky tab bar flush under the fixed nav
+  var navEl = document.querySelector('.nav');
+  function syncNavH(){
+    document.documentElement.style.setProperty('--navh', navEl.offsetHeight + 'px');
+  }
+  syncNavH();
+  window.addEventListener('resize', syncNavH);
+
+  // ---------- service tabs ----------
+  var tabButtons = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var panels = {
+    design: document.getElementById('panel-design'),
+    video:  document.getElementById('panel-video')
+  };
+  var barStrips = Array.prototype.slice.call(document.querySelectorAll('.contents'));
+  var current = 'design';
+
+  function panelFor(hash){
+    if(!hash) return 'design';
+    if(hash === '#video') return 'video';
+    if(hash.indexOf('#vid-') === 0) return 'video';
+    return 'design';
+  }
+
+  function showTab(name, opts){
+    opts = opts || {};
+    if(!panels[name]) name = 'design';
+    current = name;
+    tabButtons.forEach(function(b){
+      var on = b.dataset.tab === name;
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    Object.keys(panels).forEach(function(k){
+      var p = panels[k], on = (k === name);
+      p.classList.toggle('is-active', on);
+      p.hidden = !on;
+    });
+    barStrips.forEach(function(s){ s.hidden = s.dataset.panel !== name; });
+    if(opts.settle){
+      // re-run the reveal pass for the panel that just became visible
+      window.setTimeout(function(){
+        panels[name].querySelectorAll('.reveal').forEach(function(el){
+          var r = el.getBoundingClientRect();
+          if(r.top < window.innerHeight * 1.05) el.classList.add('in');
+        });
+      }, 60);
+    }
+    if(opts.scroll){
+      var bar = document.getElementById('tabs');
+      var y = bar.getBoundingClientRect().top + window.scrollY - navEl.offsetHeight - 6;
+      window.scrollTo({top: Math.max(0, y), behavior: 'smooth'});
+    }
+  }
+
+  tabButtons.forEach(function(b){
+    b.addEventListener('click', function(){
+      var name = b.dataset.tab;
+      if(name === current) return;
+      showTab(name, {scroll:true, settle:true});
+      try{
+        history.replaceState(null, '', name === 'video' ? '#video' : location.pathname + location.search);
+      }catch(e){}
+    });
+  });
+
+  // deep links: works.html#video, #vid-montage, or any design project anchor
+  function route(){
+    var h = location.hash;
+    var want = panelFor(h);
+    if(want !== current){
+      showTab(want, {settle:true});
+      return;
+    }
+    if(h && h !== '#video' && h.length > 1){
+      var t = document.querySelector(h);
+      if(t) window.setTimeout(function(){ t.scrollIntoView({behavior:'smooth', block:'start'}); }, 40);
+    }
+  }
+  window.addEventListener('hashchange', route);
+  showTab(panelFor(location.hash), {settle:true});
+  if(location.hash){
+    window.setTimeout(function(){
+      var t = document.querySelector(location.hash);
+      if(t) t.scrollIntoView({block:'start'});
+    }, 80);
+  }
 
   // reveal on scroll
   var io = new IntersectionObserver(function(entries){
