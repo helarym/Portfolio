@@ -289,7 +289,7 @@ h1 em{
 .vid:hover{border-color:#3d3d3d}
 .vid-frame{position:relative;aspect-ratio:16/9;background:#0d0d0d}
 .vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
-/* native playback: no Drive player chrome, no links out */
+/* our still + our play button; playback runs in the clipper below */
 .vid-poster{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;
   filter:brightness(1.42) contrast(1.06) saturate(1.08);
@@ -311,23 +311,17 @@ h1 em{
 .vid-play:hover{background:var(--red);border-color:var(--red);color:#fff}
 .vid-play::before{content:"\25B6";color:var(--red);font-size:.55rem}
 .vid-play:hover::before{color:#fff}
-.vid-player{
-  position:absolute;inset:0;width:100%;height:100%;z-index:5;
-  background:#0d0d0d;display:none;object-fit:contain;
+/* the clipper: Drive's player, its top chrome covered by our own bar */
+.vid-player{position:absolute;inset:0;z-index:5;overflow:hidden;background:#0d0d0d;display:none}
+.vid-player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid-player::before{
+  content:'';position:absolute;left:0;right:0;top:0;height:3.4rem;z-index:2;
+  background:var(--dark);border-bottom:1px solid var(--line);
 }
 .vid-frame.is-playing .vid-poster,
 .vid-frame.is-playing .vid-play,
 .vid-frame.is-playing .vid-scrim{display:none}
 .vid-frame.is-playing .vid-player{display:block}
-/* shown only if every source is refused by the host */
-.vid-fail{
-  position:absolute;left:0;right:0;bottom:0;z-index:6;display:none;
-  padding:.6rem .75rem;
-  font-family:'IBM Plex Mono',monospace;font-size:.54rem;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--gray);
-  background:rgba(10,10,12,.86);border-top:1px solid var(--line);
-}
-.vid-frame.has-failed .vid-fail{display:block}
 .vid-meta{
   display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
   padding:.8rem .95rem;border-top:1px solid var(--line);
@@ -640,12 +634,7 @@ h1 em{
           <img class="vid-poster" src="https://drive.google.com/thumbnail?id=1-GrqPXH5hv4YC4CMAovgNakTAkS_Ka9j&amp;sz=w1280" alt="NSTP Intro Montage" loading="lazy" decoding="async">
           <span class="vid-scrim"></span>
           <button class="vid-play" type="button">Play</button>
-          <video class="vid-player" controls playsinline preload="none" poster="https://drive.google.com/thumbnail?id=1-GrqPXH5hv4YC4CMAovgNakTAkS_Ka9j&amp;sz=w1280" title="NSTP Intro Montage">
-            <source src="https://drive.usercontent.google.com/download?id=1-GrqPXH5hv4YC4CMAovgNakTAkS_Ka9j&amp;export=download" type="video/mp4">
-            <source src="https://drive.google.com/uc?export=download&amp;id=1-GrqPXH5hv4YC4CMAovgNakTAkS_Ka9j" type="video/mp4">
-            <source src="https://docs.google.com/uc?export=download&amp;id=1-GrqPXH5hv4YC4CMAovgNakTAkS_Ka9j" type="video/mp4">
-          </video>
-          <p class="vid-fail">Preview unavailable in this browser — the full cut plays on request.</p>
+          <div class="vid-player" data-fid="1-GrqPXH5hv4YC4CMAovgNakTAkS_Ka9j"></div>
         </div>
         <div class="vid-meta"><h3>NSTP Intro Montage</h3><span>Montage · Event Opener</span></div>
       </article>
@@ -654,12 +643,7 @@ h1 em{
           <img class="vid-poster" src="https://drive.google.com/thumbnail?id=1V40adyZBTUaNYJPvuH3VBfg_Hqs0at47&amp;sz=w1280" alt="Obligations and Contract Trailer" loading="lazy" decoding="async">
           <span class="vid-scrim"></span>
           <button class="vid-play" type="button">Play</button>
-          <video class="vid-player" controls playsinline preload="none" poster="https://drive.google.com/thumbnail?id=1V40adyZBTUaNYJPvuH3VBfg_Hqs0at47&amp;sz=w1280" title="Obligations and Contract Trailer">
-            <source src="https://drive.usercontent.google.com/download?id=1V40adyZBTUaNYJPvuH3VBfg_Hqs0at47&amp;export=download" type="video/mp4">
-            <source src="https://drive.google.com/uc?export=download&amp;id=1V40adyZBTUaNYJPvuH3VBfg_Hqs0at47" type="video/mp4">
-            <source src="https://docs.google.com/uc?export=download&amp;id=1V40adyZBTUaNYJPvuH3VBfg_Hqs0at47" type="video/mp4">
-          </video>
-          <p class="vid-fail">Preview unavailable in this browser — the full cut plays on request.</p>
+          <div class="vid-player" data-fid="1V40adyZBTUaNYJPvuH3VBfg_Hqs0at47"></div>
         </div>
         <div class="vid-meta"><h3>Obligations and Contract Trailer</h3><span>Trailer · Narrative Cut</span></div>
       </article>
@@ -668,12 +652,7 @@ h1 em{
           <img class="vid-poster" src="https://drive.google.com/thumbnail?id=1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG&amp;sz=w1280" alt="Purposive Communication Short Movie" loading="lazy" decoding="async">
           <span class="vid-scrim"></span>
           <button class="vid-play" type="button">Play</button>
-          <video class="vid-player" controls playsinline preload="none" poster="https://drive.google.com/thumbnail?id=1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG&amp;sz=w1280" title="Purposive Communication Short Movie">
-            <source src="https://drive.usercontent.google.com/download?id=1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG&amp;export=download" type="video/mp4">
-            <source src="https://drive.google.com/uc?export=download&amp;id=1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG" type="video/mp4">
-            <source src="https://docs.google.com/uc?export=download&amp;id=1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG" type="video/mp4">
-          </video>
-          <p class="vid-fail">Preview unavailable in this browser — the full cut plays on request.</p>
+          <div class="vid-player" data-fid="1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG"></div>
         </div>
         <div class="vid-meta"><h3>Purposive Communication Short Movie</h3><span>Short Film · Dialogue Edit</span></div>
       </article>
@@ -682,12 +661,7 @@ h1 em{
           <img class="vid-poster" src="https://drive.google.com/thumbnail?id=1OytBRkCElZUg-LmZ3KNZfxunX18f53CO&amp;sz=w1280" alt="Aetheria Events AI generated shorts" loading="lazy" decoding="async">
           <span class="vid-scrim"></span>
           <button class="vid-play" type="button">Play</button>
-          <video class="vid-player" controls playsinline preload="none" poster="https://drive.google.com/thumbnail?id=1OytBRkCElZUg-LmZ3KNZfxunX18f53CO&amp;sz=w1280" title="Aetheria Events AI generated shorts">
-            <source src="https://drive.usercontent.google.com/download?id=1OytBRkCElZUg-LmZ3KNZfxunX18f53CO&amp;export=download" type="video/mp4">
-            <source src="https://drive.google.com/uc?export=download&amp;id=1OytBRkCElZUg-LmZ3KNZfxunX18f53CO" type="video/mp4">
-            <source src="https://docs.google.com/uc?export=download&amp;id=1OytBRkCElZUg-LmZ3KNZfxunX18f53CO" type="video/mp4">
-          </video>
-          <p class="vid-fail">Preview unavailable in this browser — the full cut plays on request.</p>
+          <div class="vid-player" data-fid="1OytBRkCElZUg-LmZ3KNZfxunX18f53CO"></div>
         </div>
         <div class="vid-meta"><h3>Aetheria Events — AI Generated Shorts</h3><span>AI Shorts · Brand Content</span></div>
       </article>
@@ -696,12 +670,7 @@ h1 em{
           <img class="vid-poster" src="https://drive.google.com/thumbnail?id=1Qn2Fj1F6ku-4JRl7Qpl35Fjs7pRvqDuK&amp;sz=w1280" alt="TAPIND AI generated reels" loading="lazy" decoding="async">
           <span class="vid-scrim"></span>
           <button class="vid-play" type="button">Play</button>
-          <video class="vid-player" controls playsinline preload="none" poster="https://drive.google.com/thumbnail?id=1Qn2Fj1F6ku-4JRl7Qpl35Fjs7pRvqDuK&amp;sz=w1280" title="TAPIND AI generated reels">
-            <source src="https://drive.usercontent.google.com/download?id=1Qn2Fj1F6ku-4JRl7Qpl35Fjs7pRvqDuK&amp;export=download" type="video/mp4">
-            <source src="https://drive.google.com/uc?export=download&amp;id=1Qn2Fj1F6ku-4JRl7Qpl35Fjs7pRvqDuK" type="video/mp4">
-            <source src="https://docs.google.com/uc?export=download&amp;id=1Qn2Fj1F6ku-4JRl7Qpl35Fjs7pRvqDuK" type="video/mp4">
-          </video>
-          <p class="vid-fail">Preview unavailable in this browser — the full cut plays on request.</p>
+          <div class="vid-player" data-fid="1Qn2Fj1F6ku-4JRl7Qpl35Fjs7pRvqDuK"></div>
         </div>
         <div class="vid-meta"><h3>TAPIND — AI Generated Reels</h3><span>AI Reels · Social Campaign</span></div>
       </article>
@@ -822,22 +791,18 @@ h1 em{
     }, 80);
   }
 
-  // ---------- play in place: native player, no Drive chrome ----------
+  // ---------- play on request, inside the cropped clipper ----------
   document.querySelectorAll('.vid-frame').forEach(function(frame){
     var btn = frame.querySelector('.vid-play');
-    var vid = frame.querySelector('.vid-player');
-    if(!btn || !vid) return;
-    var lastSource = vid.querySelector('source:last-of-type');
-    function fail(){ frame.classList.add('has-failed'); frame.classList.remove('is-playing'); }
-    vid.addEventListener('error', fail);
-    if(lastSource) lastSource.addEventListener('error', fail);
-
+    var mount = frame.querySelector('.vid-player');
+    if(!btn || !mount) return;
     btn.addEventListener('click', function(){
-      frame.classList.remove('has-failed');
+      var id = mount.dataset.fid;
+      if(!id) return;
       frame.classList.add('is-playing');
-      vid.load();
-      var p = vid.play();
-      if(p && p.catch) p.catch(function(){ /* fallback sources still get a turn */ });
+      mount.innerHTML = '<iframe src="https://drive.google.com/file/d/' + id +
+        '/preview" allow="autoplay; fullscreen" allowfullscreen ' +
+        'title="Video preview"></iframe>';
     });
   });
 
