@@ -3,406 +3,486 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="All design & creative works by Mark Helary Diaz — landing pages, brand identities, print collateral and digital systems, organized per project.">
+<meta name="description" content="The complete archive of design and creative work by Mark Helary Diaz — websites, brand identities, print collateral and digital systems, organised per project.">
 <title>Works — Mark Helary Diaz</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo+Narrow:wght@400;700&family=Anton&family=Source+Serif+4:ital,opsz,wght@1,8..60,400;1,8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo+Narrow:wght@400;500;700&family=Anton&family=Source+Serif+4:ital,opsz,wght@1,8..60,400;1,8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#131313;
-  --dark:#1c1c1c;
+  --dark:#1a1a1a;
   --cream:#f1ede6;
   --gray:#8c8880;
   --gray-2:#6a6862;
   --red:#c92c1d;
-  --red-bright:#e23122;
-  --line:#d8d2c6;
-  --line-d:#3c3c3c;
+  --line:#2c2c2c;
+  --pad:clamp(1.2rem,4.5vw,4.5rem);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-img{display:block}
+img{display:block;max-width:100%}
 html{scroll-behavior:smooth}
 body{
-  background:var(--ink);
-  color:var(--cream);
-  font-family:'Archivo',sans-serif;
-  line-height:1.55;
-  overflow-x:hidden;
+  background:var(--ink);color:var(--cream);
+  font-family:'Archivo Narrow','Archivo',sans-serif;
+  font-size:clamp(1rem,.95rem + .2vw,1.12rem);
+  line-height:1.6;-webkit-font-smoothing:antialiased;
 }
-::selection{background:var(--red-bright);color:var(--cream)}
-a{color:inherit;text-decoration:none}
+a{color:inherit}
+::selection{background:var(--red);color:#fff}
 
-.sec-tag{
-  display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;
-  letter-spacing:.22em;text-transform:uppercase;color:var(--gray);
-  border:1px solid var(--line-d);padding:.42rem .85rem;
-}
-
-/* ============ nav ============ */
-nav{
-  position:sticky;top:0;z-index:60;
+/* ---------- nav ---------- */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:90;
   display:flex;align-items:center;justify-content:space-between;
-  padding:1.15rem 4vw;
-  background:rgba(19,19,19,.93);
-  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line-d);
+  gap:1rem;padding:.85rem var(--pad);
+  background:rgba(19,19,19,.82);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
 }
-.logo{font-family:'Archivo Black';font-size:1.05rem;letter-spacing:.06em;color:var(--cream)}
-.logo em{font-style:normal;color:var(--red-bright)}
-.nav-links{display:flex;gap:2.1rem}
+.nav-logo{
+  font-family:'Archivo Black',sans-serif;font-size:1.15rem;
+  letter-spacing:-.02em;text-decoration:none;
+}
+.nav-links{display:flex;gap:clamp(.9rem,2vw,1.9rem);align-items:center}
 .nav-links a{
-  position:relative;font-family:'Archivo Narrow',sans-serif;font-size:.83rem;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--gray);transition:.25s;
-}
-.nav-links a::after{
-  content:"";position:absolute;left:0;bottom:-.35rem;width:0;height:2px;
-  background:var(--red-bright);transition:width .28s ease;
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;
+  letter-spacing:.16em;text-transform:uppercase;text-decoration:none;
+  color:var(--gray);transition:color .25s ease;
 }
 .nav-links a:hover{color:var(--cream)}
-.nav-links a:hover::after{width:100%}
-.nav-links a.active{color:var(--cream)}
-.nav-links a.active::after{width:100%}
+.nav-links a.is-active{color:var(--cream)}
+.nav-links a.is-active::before{content:"✦ ";color:var(--red)}
+.nav-cta{
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;
+  letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
+  border:1px solid var(--line);padding:.55rem .9rem;color:var(--cream);
+  transition:.25s ease;white-space:nowrap;
+}
+.nav-cta:hover{background:var(--cream);color:var(--ink);border-color:var(--cream)}
 
-/* ============ works hero ============ */
+/* ---------- hero ---------- */
 .works-hero{
-  position:relative;
-  padding:6.5rem 4vw 4.5rem;
-  border-bottom:1px solid var(--line-d);
+  position:relative;overflow:hidden;
+  padding:clamp(7rem,13vw,11rem) var(--pad) clamp(2.4rem,5vw,4rem);
+  border-bottom:1px solid var(--line);
 }
-.works-hero-bg{
-  position:absolute;right:-2%;top:-8%;z-index:0;pointer-events:none;
-  font-family:'Anton',sans-serif;font-size:20vw;line-height:.85;
+.hero-ghost{
+  position:absolute;left:50%;top:6%;transform:translateX(-50%);
+  font-family:'Anton',sans-serif;font-size:26vw;line-height:.8;
+  letter-spacing:-.045em;color:var(--red);opacity:.075;
+  white-space:nowrap;pointer-events:none;user-select:none;
+}
+.hero-inner{position:relative;z-index:2;max-width:76rem}
+.eyebrow{
+  display:flex;align-items:center;gap:.6rem;
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--gray-2);
+  margin-bottom:clamp(1.4rem,3vw,2.4rem);
+}
+.eyebrow::before{content:"✦";color:var(--red)}
+h1{
+  font-family:'Anton',sans-serif;font-weight:400;
+  font-size:clamp(2.7rem,7.4vw,6.4rem);line-height:.92;
   letter-spacing:-.02em;text-transform:uppercase;
-  color:var(--red);opacity:.09;user-select:none;white-space:nowrap;
 }
-.works-hero-inner{position:relative;z-index:1;max-width:1380px;margin:0 auto}
-.works-hero h1{
-  margin-top:1.8rem;
-  font-family:'Archivo Black';
-  font-size:clamp(3rem,8.5vw,8.2rem);
-  line-height:.92;letter-spacing:-.032em;text-transform:uppercase;
+h1 em{
+  font-family:'Source Serif 4',Georgia,serif;font-style:italic;
+  text-transform:none;letter-spacing:-.01em;color:var(--red);
+  font-size:.98em;
 }
-.works-hero h1 em{
-  font-style:normal;color:var(--red-bright);
-  font-family:'Source Serif 4',serif;font-weight:600;
-  text-transform:none;letter-spacing:-.01em;
+.hero-lede{
+  max-width:42ch;margin-top:clamp(1.3rem,2.6vw,2rem);
+  color:var(--gray);font-size:1.02rem;
 }
-.works-hero p{
-  margin-top:2rem;max-width:640px;
-  font-family:'Archivo Narrow',sans-serif;font-size:1.12rem;color:var(--gray);
+.hero-stats{
+  display:flex;flex-wrap:wrap;gap:clamp(1.4rem,4vw,3.4rem);
+  margin-top:clamp(1.8rem,3.6vw,2.8rem);
+  padding-top:clamp(1.2rem,2.4vw,1.8rem);
+  border-top:1px solid var(--line);
 }
-.works-hero .mini-mark{
-  display:inline-flex;align-items:center;gap:.55rem;margin-top:2.4rem;
-  font-family:'IBM Plex Mono',monospace;font-size:.7rem;
+.stat b{
+  display:block;font-family:'Anton',sans-serif;font-size:1.9rem;
+  line-height:1;letter-spacing:-.01em;
+}
+.stat span{
+  font-family:'IBM Plex Mono',monospace;font-size:.62rem;
   letter-spacing:.18em;text-transform:uppercase;color:var(--gray-2);
 }
-.works-hero .mini-mark .dot{width:.55rem;height:.55rem;background:var(--red-bright)}
 
-/* ============ strip marquee ============ */
-.strip{background:var(--cream);color:var(--ink);padding:1.15rem 0;overflow:hidden;border-block:1px solid var(--cream)}
-.strip .loop{display:flex;width:max-content;animation:loop 26s linear infinite}
-.strip .loop span{
-  font-family:'Anton',sans-serif;font-size:1.65rem;line-height:1;
-  text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;padding-right:1.4rem;
+/* ---------- ticker ---------- */
+.strip{
+  background:var(--cream);color:var(--ink);
+  padding:.85rem 0;overflow:hidden;border-block:1px solid var(--cream);
+  --speed:26s;
 }
-.strip .loop span i{font-style:normal;color:var(--red);margin-right:1.4rem}
-@keyframes loop{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.strip-inner{
+  display:flex;width:max-content;
+  animation:slide var(--speed) linear infinite;
+}
+.strip:hover .strip-inner{animation-play-state:paused}
+.strip span{
+  font-family:'Anton',sans-serif;font-size:1rem;
+  letter-spacing:.04em;text-transform:uppercase;
+  padding-right:1.6rem;white-space:nowrap;
+}
+.strip span i{color:var(--red);font-style:normal;padding-left:1.6rem}
+@keyframes slide{to{transform:translateX(-50%)}}
 
-/* ============ works list ============ */
-.works-list{padding:2.5rem 4vw 6rem}
-.work{
-  position:relative;
-  display:grid;
-  grid-template-columns:minmax(260px,1fr) minmax(0,1.75fr);
-  gap:3.5rem;
-  padding:5.5rem 0;
-  border-top:1px solid var(--line-d);
-  max-width:1380px;margin:0 auto;
+/* ---------- contents ---------- */
+.contents{
+  padding:clamp(1.6rem,3vw,2.4rem) var(--pad);
+  border-bottom:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:.55rem;align-items:center;
 }
-.work:first-child{border-top:none;padding-top:4.25rem}
-.work-meta .num{
-  font-family:'IBM Plex Mono',monospace;font-size:.72rem;
-  letter-spacing:.22em;color:var(--gray-2);
-}
-.work-meta h2{
-  margin-top:1.25rem;
-  font-family:'Archivo Black';
-  font-size:clamp(1.75rem,2.6vw,2.55rem);
-  line-height:1.02;letter-spacing:-.018em;text-transform:uppercase;
-}
-.work-type{
-  margin-top:1.15rem;display:flex;flex-wrap:wrap;gap:.55rem;
-}
-.work-type span{
-  font-family:'Archivo Narrow',sans-serif;font-size:.72rem;font-weight:700;
-  letter-spacing:.15em;text-transform:uppercase;color:var(--cream);
-  border:1px solid var(--line-d);padding:.42rem .85rem;
-}
-.work-desc{
-  margin-top:1.55rem;max-width:440px;
-  font-family:'Archivo Narrow',sans-serif;font-size:1.03rem;color:var(--gray);
-}
-.work-links{margin-top:2.15rem;display:flex;flex-direction:column;gap:.85rem;align-items:flex-start}
-.work-links a{
-  display:inline-flex;align-items:center;gap:.55rem;
-  font-family:'Archivo Narrow',sans-serif;font-size:.82rem;font-weight:700;
-  letter-spacing:.16em;text-transform:uppercase;
-  border-bottom:1px solid var(--line-d);padding-bottom:.35rem;
-  transition:.25s;
-}
-.work-links a.folder{color:var(--red-bright);border-color:var(--red-bright)}
-.work-links a:hover{opacity:.72}
-
-.work-gallery{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:1.15rem;
-  align-content:start;
-}
-.work-gallery figure{
-  position:relative;overflow:hidden;background:var(--dark);
-  border:1px solid var(--line-d);
-}
-.work-gallery figure.wide{grid-column:1/-1}
-.work-gallery img{
-  width:100%;aspect-ratio:16/10;object-fit:cover;
-  transition:transform .45s ease;
-}
-.work-gallery figure.wide img{aspect-ratio:21/9}
-.work-gallery figure:hover img{transform:scale(1.045)}
-.work-gallery figcaption{
-  position:absolute;left:0;bottom:0;right:0;
-  padding:.65rem .95rem;
+.contents-label{
   font-family:'IBM Plex Mono',monospace;font-size:.62rem;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--cream);
-  background:linear-gradient(to top,rgba(19,19,19,.78),rgba(19,19,19,0));
-  opacity:0;transition:opacity .3s ease;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gray-2);
+  margin-right:.6rem;
 }
-.work-gallery figure:hover figcaption{opacity:1}
+.contents a{
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;
+  letter-spacing:.08em;text-decoration:none;color:var(--gray);
+  border:1px solid var(--line);padding:.42rem .7rem;
+  transition:.22s ease;
+}
+.contents a:hover{color:var(--ink);background:var(--cream);border-color:var(--cream)}
+.contents a b{color:var(--red);font-weight:500;margin-right:.4rem}
+.contents a:hover b{color:var(--ink)}
 
-/* reveal on scroll */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+/* ---------- work section ---------- */
+.work{
+  padding:clamp(2.6rem,6vw,4.6rem) var(--pad);
+  border-bottom:1px solid var(--line);
+  scroll-margin-top:5rem;
+}
+.work-head{
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+  gap:clamp(1rem,4vw,4rem);align-items:end;
+  margin-bottom:clamp(1.5rem,3.4vw,2.6rem);
+}
+.work-title{display:flex;gap:clamp(.7rem,1.6vw,1.3rem);align-items:flex-start}
+.work-num{
+  font-family:'IBM Plex Mono',monospace;font-size:.7rem;
+  letter-spacing:.1em;color:var(--red);padding-top:.75rem;
+  border-top:2px solid var(--red);flex:0 0 auto;
+}
+.work h2{
+  font-family:'Anton',sans-serif;font-weight:400;
+  font-size:clamp(1.7rem,3.9vw,3rem);line-height:1;
+  letter-spacing:-.015em;text-transform:uppercase;
+}
+.work h2 em{
+  font-family:'Source Serif 4',Georgia,serif;font-style:italic;
+  text-transform:none;color:var(--red);letter-spacing:-.01em;
+}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.85rem;list-style:none}
+.tags li{
+  font-family:'IBM Plex Mono',monospace;font-size:.58rem;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--gray);
+  border:1px solid var(--line);padding:.3rem .55rem;border-radius:999px;
+}
+.work-desc{color:var(--gray);font-size:.98rem;max-width:46ch}
+.work-desc strong{color:var(--cream);font-weight:500}
+
+/* ---------- gallery: full images, never cropped ---------- */
+.shots{columns:2 22rem;column-gap:clamp(.6rem,1.4vw,1rem)}
+.shots figure{
+  break-inside:avoid;-webkit-column-break-inside:avoid;
+  margin:0 0 clamp(.6rem,1.4vw,1rem);
+  background:var(--dark);border:1px solid var(--line);
+  overflow:hidden;
+}
+.shots img{
+  width:100%;height:auto;            /* natural ratio — nothing gets cut */
+  transition:filter .35s ease,opacity .5s ease;
+  opacity:0;
+}
+.shots img.is-loaded{opacity:1}
+.shots figure:hover img{filter:brightness(1.06)}
+.shots figcaption{
+  display:flex;justify-content:space-between;gap:1rem;
+  font-family:'IBM Plex Mono',monospace;font-size:.58rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gray-2);
+  padding:.55rem .7rem;border-top:1px solid var(--line);
+}
+.shots figure:hover figcaption{color:var(--cream)}
+.shots figcaption .count{color:var(--gray-2);flex:0 0 auto}
+
+/* single-asset projects read better full width */
+.shots.stack{columns:1}
+.shots.stack figure{max-width:62rem}
+
+/* ---------- footer ---------- */
+.foot{
+  padding:clamp(3rem,7vw,5.5rem) var(--pad) clamp(2rem,4vw,3rem);
+  display:grid;gap:clamp(1.6rem,3.4vw,2.6rem);
+}
+.foot-eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:.64rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--gray-2);
+  display:flex;align-items:center;gap:.6rem;
+}
+.foot-eyebrow::before{content:"✦";color:var(--red)}
+.foot-mail{
+  font-family:'Anton',sans-serif;text-transform:uppercase;
+  font-size:clamp(1.6rem,4.6vw,3.4rem);line-height:1;
+  letter-spacing:-.015em;text-decoration:none;color:var(--cream);
+  border-bottom:2px solid var(--red);padding-bottom:.25rem;
+  justify-self:start;transition:color .25s ease,border-color .25s ease;
+}
+.foot-mail:hover{color:var(--red)}
+.foot-base{
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;
+  padding-top:clamp(1.4rem,3vw,2rem);border-top:1px solid var(--line);
+  font-family:'IBM Plex Mono',monospace;font-size:.62rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gray-2);
+}
+.foot-base a{text-decoration:none;color:var(--gray);transition:color .25s}
+.foot-base a:hover{color:var(--cream)}
+.back-top{
+  position:fixed;right:clamp(1rem,2.5vw,2rem);bottom:clamp(1rem,2.5vw,2rem);
+  z-index:80;width:2.6rem;height:2.6rem;display:grid;place-items:center;
+  background:var(--cream);color:var(--ink);border:0;cursor:pointer;
+  font-size:.9rem;opacity:0;pointer-events:none;
+  transition:opacity .3s ease,transform .3s ease;
+}
+.back-top.show{opacity:1;pointer-events:auto}
+.back-top:hover{transform:translateY(-3px)}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
 
-/* ============ footer ============ */
-footer{
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;
-  padding:1.85rem 4vw;
-  border-top:1px solid var(--line-d);
-  font-family:'Archivo Narrow',sans-serif;font-size:.82rem;color:var(--gray-2);
+@media (max-width:760px){
+  .work-head{grid-template-columns:1fr;align-items:start;gap:1.1rem}
+  .shots{columns:1}
+  .hero-ghost{font-size:34vw;top:8%}
 }
-footer .top-btn{
-  font-family:'Archivo Narrow',sans-serif;font-size:.78rem;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--gray);transition:.25s;background:none;border:none;cursor:pointer;
-}
-footer .top-btn:hover{color:var(--cream)}
-
-@media(max-width:1000px){
-  .work{grid-template-columns:1fr;gap:2.35rem;padding:4.5rem 0}
-}
-@media(max-width:640px){
-  .nav-links{gap:1.05rem}
-  .nav-links a{font-size:.72rem;letter-spacing:.12em}
-  .works-hero{padding:4.5rem 6vw 3.25rem}
-  .works-hero h1{font-size:clamp(2.75rem,13.5vw,5.5rem)}
-  .works-hero-bg{font-size:34vw;top:-4%}
-  .strip .loop span{font-size:1.35rem}
-  .work-gallery{grid-template-columns:1fr}
-  .work-gallery figure.wide{grid-column:auto}
-  .work-gallery figure.wide img{aspect-ratio:16/10}
-  footer{flex-direction:column;text-align:center}
+@media (prefers-reduced-motion:reduce){
+  .strip-inner{animation:none}
+  .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
 }
 </style>
 </head>
 <body>
 
-<nav>
-  <a class="logo" href="index.html">MD<em>.</em></a>
+<nav class="nav">
+  <a class="nav-logo" href="index.html">MD.</a>
   <div class="nav-links">
-    <a class="active" href="works.html">Work</a>
+    <a href="works.html" class="is-active">Work</a>
     <a href="index.html#about">About</a>
     <a href="index.html#contact">Contact</a>
   </div>
+  <a class="nav-cta" href="index.html">← Portfolio</a>
 </nav>
 
 <header class="works-hero">
-  <div class="works-hero-bg">Works.</div>
-  <div class="works-hero-inner">
-    <div class="sec-tag">Design &amp; Creatives — all works</div>
-    <h1>Every piece,<br><em>organized.</em></h1>
-    <p>Landing pages, brand identities, print collateral and digital systems — grouped by project, in the order they were built. Open any folder for the full set of files.</p>
-    <div class="mini-mark"><span class="dot"></span> Selected archive · 2024—2026</div>
+  <div class="hero-ghost" aria-hidden="true">WORKS.</div>
+  <div class="hero-inner">
+    <p class="eyebrow">Selected archive · 2024—2026</p>
+    <h1>Every piece,<br><em>organised.</em></h1>
+    <p class="hero-lede">Websites, brand systems, print and social work — each project collected in full, in one place. No loose files, no hunting through folders.</p>
+    <div class="hero-stats">
+      <div class="stat"><b>07</b><span>Projects</span></div>
+      <div class="stat"><b>24</b><span>Pieces</span></div>
+      <div class="stat"><b>05</b><span>Disciplines</span></div>
+      <div class="stat"><b>2026</b><span>Latest</span></div>
+    </div>
   </div>
 </header>
 
 <div class="strip" aria-hidden="true">
-  <div class="loop">
-    <span><i>✦</i>Design<i>✦</i>Strategy<i>✦</i>UI / UX<i>✦</i>Print<i>✦</i>Branding<i>✦</i>Build<i>✦</i></span>
-    <span><i>✦</i>Design<i>✦</i>Strategy<i>✦</i>UI / UX<i>✦</i>Print<i>✦</i>Branding<i>✦</i>Build<i>✦</i></span>
-    <span><i>✦</i>Design<i>✦</i>Strategy<i>✦</i>UI / UX<i>✦</i>Print<i>✦</i>Branding<i>✦</i>Build<i>✦</i></span>
-    <span><i>✦</i>Design<i>✦</i>Strategy<i>✦</i>UI / UX<i>✦</i>Print<i>✦</i>Branding<i>✦</i>Build<i>✦</i></span>
+  <div class="strip-inner">
+    <span>Web Design<i>✦</i></span><span>Brand Systems<i>✦</i></span><span>Print<i>✦</i></span><span>Social<i>✦</i></span><span>UI / UX<i>✦</i></span><span>Build<i>✦</i></span>
+    <span>Web Design<i>✦</i></span><span>Brand Systems<i>✦</i></span><span>Print<i>✦</i></span><span>Social<i>✦</i></span><span>UI / UX<i>✦</i></span><span>Build<i>✦</i></span>
   </div>
 </div>
 
-<main class="works-list">
+<nav class="contents" aria-label="Jump to project">
+  <span class="contents-label">Jump to</span>
+  <a href="#ae-website"><b>01</b>Aetheria Website</a>
+  <a href="#aetheria-landing"><b>02</b>Aetheria Landing</a>
+  <a href="#brothers-ramen"><b>03</b>Brother's Ramen</a>
+  <a href="#allanese"><b>04</b>Allanese</a>
+  <a href="#food-stall"><b>05</b>Food Stall</a>
+  <a href="#nstp"><b>06</b>NSTP</a>
+  <a href="#brand-logos"><b>07</b>Brand Logos</a>
+</nav>
 
-  <!-- 01 · AE WEBSITE -->
+<main>
+
   <section class="work reveal" id="ae-website">
-    <div class="work-meta">
-      <div class="num">01 / 07</div>
-      <h2>Aetheria Events<br>Website</h2>
-      <div class="work-type"><span>Web Design</span><span>Build</span></div>
-      <p class="work-desc">The full Aetheria Events website — a complete, multi-section home on the web that carries the brand past the landing page. Designed screen by screen to keep the elegance consistent everywhere.</p>
-      <div class="work-links">
-        <a class="folder" href="https://drive.google.com/drive/folders/1KPa55BBjZCBf2gI8ndqQHsKs-KotrhvL" target="_blank" rel="noopener">Open full folder ↗</a>
+    <div class="work-head">
+      <div class="work-title">
+        <span class="work-num">01</span>
+        <div>
+          <h2>Aetheria Events <em>Website</em></h2>
+          <ul class="tags"><li>Web Design</li><li>Build</li><li>2026</li></ul>
+        </div>
       </div>
+      <p class="work-desc">The full Aetheria Events site — <strong>screen by screen</strong>, from first impression to enquiry. Layout, type and imagery built to make an events brand feel considered and easy to book.</p>
     </div>
-    <div class="work-gallery">
-      <figure class="wide"><img src="https://lh3.googleusercontent.com/d/1ZsL3shtZfL2-bCNbd0zVmefg6yZYiBna=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1ZsL3shtZfL2-bCNbd0zVmefg6yZYiBna&amp;sz=w1200'" alt="Aetheria Events website — screen 1" loading="lazy" decoding="async"><figcaption>Home · Hero</figcaption></figure>
-      <figure><img src="https://lh3.googleusercontent.com/d/15h_rhTLDkRBUiyk-tvUvg_7iGIVB5xZl=w800" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=15h_rhTLDkRBUiyk-tvUvg_7iGIVB5xZl&amp;sz=w800'" alt="Aetheria Events website — screen 2" loading="lazy" decoding="async"><figcaption>Section</figcaption></figure>
-      <figure><img src="https://lh3.googleusercontent.com/d/1x9rQ-pvgnyBn3GhuqCqLBRt_fV_zgSmq=w800" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1x9rQ-pvgnyBn3GhuqCqLBRt_fV_zgSmq&amp;sz=w800'" alt="Aetheria Events website — screen 3" loading="lazy" decoding="async"><figcaption>Section</figcaption></figure>
-      <figure class="wide"><img src="https://lh3.googleusercontent.com/d/1ZUFzUqvcHRXakR6uceolHMms_HpGC0zj=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1ZUFzUqvcHRXakR6uceolHMms_HpGC0zj&amp;sz=w1200'" alt="Aetheria Events website — screen 4" loading="lazy" decoding="async"><figcaption>Footer · Contact</figcaption></figure>
+    <div class="shots">
+      <figure><img src="https://lh3.googleusercontent.com/d/1ZsL3shtZfL2-bCNbd0zVmefg6yZYiBna=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1ZsL3shtZfL2-bCNbd0zVmefg6yZYiBna&amp;sz=w1200'" alt="Aetheria Events website screen 1" loading="lazy" decoding="async"><figcaption><span>Screen 01</span><span class="count">1 / 4</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/15h_rhTLDkRBUiyk-tvUvg_7iGIVB5xZl=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=15h_rhTLDkRBUiyk-tvUvg_7iGIVB5xZl&amp;sz=w1200'" alt="Aetheria Events website screen 2" loading="lazy" decoding="async"><figcaption><span>Screen 02</span><span class="count">2 / 4</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/1x9rQ-pvgnyBn3GhuqCqLBRt_fV_zgSmq=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1x9rQ-pvgnyBn3GhuqCqLBRt_fV_zgSmq&amp;sz=w1200'" alt="Aetheria Events website screen 3" loading="lazy" decoding="async"><figcaption><span>Screen 03</span><span class="count">3 / 4</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/1ZUFzUqvcHRXakR6uceolHMms_HpGC0zj=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1ZUFzUqvcHRXakR6uceolHMms_HpGC0zj&amp;sz=w1200'" alt="Aetheria Events website screen 4" loading="lazy" decoding="async"><figcaption><span>Screen 04</span><span class="count">4 / 4</span></figcaption></figure>
     </div>
   </section>
 
-  <!-- 02 · AETHERIA LANDING PAGE -->
   <section class="work reveal" id="aetheria-landing">
-    <div class="work-meta">
-      <div class="num">02 / 07</div>
-      <h2>Aetheria Events<br>Landing Page &amp; RSVP</h2>
-      <div class="work-type"><span>UI/UX</span><span>Web</span><span>Invites</span></div>
-      <p class="work-desc">An event landing page with an RSVP flow built to turn invites into confirmed guests — clear hierarchy, a fast path to yes, zero clutter.</p>
-      <div class="work-links">
-        <a class="folder" href="https://drive.google.com/drive/folders/1AtzA6gqy2D_-9L3diyDBREEg4eBRrQA_" target="_blank" rel="noopener">Open full folder ↗</a>
+    <div class="work-head">
+      <div class="work-title">
+        <span class="work-num">02</span>
+        <div>
+          <h2>Aetheria Events <em>Landing &amp; RSVP</em></h2>
+          <ul class="tags"><li>Landing Page</li><li>Conversion</li></ul>
+        </div>
       </div>
+      <p class="work-desc">One scrolling landing page with a built-in RSVP flow — <strong>event details up front</strong>, one clear action at the end. Crafted for social traffic that arrives with a phone and no patience.</p>
     </div>
-    <div class="work-gallery">
-      <figure class="wide"><img src="https://lh3.googleusercontent.com/d/1X0nbAE6C486buPvhn-zq6r6GLqE1_Ssn=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1X0nbAE6C486buPvhn-zq6r6GLqE1_Ssn&amp;sz=w1200'" alt="Aetheria landing page" loading="lazy" decoding="async"><figcaption>Landing page</figcaption></figure>
-      <figure><img src="https://lh3.googleusercontent.com/d/1aHdQf_vu_2fbGq_GvQNL_ZEqMKLByRYa=w800" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1aHdQf_vu_2fbGq_GvQNL_ZEqMKLByRYa&amp;sz=w800'" alt="Aetheria RSVP flow" loading="lazy" decoding="async"><figcaption>RSVP flow</figcaption></figure>
-      <figure><img src="https://lh3.googleusercontent.com/d/1ISfOE3hxzoAiFVf2IuzKyUcjlI1DPFR2=w800" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1ISfOE3hxzoAiFVf2IuzKyUcjlI1DPFR2&amp;sz=w800'" alt="Aetheria invite" loading="lazy" decoding="async"><figcaption>Digital invite</figcaption></figure>
+    <div class="shots">
+      <figure><img src="https://lh3.googleusercontent.com/d/1X0nbAE6C486buPvhn-zq6r6GLqE1_Ssn=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1X0nbAE6C486buPvhn-zq6r6GLqE1_Ssn&amp;sz=w1200'" alt="Aetheria landing page hero" loading="lazy" decoding="async"><figcaption><span>Hero</span><span class="count">1 / 3</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/1aHdQf_vu_2fbGq_GvQNL_ZEqMKLByRYa=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1aHdQf_vu_2fbGq_GvQNL_ZEqMKLByRYa&amp;sz=w1200'" alt="Aetheria landing page details" loading="lazy" decoding="async"><figcaption><span>Details</span><span class="count">2 / 3</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/1ISfOE3hxzoAiFVf2IuzKyUcjlI1DPFR2=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1ISfOE3hxzoAiFVf2IuzKyUcjlI1DPFR2&amp;sz=w1200'" alt="Aetheria landing page RSVP" loading="lazy" decoding="async"><figcaption><span>RSVP</span><span class="count">3 / 3</span></figcaption></figure>
     </div>
   </section>
 
-  <!-- 03 · BROTHER'S RAMEN -->
   <section class="work reveal" id="brothers-ramen">
-    <div class="work-meta">
-      <div class="num">03 / 07</div>
-      <h2>Brother's Ramen</h2>
-      <div class="work-type"><span>Branding</span><span>UI/UX</span><span>Print</span></div>
-      <p class="work-desc">A full touchpoint system for a ramen shop: a payment &amp; social QR standee for the counter and a digital card UI — one brand voice from print to screen.</p>
-      <div class="work-links">
-        <a class="folder" href="https://drive.google.com/drive/folders/1QwuWE77Gcq98i5FBBpWOy190bER4-QMB" target="_blank" rel="noopener">Open full folder ↗</a>
+    <div class="work-head">
+      <div class="work-title">
+        <span class="work-num">03</span>
+        <div>
+          <h2>Brother's <em>Ramen</em></h2>
+          <ul class="tags"><li>Brand Identity</li><li>Print</li><li>QR Menu</li></ul>
+        </div>
       </div>
+      <p class="work-desc">A full restaurant kit — <strong>menus, QR standee and in-store collateral</strong>, all pulling the same bold, appetising tone. Built to work at arm's length on a table and across the room on a wall.</p>
     </div>
-    <div class="work-gallery">
-      <figure class="wide"><img src="https://lh3.googleusercontent.com/d/1dqXmUj9DESXboznfMysE6msBKqidfPb1=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1dqXmUj9DESXboznfMysE6msBKqidfPb1&amp;sz=w1200'" alt="Brother's Ramen counter standee mockup" loading="lazy" decoding="async"><figcaption>Counter standee mockup</figcaption></figure>
-      <figure><img src="https://lh3.googleusercontent.com/d/1-A0KGpGQPuIWNvgvgDzzfq4T3JofFwQg=w800" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1-A0KGpGQPuIWNvgvgDzzfq4T3JofFwQg&amp;sz=w800'" alt="Brother's Ramen standee artwork" loading="lazy" decoding="async"><figcaption>Standee artwork</figcaption></figure>
-      <figure><img src="https://lh3.googleusercontent.com/d/1FWjk2SD--PJJ4b4gQflrmXyG4ki_tgzG=w800" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1FWjk2SD--PJJ4b4gQflrmXyG4ki_tgzG&amp;sz=w800'" alt="Brother's Ramen digital card" loading="lazy" decoding="async"><figcaption>Digital card UI</figcaption></figure>
-      <figure><img src="https://lh3.googleusercontent.com/d/15VZXaEM5QqvCPUsyJ0PrR9PJaLbpDRsm=w800" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=15VZXaEM5QqvCPUsyJ0PrR9PJaLbpDRsm&amp;sz=w800'" alt="Brother's Ramen QR payment UI" loading="lazy" decoding="async"><figcaption>QR payment UI</figcaption></figure>
-      <figure><img src="https://lh3.googleusercontent.com/d/13PzKlPl0w-fFUVV6QGYco00rgTUSBcKz=w800" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=13PzKlPl0w-fFUVV6QGYco00rgTUSBcKz&amp;sz=w800'" alt="Brother's Ramen social QR panel" loading="lazy" decoding="async"><figcaption>Social QR panel</figcaption></figure>
-      <figure class="wide"><img src="https://lh3.googleusercontent.com/d/1MMvMEYB0AWJpmDkuG5qvKX8yZYgtxjwJ=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1MMvMEYB0AWJpmDkuG5qvKX8yZYgtxjwJ&amp;sz=w1200'" alt="Brother's Ramen system overview" loading="lazy" decoding="async"><figcaption>System overview</figcaption></figure>
+    <div class="shots">
+      <figure><img src="https://lh3.googleusercontent.com/d/1dqXmUj9DESXboznfMysE6msBKqidfPb1=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1dqXmUj9DESXboznfMysE6msBKqidfPb1&amp;sz=w1200'" alt="Brother's Ramen QR standee" loading="lazy" decoding="async"><figcaption><span>QR standee</span><span class="count">1 / 6</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/1-A0KGpGQPuIWNvgvgDzzfq4T3JofFwQg=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1-A0KGpGQPuIWNvgvgDzzfq4T3JofFwQg&amp;sz=w1200'" alt="Brother's Ramen menu board" loading="lazy" decoding="async"><figcaption><span>Menu board</span><span class="count">2 / 6</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/1FWjk2SD--PJJ4b4gQflrmXyG4ki_tgzG=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1FWjk2SD--PJJ4b4gQflrmXyG4ki_tgzG&amp;sz=w1200'" alt="Brother's Ramen print collateral" loading="lazy" decoding="async"><figcaption><span>Collateral</span><span class="count">3 / 6</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/15VZXaEM5QqvCPUsyJ0PrR9PJaLbpDRsm=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=15VZXaEM5QqvCPUsyJ0PrR9PJaLbpDRsm&amp;sz=w1200'" alt="Brother's Ramen social creative" loading="lazy" decoding="async"><figcaption><span>Social</span><span class="count">4 / 6</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/13PzKlPl0w-fFUVV6QGYco00rgTUSBcKz=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=13PzKlPl0w-fFUVV6QGYco00rgTUSBcKz&amp;sz=w1200'" alt="Brother's Ramen signage" loading="lazy" decoding="async"><figcaption><span>Signage</span><span class="count">5 / 6</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/1MMvMEYB0AWJpmDkuG5qvKX8yZYgtxjwJ=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1MMvMEYB0AWJpmDkuG5qvKX8yZYgtxjwJ&amp;sz=w1200'" alt="Brother's Ramen packaging" loading="lazy" decoding="async"><figcaption><span>Packaging</span><span class="count">6 / 6</span></figcaption></figure>
     </div>
   </section>
 
-  <!-- 04 · ALLANESE AESTHETICS -->
   <section class="work reveal" id="allanese">
-    <div class="work-meta">
-      <div class="num">04 / 07</div>
-      <h2>Allanese<br>Aesthetics</h2>
-      <div class="work-type"><span>Print</span><span>Collateral</span></div>
-      <p class="work-desc">A beauty-clinic standee engineered around two actions: follow on Facebook and leave a Google review. Soft visuals, sharp information hierarchy.</p>
-      <div class="work-links">
-        <a class="folder" href="https://drive.google.com/drive/folders/1JgAALbmEmYQGzqs2l4F3OMnWGV0udxww" target="_blank" rel="noopener">Open full folder ↗</a>
+    <div class="work-head">
+      <div class="work-title">
+        <span class="work-num">04</span>
+        <div>
+          <h2>Allanese <em>Aesthetics</em></h2>
+          <ul class="tags"><li>Print</li><li>QR Standee</li></ul>
+        </div>
       </div>
+      <p class="work-desc">A clinic standee and its matching piece — <strong>calm, clinical, quietly premium</strong>. Type kept airy so the booking QR reads before the eye has to think.</p>
     </div>
-    <div class="work-gallery">
-      <figure class="wide"><img src="https://lh3.googleusercontent.com/d/1Xovn-NyNwsrHbaKoc18hC8PHTIHdx5m8=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1Xovn-NyNwsrHbaKoc18hC8PHTIHdx5m8&amp;sz=w1200'" alt="Allanese Aesthetics standee" loading="lazy" decoding="async"><figcaption>QR standee</figcaption></figure>
-      <figure class="wide"><img src="https://lh3.googleusercontent.com/d/1or-kUUNEeIbvDLG49d5EAeaqvAt-pCKh=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1or-kUUNEeIbvDLG49d5EAeaqvAt-pCKh&amp;sz=w1200'" alt="Allanese Aesthetics standee variant" loading="lazy" decoding="async"><figcaption>Variant</figcaption></figure>
+    <div class="shots">
+      <figure><img src="https://lh3.googleusercontent.com/d/1Xovn-NyNwsrHbaKoc18hC8PHTIHdx5m8=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1Xovn-NyNwsrHbaKoc18hC8PHTIHdx5m8&amp;sz=w1200'" alt="Allanese Aesthetics standee" loading="lazy" decoding="async"><figcaption><span>Standee</span><span class="count">1 / 2</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/1or-kUUNEeIbvDLG49d5EAeaqvAt-pCKh=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1or-kUUNEeIbvDLG49d5EAeaqvAt-pCKh&amp;sz=w1200'" alt="Allanese Aesthetics print piece" loading="lazy" decoding="async"><figcaption><span>Print</span><span class="count">2 / 2</span></figcaption></figure>
     </div>
   </section>
 
-  <!-- 05 · FOOD STALL X-BANNER -->
   <section class="work reveal" id="food-stall">
-    <div class="work-meta">
-      <div class="num">05 / 07</div>
-      <h2>Food Stall<br>X-Banner</h2>
-      <div class="work-type"><span>Print</span><span>Signage</span></div>
-      <p class="work-desc">Street-food signage that reads from across the lot — bold type, honest visuals, built for the night market.</p>
-      <div class="work-links">
-        <a class="folder" href="https://drive.google.com/drive/folders/1tX9-LWtqzBCOgCWtAyWEM-VjP3cAYHff" target="_blank" rel="noopener">Open full folder ↗</a>
+    <div class="work-head">
+      <div class="work-title">
+        <span class="work-num">05</span>
+        <div>
+          <h2>Food Stall <em>X-Banner</em></h2>
+          <ul class="tags"><li>Large Format</li><li>Retail</li></ul>
+        </div>
       </div>
+      <p class="work-desc">Tall-format banner work built to be <strong>read from a walkway</strong> — appetite first, price second, name last. Loud enough to stop a crowd, tidy enough to print clean.</p>
     </div>
-    <div class="work-gallery">
-      <figure class="wide"><img src="https://lh3.googleusercontent.com/d/1PzB1KczsbvGWmV2_9Tx4Hf_e3unkhWOf=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1PzB1KczsbvGWmV2_9Tx4Hf_e3unkhWOf&amp;sz=w1200'" alt="Food stall X-banner artwork" loading="lazy" decoding="async"><figcaption>Final layout</figcaption></figure>
-      <figure><img src="https://lh3.googleusercontent.com/d/1MmCzshy6JkAY3g2_01VcqDYIvuH8gZw5=w800" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1MmCzshy6JkAY3g2_01VcqDYIvuH8gZw5&amp;sz=w800'" alt="Food stall X-banner detail" loading="lazy" decoding="async"><figcaption>Detail</figcaption></figure>
-      <figure><img src="https://lh3.googleusercontent.com/d/11wRIwYxBralPdU8mst9RaahAPAPMVMR0=w800" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=11wRIwYxBralPdU8mst9RaahAPAPMVMR0&amp;sz=w800'" alt="Food stall X-banner mockup" loading="lazy" decoding="async"><figcaption>Mockup</figcaption></figure>
+    <div class="shots">
+      <figure><img src="https://lh3.googleusercontent.com/d/1PzB1KczsbvGWmV2_9Tx4Hf_e3unkhWOf=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1PzB1KczsbvGWmV2_9Tx4Hf_e3unkhWOf&amp;sz=w1200'" alt="Food stall X-banner" loading="lazy" decoding="async"><figcaption><span>X-banner</span><span class="count">1 / 3</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/1MmCzshy6JkAY3g2_01VcqDYIvuH8gZw5=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1MmCzshy6JkAY3g2_01VcqDYIvuH8gZw5&amp;sz=w1200'" alt="Food stall banner detail" loading="lazy" decoding="async"><figcaption><span>Detail</span><span class="count">2 / 3</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/11wRIwYxBralPdU8mst9RaahAPAPMVMR0=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=11wRIwYxBralPdU8mst9RaahAPAPMVMR0&amp;sz=w1200'" alt="Food stall banner alternate" loading="lazy" decoding="async"><figcaption><span>Alternate</span><span class="count">3 / 3</span></figcaption></figure>
     </div>
   </section>
 
-  <!-- 06 · NSTP ID & TARP -->
   <section class="work reveal" id="nstp">
-    <div class="work-meta">
-      <div class="num">06 / 07</div>
-      <h2>NSTP ID<br>&amp; Tarpaulin</h2>
-      <div class="work-type"><span>Print</span><span>ID System</span></div>
-      <p class="work-desc">An official ID system and tarpaulin layout for NSTP officers, corps, and coordinators — formal, organized, print-ready.</p>
-      <div class="work-links">
-        <a class="folder" href="https://drive.google.com/drive/folders/11sPhQeOMF4N6BxYludQmYjH_dwxvnDQK" target="_blank" rel="noopener">Open full folder ↗</a>
+    <div class="work-head">
+      <div class="work-title">
+        <span class="work-num">06</span>
+        <div>
+          <h2>NSTP <em>ID &amp; Tarpaulin</em></h2>
+          <ul class="tags"><li>Identity Card</li><li>Tarpaulin</li></ul>
+        </div>
       </div>
+      <p class="work-desc">Programme ID cards and the matching tarpaulin — <strong>tight, legible, official</strong>. Small-format and large-format versions of one system, so the same graphic holds up at a glance and at a distance.</p>
     </div>
-    <div class="work-gallery">
-      <figure class="wide"><img src="https://lh3.googleusercontent.com/d/1gYmTZiJJOhvBP_3ZREvrF6Xc0FMORDhP=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1gYmTZiJJOhvBP_3ZREvrF6Xc0FMORDhP&amp;sz=w1200'" alt="NSTP officer ID" loading="lazy" decoding="async"><figcaption>Officer ID</figcaption></figure>
-      <figure><img src="https://lh3.googleusercontent.com/d/1jc0guLzoiKU80-7sqj8VtO2QIbc1m3HV=w800" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1jc0guLzoiKU80-7sqj8VtO2QIbc1m3HV&amp;sz=w800'" alt="NSTP corps ID" loading="lazy" decoding="async"><figcaption>Corps ID</figcaption></figure>
-      <figure><img src="https://lh3.googleusercontent.com/d/1uJLNisH86htgOU6IfjJZ4-Dx-Ea7q84I=w800" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1uJLNisH86htgOU6IfjJZ4-Dx-Ea7q84I&amp;sz=w800'" alt="NSTP coordinator ID" loading="lazy" decoding="async"><figcaption>Coordinator ID</figcaption></figure>
-      <figure class="wide"><img src="https://lh3.googleusercontent.com/d/1xQAuGKAOIpVa-Dcj8Y6y3aeWzJnXl2za=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1xQAuGKAOIpVa-Dcj8Y6y3aeWzJnXl2za&amp;sz=w1200'" alt="NSTP tarpaulin layout" loading="lazy" decoding="async"><figcaption>Tarpaulin layout</figcaption></figure>
+    <div class="shots">
+      <figure><img src="https://lh3.googleusercontent.com/d/1gYmTZiJJOhvBP_3ZREvrF6Xc0FMORDhP=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1gYmTZiJJOhvBP_3ZREvrF6Xc0FMORDhP&amp;sz=w1200'" alt="NSTP ID card" loading="lazy" decoding="async"><figcaption><span>ID card</span><span class="count">1 / 4</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/1jc0guLzoiKU80-7sqj8VtO2QIbc1m3HV=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1jc0guLzoiKU80-7sqj8VtO2QIbc1m3HV&amp;sz=w1200'" alt="NSTP ID card variant" loading="lazy" decoding="async"><figcaption><span>ID variant</span><span class="count">2 / 4</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/1uJLNisH86htgOU6IfjJZ4-Dx-Ea7q84I=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1uJLNisH86htgOU6IfjJZ4-Dx-Ea7q84I&amp;sz=w1200'" alt="NSTP tarpaulin" loading="lazy" decoding="async"><figcaption><span>Tarpaulin</span><span class="count">3 / 4</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/1xQAuGKAOIpVa-Dcj8Y6y3aeWzJnXl2za=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1xQAuGKAOIpVa-Dcj8Y6y3aeWzJnXl2za&amp;sz=w1200'" alt="NSTP tarpaulin detail" loading="lazy" decoding="async"><figcaption><span>Detail</span><span class="count">4 / 4</span></figcaption></figure>
     </div>
   </section>
 
-  <!-- 07 · BRAND LOGOS -->
   <section class="work reveal" id="brand-logos">
-    <div class="work-meta">
-      <div class="num">07 / 07</div>
-      <h2>Brand<br>Logos</h2>
-      <div class="work-type"><span>Branding</span><span>Identity</span></div>
-      <p class="work-desc">Identity marks crafted to work small, work big, and still look like the brand in between.</p>
-      <div class="work-links">
-        <a class="folder" href="https://drive.google.com/drive/folders/1g9i0C5yNU2y8e9t-TV3Y1EeXOV6pItrQ" target="_blank" rel="noopener">Open full folder ↗</a>
+    <div class="work-head">
+      <div class="work-title">
+        <span class="work-num">07</span>
+        <div>
+          <h2>Brand <em>Logos</em></h2>
+          <ul class="tags"><li>Identity</li><li>Logo Design</li></ul>
+        </div>
       </div>
+      <p class="work-desc">Mark-making across clients — <strong>wordmarks, monograms and lockups</strong>. Each built to survive being shrunk to a profile photo and blown up on a shirt.</p>
     </div>
-    <div class="work-gallery">
-      <figure class="wide"><img src="https://lh3.googleusercontent.com/d/1QiplGwjvteLALqpklHGfu0LHyy3_yvhd=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1QiplGwjvteLALqpklHGfu0LHyy3_yvhd&amp;sz=w1200'" alt="Brand logo marks" loading="lazy" decoding="async"><figcaption>Logo marks</figcaption></figure>
-      <figure class="wide"><img src="https://lh3.googleusercontent.com/d/1um6l9aOYpoZObNBpug212xn5z3a5kw0R=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1um6l9aOYpoZObNBpug212xn5z3a5kw0R&amp;sz=w1200'" alt="Brand logo applications" loading="lazy" decoding="async"><figcaption>Applications</figcaption></figure>
+    <div class="shots">
+      <figure><img src="https://lh3.googleusercontent.com/d/1QiplGwjvteLALqpklHGfu0LHyy3_yvhd=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1QiplGwjvteLALqpklHGfu0LHyy3_yvhd&amp;sz=w1200'" alt="Brand logo sheet" loading="lazy" decoding="async"><figcaption><span>Logotypes</span><span class="count">1 / 2</span></figcaption></figure>
+      <figure><img src="https://lh3.googleusercontent.com/d/1um6l9aOYpoZObNBpug212xn5z3a5kw0R=w1200" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1um6l9aOYpoZObNBpug212xn5z3a5kw0R&amp;sz=w1200'" alt="Brand logo marks" loading="lazy" decoding="async"><figcaption><span>Marks</span><span class="count">2 / 2</span></figcaption></figure>
     </div>
   </section>
 
 </main>
 
-<footer>
-  <div>© 2026 Mark Helary Diaz</div>
-  <div>Valenzuela City, PH</div>
-  <button class="top-btn" id="toTop">↑ Back to top</button>
+<footer class="foot">
+  <p class="foot-eyebrow">Open for work</p>
+  <a class="foot-mail" href="mailto:markhelarydiaz@gmail.com">Let's build something.</a>
+  <div class="foot-base">
+    <span>© <span id="yr">2026</span> Mark Helary Diaz</span>
+    <span><a href="index.html">← Back to portfolio</a></span>
+  </div>
 </footer>
 
-<script>
-// expand ticker for seamless marquee loop
-document.querySelectorAll('.strip .loop').forEach(function(loop){
-  loop.innerHTML = loop.innerHTML + loop.innerHTML;
-});
-// back to top
-document.getElementById('toTop').addEventListener('click', function(){
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-// reveal on scroll
-if ('IntersectionObserver' in window) {
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
-} else {
-  document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
-}
-</script>
+<button class="back-top" id="toTop" aria-label="Back to top">↑</button>
 
+<script>
+(function(){
+  var yr = document.getElementById('yr');
+  if(yr) yr.textContent = new Date().getFullYear();
+
+  // fade each shot in as it decodes (no cropping, no layout shift)
+  document.querySelectorAll('.shots img').forEach(function(img){
+    if(img.complete && img.naturalWidth) img.classList.add('is-loaded');
+    else img.addEventListener('load', function(){ img.classList.add('is-loaded'); });
+  });
+
+  // reveal on scroll
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {rootMargin:'0px 0px -8% 0px', threshold:.08});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  // back to top
+  var btn = document.getElementById('toTop');
+  window.addEventListener('scroll', function(){
+    btn.classList.toggle('show', window.scrollY > 700);
+  }, {passive:true});
+  btn.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
 </body>
 </html>
