@@ -289,24 +289,6 @@ h1 em{
 .vid:hover{border-color:#3d3d3d}
 .vid-frame{position:relative;aspect-ratio:16/9;background:#0d0d0d}
 .vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
-/* static frame first: the video only loads when asked for */
-.vid-frame.has-poster iframe{visibility:hidden}
-.vid-poster{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;
-  cursor:pointer;filter:saturate(.95) contrast(1.02);
-  transition:filter .35s ease,transform .5s ease;
-}
-.vid:hover .vid-poster{filter:saturate(1) contrast(1.05) brightness(1.05);transform:scale(1.02)}
-.vid-play{
-  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;
-  width:3.4rem;height:3.4rem;border-radius:50%;display:grid;place-items:center;
-  border:1px solid var(--red);background:rgba(10,10,12,.42);color:var(--red);
-  font-size:.8rem;padding-left:.2rem;cursor:pointer;
-  backdrop-filter:blur(3px);transition:transform .3s ease,background .3s ease;
-}
-.vid-play::after{content:'';position:absolute;inset:-9px;border:1px solid rgba(201,44,29,.3);border-radius:50%}
-.vid:hover .vid-play{transform:translate(-50%,-50%) scale(1.07);background:rgba(201,44,29,.16)}
-.vid-frame:not(.has-poster) .vid-play,.vid-frame:not(.has-poster) .vid-poster{display:none}
 .vid-meta{
   display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
   padding:.7rem .85rem;border-top:1px solid var(--line);
@@ -614,41 +596,31 @@ h1 em{
     </div>
     <div class="vids">
       <article class="vid" id="vid-montage">
-        <div class="vid-frame has-poster">
-          <img class="vid-poster" src="images/video/montage-06s.jpg" alt="NSTP Intro Montage — frame at 0:06" loading="lazy" decoding="async" onerror="this.closest('.vid-frame').classList.remove('has-poster');this.remove()">
-          <button class="vid-play" type="button" aria-label="Play NSTP Intro Montage">▶</button>
+        <div class="vid-frame">
           <iframe src="https://drive.google.com/file/d/1-GrqPXH5hv4YC4CMAovgNakTAkS_Ka9j/preview" title="NSTP Intro Montage" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
         <div class="vid-meta"><h3>NSTP Intro Montage</h3><span>Montage · Event Opener</span></div>
       </article>
       <article class="vid" id="vid-trailer">
-        <div class="vid-frame has-poster">
-          <img class="vid-poster" src="images/video/trailer-06s.jpg" alt="Obligations and Contract Trailer — frame at 0:06" loading="lazy" decoding="async" onerror="this.closest('.vid-frame').classList.remove('has-poster');this.remove()">
-          <button class="vid-play" type="button" aria-label="Play Obligations and Contract Trailer">▶</button>
+        <div class="vid-frame">
           <iframe src="https://drive.google.com/file/d/1V40adyZBTUaNYJPvuH3VBfg_Hqs0at47/preview" title="Obligations and Contract Trailer" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
         <div class="vid-meta"><h3>Obligations and Contract Trailer</h3><span>Trailer · Narrative Cut</span></div>
       </article>
       <article class="vid" id="vid-short">
-        <div class="vid-frame has-poster">
-          <img class="vid-poster" src="images/video/short-06s.jpg" alt="Purposive Communication Short Movie — frame at 0:06" loading="lazy" decoding="async" onerror="this.closest('.vid-frame').classList.remove('has-poster');this.remove()">
-          <button class="vid-play" type="button" aria-label="Play Purposive Communication Short Movie">▶</button>
+        <div class="vid-frame">
           <iframe src="https://drive.google.com/file/d/1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG/preview" title="Purposive Communication Short Movie" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
         <div class="vid-meta"><h3>Purposive Communication Short Movie</h3><span>Short Film · Dialogue Edit</span></div>
       </article>
       <article class="vid" id="vid-ai-shorts">
-        <div class="vid-frame has-poster">
-          <img class="vid-poster" src="images/video/ai-shorts-06s.jpg" alt="Aetheria Events AI generated shorts — frame at 0:06" loading="lazy" decoding="async" onerror="this.closest('.vid-frame').classList.remove('has-poster');this.remove()">
-          <button class="vid-play" type="button" aria-label="Play Aetheria Events AI generated shorts">▶</button>
+        <div class="vid-frame">
           <iframe src="https://drive.google.com/file/d/1OytBRkCElZUg-LmZ3KNZfxunX18f53CO/preview" title="Aetheria Events — AI Generated Shorts" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
         <div class="vid-meta"><h3>Aetheria Events — AI Generated Shorts</h3><span>AI Shorts · Brand Content</span></div>
       </article>
       <article class="vid" id="vid-ai-reels">
-        <div class="vid-frame has-poster">
-          <img class="vid-poster" src="images/video/ai-reels-06s.jpg" alt="TAPIND AI generated reels — frame at 0:06" loading="lazy" decoding="async" onerror="this.closest('.vid-frame').classList.remove('has-poster');this.remove()">
-          <button class="vid-play" type="button" aria-label="Play TAPIND AI generated reels">▶</button>
+        <div class="vid-frame">
           <iframe src="https://drive.google.com/file/d/1Qn2Fj1F6ku-4JRl7Qpl35Fjs7pRvqDuK/preview" title="TAPIND — AI Generated Reels" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
         <div class="vid-meta"><h3>TAPIND — AI Generated Reels</h3><span>AI Reels · Social Campaign</span></div>
@@ -769,20 +741,6 @@ h1 em{
       if(t) t.scrollIntoView({block:'start'});
     }, 80);
   }
-
-  // ---------- static frame -> play on request ----------
-  document.querySelectorAll('.vid-frame.has-poster').forEach(function(frame){
-    var poster = frame.querySelector('.vid-poster');
-    var btn = frame.querySelector('.vid-play');
-    var iframe = frame.querySelector('iframe');
-    function play(){
-      var src = iframe.getAttribute('src');
-      iframe.setAttribute('src', src + (src.indexOf('?') > -1 ? '&' : '?') + 'autoplay=1');
-      frame.classList.remove('has-poster');
-    }
-    if(poster) poster.addEventListener('click', play);
-    if(btn) btn.addEventListener('click', play);
-  });
 
   // reveal on scroll
   var io = new IntersectionObserver(function(entries){
