@@ -189,25 +189,18 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 }
 /* play ring */
 .pcard-preview.is-video .play-ring{position:relative;z-index:3}
-/* bottom caption: what it is, and where in the cut */
+/* caption sits under the frame, never over the footage */
 .vcap{
-  position:absolute;left:0;right:0;bottom:0;z-index:3;
-  display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;
-  padding:.7rem .85rem .75rem;
+  display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  margin-top:.55rem;padding-top:.5rem;border-top:1px solid var(--line-d);
   font-family:'IBM Plex Mono',monospace;text-transform:uppercase;
 }
 .vcap-title{
-  font-size:.56rem;letter-spacing:.14em;color:rgba(244,241,236,.92);
+  font-size:.54rem;letter-spacing:.14em;color:rgba(244,241,236,.72);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .vcap-time{font-size:.54rem;letter-spacing:.12em;color:var(--red);flex:0 0 auto}
 .vcap-time::before{content:"\25CF";margin-right:.32rem;font-size:.45rem}
-/* the 10 second preview span, drawn as a progress hairline */
-.vbar{
-  position:absolute;left:.85rem;right:.85rem;bottom:.55rem;z-index:3;height:1px;
-  background:rgba(244,241,236,.22);
-}
-.vbar i{position:absolute;inset:0 auto 0 0;width:38%;background:var(--red)}
 .vloop-badge{
   position:absolute;left:.7rem;bottom:.7rem;z-index:3;display:none;
   font-family:'IBM Plex Mono',monospace;font-size:.53rem;letter-spacing:.15em;
@@ -243,7 +236,7 @@ nav.scrolled{background:rgba(244,241,236,.85);backdrop-filter:blur(14px);border-
 .pcard-preview.has-slides{display:block;padding:0;overflow:hidden}
 .pcard-preview.has-slides::after{display:none}
 .pslide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:pslide 21s infinite}
-.pslide:nth-child(1){animation-delay:0s}.pslide:nth-child(2){animation-delay:3s}
+.pslide:nth-child(1){animation-delay:0s;opacity:1}   /* visible base state: never an empty box */.pslide:nth-child(2){animation-delay:3s}
 .pslide:nth-child(3){animation-delay:6s}.pslide:nth-child(4){animation-delay:9s}
 .pslide:nth-child(5){animation-delay:12s}.pslide:nth-child(6){animation-delay:15s}
 .pslide:nth-child(7){animation-delay:18s}
@@ -369,6 +362,12 @@ footer a:hover{color:var(--red)}
   *{animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}
   .about-giant{opacity:.85}
+  /* the archive marquee and the card slideshow ARE the content: keep them
+     running, just slower and gentler */
+  .proj-track{animation:loop 60s linear infinite!important}
+  .pslide{animation:pslide 28s infinite!important}
+  .pslide:nth-child(1){opacity:1}
+  .strip .loop{animation:loop 40s linear infinite!important}
 }
 </style>
 </head>
@@ -628,7 +627,8 @@ footer a:hover{color:var(--red)}
       <div class="pcard">
         <div class="pcard-num">03</div>
         <div class="pcard-tags"><span>Cinematic</span><span>Montage</span><span>Reels</span></div>
-        <div class="pcard-preview is-video"><img class="vstill" src="https://drive.google.com/thumbnail?id=1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG&amp;sz=w1200" onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/d/1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG=w1200';this.addEventListener('error',function(){this.style.display='none'},{once:true})" alt="Purposive Communication Short Movie — frame at 0:06" decoding="async"><span class="vscrim"></span><span class="play-ring">▶</span><span class="vcap"><span class="vcap-title">Purposive Communication</span><span class="vcap-time">0:06</span></span><span class="vbar"><i></i></span></div>
+        <div class="pcard-preview is-video"><img class="vstill" src="https://drive.google.com/thumbnail?id=1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG&amp;sz=w1200" onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/d/1AfTYEnPelZOZKRWAFi1i6qPNxUAVeuhG=w1200';this.addEventListener('error',function(){this.style.display='none'},{once:true})" alt="Purposive Communication Short Movie — frame at 0:06" decoding="async"><span class="vscrim"></span><span class="play-ring">▶</span></div>
+        <div class="vcap"><span class="vcap-title">Purposive Communication</span><span class="vcap-time">0:06</span></div>
         <h3>Video Editing</h3>
         <p>Cinematic cuts, montages, and reels with rhythm. Pacing that keeps thumbs from scrolling.</p>
         <div class="pcard-foot"><a class="pcard-cta" href="works.html#video">VIEW ALL ↗</a></div>
